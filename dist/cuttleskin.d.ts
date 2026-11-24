@@ -116,6 +116,12 @@ export interface TransformationConfig<V = unknown> {
 export interface ElementConfig {
   /** ID of the SVG element. */
   readonly id: string;
+  /**
+   * Name under which the element reports its events, e.g. `doorFrontLeft`. It decouples the
+   * application from the SVG: the application reacts to the name, the ID may change with the
+   * drawing. Defaults to the ID.
+   */
+  readonly name?: string;
   /** DOM events forwarded to the graphic as `element.<event>`. */
   readonly events?: readonly string[];
 }
@@ -280,8 +286,11 @@ export interface ScreenBBox {
   readonly pageY: number;
 }
 export declare function screenBBox(element: Element): ScreenBBox;
-/** Every DOM event type maps to `(element, event, bbox)`. */
-export type DomEventMap = Record<string, [element: Element, event: Event, bbox: ScreenBBox]>;
+/**
+ * Every DOM event type maps to `(name, element, event, bbox)`. The name identifies the element
+ * for the application (see `ElementConfig.name`), so it does not need to know SVG IDs.
+ */
+export type DomEventMap = Record<string, [name: string, element: Element, event: Event, bbox: ScreenBBox]>;
 /**
  * Observable that forwards DOM events of an element.
  * Exactly one native listener is registered per event type, regardless of the number of subscribers,
@@ -289,7 +298,8 @@ export type DomEventMap = Record<string, [element: Element, event: Event, bbox: 
  */
 export declare class DomObservable extends Observable<DomEventMap> {
   #private;
-  constructor(element: Element, parent?: EventSink, prefix?: string);
+  /** `name` is passed to the listeners; without it, the ID of the element. */
+  constructor(element: Element, parent?: EventSink, prefix?: string, name?: string);
   on(event: string, listener: Listener<DomEventMap[string]>): () => void;
   off(event: string, listener: Listener<DomEventMap[string]>): void;
   destroy(): void;

@@ -7,17 +7,17 @@ gauge, a clock, a status display or a map – in a web page and drives it with y
 the values of the variables; the runtime rotates, moves, scales, colors, fades and relabels the
 elements of the SVG, with smooth transitions where the graphic defines them.
 
-About 40 KB, no dependencies. Create, edit and export the graphics at
+About 60 KB (20 KB compressed), no dependencies. Create, edit and export the graphics at
 [cuttleskin.com](https://cuttleskin.com).
 
 ## Files
 
-| File                     | Use                                                          |
-| ------------------------ | ------------------------------------------------------------ |
-| `dist/cuttleskin.min.js` | classic `<script>` tag; defines the global `cuttleskin`      |
-| `dist/cuttleskin.mjs`    | ES module for bundlers and `<script type="module">`          |
-| `dist/cuttleskin.d.ts`   | TypeScript declarations                                      |
-| `example/`               | a speedometer whose needle follows a slider                  |
+| File                     | Use                                                     |
+| ------------------------ | ------------------------------------------------------- |
+| `dist/cuttleskin.min.js` | classic `<script>` tag; defines the global `cuttleskin` |
+| `dist/cuttleskin.mjs`    | ES module for bundlers and `<script type="module">`     |
+| `dist/cuttleskin.d.ts`   | TypeScript declarations                                 |
+| `example/`               | a speedometer whose needle follows a slider             |
 
 Download them from the [latest release](https://github.com/byteAgenten/cuttleskin-runtime/releases/latest)
 and host them yourself.
