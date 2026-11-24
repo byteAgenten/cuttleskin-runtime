@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>cuttleskin runtime example</title>
+    <style>
+      body {
+        display: grid;
+        justify-items: center;
+        gap: 16px;
+        margin: 32px 16px;
+        font-family: system-ui, sans-serif;
+      }
+      /* The container needs a size; the graphic fills it */
+      #gauge {
+        width: min(400px, 100%);
+        aspect-ratio: 1;
+      }
+      input {
+        width: min(400px, 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gauge"></div>
+    <input id="speed" type="range" min="0" max="200" value="0" aria-label="Speed" />
+
+    <script src="../dist/cuttleskin.min.js"></script>
+    <script>
+      const container = document.getElementById('gauge');
+      const graphic = cuttleskin.create(container);
+
+      graphic.loadUrl('speedometer.svg', 'speedometer.config.json').then((issues) => {
+        if (issues.length > 0) console.warn('Skipped configuration entries', issues);
+        graphic.view.zoomToFit();
+        new ResizeObserver(() => graphic.view.zoomToFit()).observe(container);
+      });
+
+      document.getElementById('speed').addEventListener('input', (event) => {
+        graphic.setValue('speed', event.target.value);
+      });
+    </script>
+  </body>
+</html>
