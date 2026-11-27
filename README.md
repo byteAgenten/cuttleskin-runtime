@@ -18,6 +18,7 @@ About 60 KB (20 KB compressed), no dependencies. Create, edit and export the gra
 | `dist/cuttleskin.mjs`    | ES module for bundlers and `<script type="module">`     |
 | `dist/cuttleskin.d.ts`   | TypeScript declarations                                 |
 | `example/`               | a speedometer whose needle follows a slider             |
+| `src/`, `config/`        | the source of the runtime and of the configuration format |
 
 Download them from the [latest release](https://github.com/byteAgenten/cuttleskin-runtime/releases/latest)
 and host them yourself.
@@ -62,9 +63,28 @@ reference – is at [cuttleskin.com/docs/runtime](https://cuttleskin.com/docs/ru
 
 ## Security
 
-The runtime inserts the SVG into your page without cleaning it. Only load graphics you trust, or
-sanitize them first (e.g. with DOMPurify) and pass the result to `graphic.load(node, config)`.
+The runtime sanitizes every SVG before it inserts it into your page (`src/document/sanitize.ts`):
+
+- `<script>`, `<foreignObject>` and elements outside the SVG namespace (HTML, MathML, editor
+  metadata) are removed.
+- Event handler attributes (`onload`, `onclick`, …) are removed.
+- Links and image references keep only relative URLs, `http(s):`, `blob:` and image data URLs;
+  `javascript:` and other schemes are dropped. The same check applies to image URLs that
+  variables set at runtime.
+- SMIL animations that would set an event handler or a link are removed.
+
+Styles (`<style>`, `style`) are kept; they can change the look of the graphic but run no script.
+
+## Build from source
+
+```sh
+npm install
+npm run build   # → dist/
+```
+
+`src/` holds the runtime, `config/` the configuration format it reads. Both are built into the
+files in `dist/` without obfuscation; `cuttleskin.mjs` is not minified.
 
 ## Licence
 
-[MIT](LICENSE) © byteAgenten GmbH. The runtime is distributed minified and obfuscated.
+[MIT](LICENSE) © byteAgenten GmbH

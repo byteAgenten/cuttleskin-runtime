@@ -189,6 +189,12 @@ export declare function parseGraphicConfigStrict(input: unknown): GraphicConfig;
  * input is never modified.
  */
 export declare function upgradeGraphicConfig(input: unknown): unknown;
+/**
+ * Whether a URL may be used as `href` in a graphic: relative URLs and fragments, `http(s):`,
+ * `blob:` and data URLs of images. Everything else, in particular `javascript:`, is refused.
+ * Whitespace and control characters are ignored like browsers do (`java\tscript:`).
+ */
+export declare function isSafeUrl(value: string): boolean;
 /** Maps linear progress `t` in [0, 1] to eased progress. */
 export type Easing = (t: number) => number;
 /** Curves match the former Snap.svg `mina` easings so existing graphics animate identically. */
@@ -657,7 +663,10 @@ export declare class GraphicDocument extends Observable<DocumentEvents> implemen
    * Throws if the content is not and does not contain an `<svg>` element.
    */
   load(content: DocumentContent): void;
-  /** Adds content to the content layer or to `parent`. */
+  /**
+   * Adds content to the content layer or to `parent`. The content is sanitized first: scripts,
+   * event handlers, HTML and unsafe links are removed (see `sanitizeSvg`).
+   */
   append(content: DocumentContent, parent?: Element): void;
   remove(node: Node): void;
   clear(): void;
@@ -684,6 +693,19 @@ export declare class GraphicDocument extends Observable<DocumentEvents> implemen
   viewSize(): ViewSize;
   destroy(): void;
 }
+/**
+ * Removes everything from SVG content that could run script in the page that shows it:
+ * - elements outside the SVG namespace (HTML, MathML, editor metadata), `<script>` and
+ *   `<foreignObject>`
+ * - event handler attributes (`onload`, `onclick`, …)
+ * - links and image references with other schemes than `http(s):`, `blob:`, relative URLs and
+ *   image data URLs, e.g. `javascript:`
+ * - SMIL animations that would set an event handler or a link
+ *
+ * Works in place on `root` and its descendants; call it before the content is inserted into a
+ * live document. Returns `false` if `root` itself must not be inserted at all.
+ */
+export declare function sanitizeSvg(root: Node): boolean;
 export declare const MIN_ZOOM_LEVEL = 0.01;
 export declare const MAX_ZOOM_LEVEL = 99.99;
 /** Mutable fields of a viewport. */
@@ -883,4 +905,3 @@ export declare function discreteUpdater<V>(apply: (value: V) => void): Updater<V
  */
 export declare function transitionUpdater<V>(transition: TransitionConfig, interpolate: (from: V, to: V, t: number) => V, apply: (value: V) => void): Updater<V>;
 export type { ConfigIssue, IssueParams, ParseResult };
-//# sourceMappingURL=index.d.ts.map

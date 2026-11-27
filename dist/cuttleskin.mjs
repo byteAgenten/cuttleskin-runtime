@@ -1,1 +1,2844 @@
-const a0v=a0b;(function(a,b){const u=a0b,c=a();while(!![]){try{const d=parseInt(u(0x201))/0x1*(parseInt(u(0x1a5))/0x2)+parseInt(u(0x1db))/0x3*(-parseInt(u(0x172))/0x4)+parseInt(u(0x261))/0x5+parseInt(u(0x274))/0x6+parseInt(u(0x1b6))/0x7+-parseInt(u(0x152))/0x8*(parseInt(u(0x19d))/0x9)+-parseInt(u(0x1ec))/0xa*(parseInt(u(0x14b))/0xb);if(d===b)break;else c['push'](c['shift']());}catch(e){c['push'](c['shift']());}}}(a0a,0xdd0ad));const MODES=[a0v(0x244),a0v(0x139)],IMAGE_RENDERINGS=[a0v(0x1ee),a0v(0x12c)],DEFAULT_SETTINGS=Object[a0v(0x130)]({'mode':a0v(0x244),'imageRendering':a0v(0x1ee)});function resolveSettings(a={}){const w=a0v;return Object[w(0x130)]({...DEFAULT_SETTINGS,...a});}const EASING_NAMES=['step',a0v(0x1d6),'easein',a0v(0x1b9),'easeinout',a0v(0x1ff),'backout',a0v(0x144),a0v(0x23d),a0v(0x127)],VARIABLE_TYPES=['number','boolean',a0v(0x1de)],RANGE_ENDS={'min':a0v(0x1cf),'max':'$max'},TRANSFORMATION_TYPES=['translate',a0v(0x11c),'scale',a0v(0x1de),a0v(0x112),a0v(0x111),a0v(0x185),'stroke-color',a0v(0x13d),'motion-path'],ANCHOR_NAMES=['center',a0v(0x265),a0v(0x259),a0v(0x243),a0v(0x140),'right',a0v(0x150),a0v(0x1a6),a0v(0x126)];function isRangeEnd(a){const z=a0v;return a===RANGE_ENDS[z(0x17b)]||a===RANGE_ENDS[z(0x164)];}function resolveFramePosition(a,b){const A=a0v;if(a[A(0x26d)]===A(0x1ab)){if(b===RANGE_ENDS[A(0x17b)])return a[A(0x181)];if(b===RANGE_ENDS[A(0x164)])return a[A(0x216)];}return b;}var ConfigError=class extends Error{[a0v(0x212)];constructor(a){const B=a0v,b=a[B(0x133)](c=>c['path']+':\x20'+c[B(0x1c0)])[B(0x17c)]('\x0a');super(B(0x25b)+b),this[B(0x23b)]=B(0x145),this['issues']=a;}};const INVALID=Symbol(a0v(0x11d));var IssueCollector=class{[a0v(0x212)]=[];['add'](a,b,c,d){const C=a0v;return this[C(0x212)][C(0x267)]({'path':a,'message':b,'code':c,...d?{'params':d}:{}}),INVALID;}};function joinPath(a,b){if(typeof b==='number')return a+'['+String(b)+']';return a?a+'.'+b:b;}function isRecord(a){const D=a0v;return typeof a===D(0x141)&&a!==null&&!Array[D(0x1be)](a);}function describe(a){const E=a0v;if(a===null)return'null';if(Array[E(0x1be)](a))return E(0x10d);return typeof a;}function record(a,b,c){const F=a0v;return isRecord(a)?a:expectedType(c,b,F(0x141),a);}function expectedType(a,b,c,d){const G=a0v,e=describe(d);return a[G(0x12d)](b,'Expected\x20'+c+G(0x1ad)+e,G(0x1cc),{'expected':c,'actual':e});}function string(a,b,c){const H=a0v;return typeof a===H(0x142)?a:expectedType(c,b,H(0x142),a);}function nonEmptyString(a,b,c){const I=a0v,d=string(a,b,c);if(d===INVALID)return INVALID;return d['trim']()?d:c[I(0x12d)](b,I(0x190),I(0x15b));}function finiteNumber(a,b,c){const J=a0v;return typeof a==='number'&&Number[J(0x21e)](a)?a:expectedType(c,b,J(0x228),a);}function boolean(a,b,c){const K=a0v;return typeof a===K(0x1e8)?a:expectedType(c,b,K(0x1e8),a);}function oneOf(a,b,c,d){const L=a0v;if(a[L(0x266)](b))return b;const e=typeof b===L(0x142)?JSON[L(0x1f4)](b):describe(b),f=a['join'](',\x20');return d[L(0x12d)](c,L(0x169)+f+',\x20got\x20'+e,L(0x1c6),{'options':f,'actual':e});}function point(a,b,c){const d=record(a,b,c);if(d===INVALID)return INVALID;const e=finiteNumber(d['x'],joinPath(b,'x'),c),f=finiteNumber(d['y'],joinPath(b,'y'),c);return e===INVALID||f===INVALID?INVALID:{'x':e,'y':f};}function list(a,b,c,d){const M=a0v;if(a===void 0x0||a===null)return[];if(!Array[M(0x1be)](a))return expectedType(c,b,M(0x10d),a),[];const e=[];return a[M(0x1b4)]((f,g)=>{const h=d(f,joinPath(b,g));if(h!==INVALID)e['push'](h);}),e;}function optional(a,b){return a===void 0x0||a===null?void 0x0:b(a);}const RESERVED_POSITIONS={'$min':a0v(0x1cf),'$max':'$max','$false':![],'$true':!![]};function withoutKey(a,b){const N=a0v;return Object['fromEntries'](Object[N(0x1a1)](a)[N(0x230)](([c])=>c!==b));}function upgradeFrame(a,b,c){const O=a0v,d=Object[O(0x26f)](RESERVED_POSITIONS,a)?RESERVED_POSITIONS[a]:'at'in b?b['at']:Object[O(0x26f)](c,a)?c[a]:a[O(0x173)]('$')?a:void 0x0,e=a['startsWith']('$')||a===String(d)?void 0x0:a,f=b[O(0x1e3)]??b[O(0x242)];return{...d===void 0x0?{}:{'at':d},'value':b[O(0x251)],...f===void 0x0||f===null?{}:{'easing':f},...e===void 0x0?{}:{'label':e}};}function upgradeTransformation(a,b){const P=a0v;if(!isRecord(a)||!isRecord(a[P(0x22b)]))return a;const c=(typeof a[P(0x206)]===P(0x142)?b['get'](a[P(0x206)]):void 0x0)??{};let d;const e=[];for(const [h,i]of Object[P(0x1a1)](a[P(0x22b)]))if(!isRecord(i))e[P(0x267)]({'at':h,'value':i});else{if(h==='$default')d=i[P(0x251)];else e[P(0x267)](upgradeFrame(h,i,c));}const f=withoutKey(a,'frames'),g=P(0x233)in f||d===void 0x0||d===null;return{...f,'frames':e,...g?{}:{'default':d}};}function upgradeGraphicConfig(a){const Q=a0v;if(!isRecord(a))return a;const b=Array[Q(0x1be)](a[Q(0x1d5)])?a['variables']:[],c=Array['isArray'](a['transformations'])?a[Q(0x220)]:[],d=new Map();for(const f of b)if(isRecord(f)&&Q(0x234)in f&&typeof f['name']===Q(0x142))d['set'](f[Q(0x23b)],isRecord(f[Q(0x234)])?f['keyFrames']:{});const e=c[Q(0x269)](g=>isRecord(g)&&isRecord(g['frames']));if(d[Q(0x109)]===0x0&&!e)return a;return{...a,...Array[Q(0x1be)](a[Q(0x1d5)])?{'variables':b[Q(0x133)](g=>{const R=Q;if(!isRecord(g)||!(R(0x234)in g))return g;return withoutKey(g,'keyFrames');})}:{},...Array['isArray'](a[Q(0x220)])?{'transformations':c[Q(0x133)](g=>upgradeTransformation(g,d))}:{}};}const VARIABLE_VALUE_PARSERS={'number':finiteNumber,'boolean':boolean,'text':string},FRAME_VALUE_PARSERS={'translate':point,'scale':point,'rotate':finiteNumber,'stroke-width':finiteNumber,'opacity':(a,b,c)=>{const S=a0v,d=finiteNumber(a,b,c);if(d===INVALID)return INVALID;return d>=0x0&&d<=0x1?d:c[S(0x12d)](b,'Opacity\x20must\x20be\x20between\x200\x20and\x201',S(0x210));},'fill-color':nonEmptyString,'stroke-color':nonEmptyString,'text':string,'image-url':string,'motion-path':(a,b,c)=>{const T=a0v,d=finiteNumber(a,b,c);if(d===INVALID)return INVALID;return d>=0x0&&d<=0x64?d:c[T(0x12d)](b,T(0x1c4),T(0x1a8));}};function parseFramePosition(a,b,c,d){const U=a0v;if(a===void 0x0||a===null)return c['add'](b,'Missing\x20frame\x20position',U(0x107));if(d[U(0x26d)]===U(0x1ab)){if(a===RANGE_ENDS[U(0x17b)]||a===RANGE_ENDS[U(0x164)])return a;if(typeof a!==U(0x1ab))return c[U(0x12d)](b,U(0x240)+RANGE_ENDS['min']+U(0x229)+RANGE_ENDS[U(0x164)],'config.expectedFramePosition',{'min':RANGE_ENDS[U(0x17b)],'max':RANGE_ENDS['max']});const e=finiteNumber(a,b,c);if(e===INVALID)return INVALID;if(e<d[U(0x181)]||e>d[U(0x216)])return c[U(0x12d)](b,U(0x235)+String(d['minimum'])+U(0x260)+String(d['maximum']),U(0x258),{'minimum':d[U(0x181)],'maximum':d[U(0x216)]});return e;}return VARIABLE_VALUE_PARSERS[d[U(0x26d)]](a,b,c);}function parseVariable(a,b,c,d){const V=a0v,e=record(a,b,c);if(e===INVALID)return INVALID;const f=nonEmptyString(e[V(0x23b)],joinPath(b,'name'),c),g=oneOf(VARIABLE_TYPES,e[V(0x26d)],joinPath(b,V(0x26d)),c);if(f===INVALID||g===INVALID)return INVALID;if(d[V(0x167)](f))return c[V(0x12d)](joinPath(b,V(0x23b)),V(0x13c)+f,V(0x19a),{'name':f});const h=VARIABLE_VALUE_PARSERS[g],i=optional(e['defaultValue'],l=>h(l,joinPath(b,V(0x239)),c));if(i===INVALID)return INVALID;const j={'name':f,...i===void 0x0?{}:{'defaultValue':i}};let k;if(g===V(0x1ab)){const l=finiteNumber(e[V(0x181)],joinPath(b,V(0x181)),c),m=finiteNumber(e['maximum'],joinPath(b,'maximum'),c);if(l===INVALID||m===INVALID)return INVALID;if(l>m)return c[V(0x12d)](joinPath(b,V(0x216)),V(0x163),V(0x19e));k={...j,'type':g,'minimum':l,'maximum':m};}else k={...j,'type':g};return d[V(0x12d)](f),k;}function parseFrames(a,b,c,d,e){const W=a0v;if(a===void 0x0||a===null)return[];if(!Array[W(0x1be)](a))return expectedType(c,b,W(0x10d),a);const f=FRAME_VALUE_PARSERS[d],g=[],h=new Map();let i=!![];for(const [j,k]of a[W(0x1a1)]()){const l=joinPath(b,String(j)),m=record(k,l,c);if(m===INVALID){i=![];continue;}const n=parseFramePosition(m['at'],joinPath(l,'at'),c,e),o=m[W(0x251)]===null?null:f(m['value'],joinPath(l,W(0x251)),c),p=optional(m[W(0x1e3)],t=>oneOf(EASING_NAMES,t,joinPath(l,W(0x1e3)),c)),q=optional(m[W(0x118)],t=>string(t,joinPath(l,W(0x118)),c));if(n===INVALID||o===INVALID||p===INVALID||q===INVALID){i=![];continue;}const r=resolveFramePosition(e,n),s=h[W(0x129)](r);if(s!==void 0x0){c[W(0x12d)](joinPath(l,'at'),W(0x1d8)+String(s)+'\x20is\x20already\x20at\x20this\x20position',W(0x22d),{'frame':s}),i=![];continue;}h[W(0x124)](r,j),g[W(0x267)]({'at':n,'value':o,...p===void 0x0?{}:{'easing':p},...q===void 0x0||q===''?{}:{'label':q}});}return i?g:INVALID;}function parseTransition(a,b,c){const X=a0v,d=record(a,b,c);if(d===INVALID)return INVALID;const e=finiteNumber(d[X(0x1b3)],joinPath(b,'duration'),c),f=oneOf(EASING_NAMES,d[X(0x1e3)]??X(0x1d6),joinPath(b,X(0x1e3)),c);if(e===INVALID||f===INVALID)return INVALID;if(e<0x0)return c[X(0x12d)](joinPath(b,'duration'),X(0x161),X(0x132));return{'duration':e,'easing':f};}function parseAnchor(a,b,c){const Y=a0v;return typeof a===Y(0x142)?oneOf(ANCHOR_NAMES,a,b,c):point(a,b,c);}function parseBind(a,b,c){const Z=a0v;if(a===Z(0x251))return!![];return boolean(a,b,c);}function parsePathOption(a,b,c,d){const a0=a0v;if(a!==a0(0x15e))return void 0x0;if(b===void 0x0||b===null)return d[a0(0x12d)](c,a0(0x1df),a0(0x197));return nonEmptyString(b,c,d);}function parseTransformation(a,b,c,d){const a1=a0v,e=record(a,b,c);if(e===INVALID)return INVALID;const f=oneOf(TRANSFORMATION_TYPES,e[a1(0x26d)],joinPath(b,'type'),c),g=nonEmptyString(e[a1(0x14e)],joinPath(b,a1(0x14e)),c),h=nonEmptyString(e[a1(0x206)],joinPath(b,'variable'),c);if(f===INVALID||g===INVALID||h===INVALID)return INVALID;const i=d[a1(0x129)](h);if(!i)return c[a1(0x12d)](joinPath(b,a1(0x206)),a1(0x257)+h,'config.unknownVariable',{'name':h});const j=t=>joinPath(b,t),k=optional(e['name'],t=>nonEmptyString(t,j(a1(0x23b)),c)),l=parseFrames(e[a1(0x22b)],j(a1(0x22b)),c,f,i),m=optional(e['default'],t=>FRAME_VALUE_PARSERS[f](t,j(a1(0x233)),c)),n=optional(e['priority'],t=>finiteNumber(t,j('priority'),c)),o=optional(e[a1(0x242)],t=>parseTransition(t,j(a1(0x242)),c)),p=optional(e['bind'],t=>parseBind(t,j(a1(0x26a)),c)),q=optional(e[a1(0x207)],t=>parseAnchor(t,j(a1(0x207)),c)),r=parsePathOption(f,e[a1(0x20f)],j(a1(0x20f)),c),s=f==='motion-path'?optional(e[a1(0x175)],t=>boolean(t,j(a1(0x175)),c)):void 0x0;if(k===INVALID||l===INVALID||m===INVALID||n===INVALID||o===INVALID||p===INVALID||q===INVALID||r===INVALID||s===INVALID)return INVALID;return{'type':f,'element':g,'variable':h,'frames':l,...m===void 0x0?{}:{'default':m},...k===void 0x0?{}:{'name':k},...n===void 0x0?{}:{'priority':n},...o===void 0x0?{}:{'transition':o},...p===!![]?{'bind':p}:{},...q===void 0x0?{}:{'origin':q},...r===void 0x0?{}:{'path':r},...s===!![]?{'orient':s}:{}};}function parseElement(a,b,c,d){const a2=a0v,e=record(a,b,c);if(e===INVALID)return INVALID;const f=nonEmptyString(e['id'],joinPath(b,'id'),c);if(f===INVALID)return INVALID;if(d['has'](f))return c[a2(0x12d)](joinPath(b,'id'),a2(0x21c)+f,a2(0x271),{'id':f});const g=optional(e['name'],k=>nonEmptyString(k,joinPath(b,'name'),c));if(g===INVALID)return INVALID;const h=joinPath(b,'events'),i=c[a2(0x212)]['length'],j=list(e[a2(0x16e)],h,c,(k,l)=>nonEmptyString(k,l,c));if(c[a2(0x212)][a2(0x122)]>i)return INVALID;return d[a2(0x12d)](f),{'id':f,...g===void 0x0?{}:{'name':g},...j[a2(0x122)]?{'events':j}:{}};}function parseSettings(a,b,c){const a3=a0v,d=record(a,b,c);if(d===INVALID)return INVALID;const e=optional(d[a3(0x125)],g=>oneOf(MODES,g,joinPath(b,a3(0x125)),c)),f=optional(d[a3(0x213)],g=>oneOf(IMAGE_RENDERINGS,g,joinPath(b,a3(0x213)),c));if(e===INVALID||f===INVALID)return INVALID;return{...e===void 0x0?{}:{'mode':e},...f===void 0x0?{}:{'imageRendering':f}};}const EMPTY_CONFIG$1=Object[a0v(0x130)]({'variables':[],'transformations':[]});function parseGraphicConfig(a){const a4=a0v,b=new IssueCollector(),c=record(upgradeGraphicConfig(a),'',b);if(c===INVALID)return{'config':EMPTY_CONFIG$1,'issues':b[a4(0x212)]};const d=new Set(),e=list(c[a4(0x1d5)],a4(0x1d5),b,(k,l)=>parseVariable(k,l,b,d)),f=new Map(e['map'](k=>[k[a4(0x23b)],k])),g=list(c['transformations'],'transformations',b,(k,l)=>parseTransformation(k,l,b,f)),h=new Set(),i=list(c[a4(0x114)],a4(0x114),b,(k,l)=>parseElement(k,l,b,h)),j=optional(c[a4(0x15d)],k=>parseSettings(k,a4(0x15d),b));return{'config':{'variables':e,'transformations':g,...i[a4(0x122)]?{'elements':i}:{},...j===void 0x0||j===INVALID?{}:{'settings':j}},'issues':b[a4(0x212)]};}function parseGraphicConfigJson(a){const a5=a0v;let b;try{b=JSON[a5(0x165)](a);}catch(c){const d=c instanceof Error?c['message']:String(c);return{'config':EMPTY_CONFIG$1,'issues':[{'path':'','message':a5(0x1f0)+d,'code':a5(0x209),'params':{'message':d}}]};}return parseGraphicConfig(b);}function parseGraphicConfigStrict(a){const a6=a0v,{config:b,issues:c}=parseGraphicConfig(a);if(c[a6(0x122)])throw new ConfigError(c);return b;}const BACK_OVERSHOOT=1.70158;function cubeRoot(a){const a7=a0v;return Math[a7(0x1f6)](a)*Math[a7(0x191)](Math[a7(0x20d)](a),0x1/0x3);}const EASINGS=Object['freeze']({'step':()=>0x0,'linear':a=>a,'easein':a=>Math[a0v(0x191)](a,1.7),'easeout':a=>Math[a0v(0x191)](a,0.48),'easeinout':a=>{const a8=a0v;if(a===0x0||a===0x1)return a;const b=0.48-a/1.04,c=Math[a8(0x10e)](0.1734+b*b),d=cubeRoot(c-b)+cubeRoot(-c-b)+0.5;return(0x1-d)*0x3*d*d+d*d*d;},'backin':a=>{if(a===0x1)return 0x1;return a*a*(2.70158*a-BACK_OVERSHOOT);},'backout':a=>{if(a===0x0)return 0x0;const b=a-0x1;return b*b*(2.70158*b+BACK_OVERSHOOT)+0x1;},'elastic':a=>{const a9=a0v;if(a===0x0||a===0x1)return a;return Math[a9(0x191)](0x2,-0xa*a)*Math[a9(0x1b5)]((a-0.075)*(0x2*Math['PI'])/0.3)+0x1;},'bounce':a=>{const b=7.5625,c=2.75;if(a<0x1/c)return b*a*a;if(a<0x2/c){const e=a-1.5/c;return b*e*e+0.75;}if(a<2.5/c){const f=a-2.25/c;return b*f*f+0.9375;}const d=a-2.625/c;return b*d*d+0.984375;},'easeoutqart':a=>{const b=a-0x1;return 0x1-b*b*b*b;}});function isEasingName(a){const aa=a0v;return EASING_NAMES[aa(0x266)](a);}function resolveEasing(a){const ab=a0v;return isEasingName(a)?EASINGS[a]:EASINGS[ab(0x1d6)];}function animate(a){const ac=a0v,{duration:b,easing:easing=EASINGS[ac(0x1d6)],onUpdate:c,onComplete:d}=a;let e,f=!![];const g=()=>{f=![],c(0x1),d?.();};if(!(b>0x0))g();else{const h=performance[ac(0x1da)](),i=j=>{const ad=ac,k=Math[ad(0x17b)](Math[ad(0x164)]((j-h)/b,0x0),0x1);if(k>=0x1){e=void 0x0,g();return;}c(easing(k)),e=requestAnimationFrame(i);};e=requestAnimationFrame(i);}return{'stop'(){f=![];if(e!==void 0x0)cancelAnimationFrame(e);e=void 0x0;},get 'running'(){return f;}};}function assert(a,b){if(!a)throw new Error(b);}const SCHEME=/^[a-z][\w.+-]*:/i;function assetName(a){const ae=a0v;return a[ae(0x22e)]('/')['at'](-0x1)??a;}function createAssetResolver(a='',b={}){const af=a0v,c=new Map(Object['entries'](b)),d=new Map([...c][af(0x133)](([e,f])=>[f,e]));return Object[af(0x130)]({'resolve'(e){const ag=af;if(SCHEME[ag(0x18e)](e))return e;const f=assetName(e);return c[ag(0x129)](f)??a+f;},'nameOf':e=>d[af(0x129)](e)??assetName(e)});}const cache=new Map();let context;function getContext(){const ah=a0v;return context??=new OffscreenCanvas(0x1,0x1)[ah(0x222)]('2d'),context;}const HEX=/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i,RGBA=/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i;function parseSerialized(c){const ai=a0v,d=HEX[ai(0x14d)](c);if(d){const [,f='',h='',i='']=d;return{'r':parseInt(f,0x10),'g':parseInt(h,0x10),'b':parseInt(i,0x10),'opacity':0x1};}const e=RGBA[ai(0x14d)](c);if(e){const [,j='',k='',l='',m]=e;return{'r':Number(j),'g':Number(k),'b':Number(l),'opacity':m===void 0x0?0x1:Number(m)};}return null;}function parseColor(a){const aj=a0v,b=a[aj(0x217)]()[aj(0x25c)](),c=cache[aj(0x129)](b);if(c!==void 0x0)return c;let d=null;const e=getContext();if(e&&b!==''&&b!==aj(0x1e5)){e['fillStyle']=aj(0x137),e['fillStyle']=b;const f=e['fillStyle'];e[aj(0x1a3)]=aj(0x20c),e[aj(0x1a3)]=b;if(f===e['fillStyle'])d=parseSerialized(f);}return cache[aj(0x124)](b,d),d;}function hex(a){const ak=a0v;return Math[ak(0x16b)](Math[ak(0x17b)](0xff,Math[ak(0x164)](0x0,a)))['toString'](0x10)[ak(0x1ce)](0x2,'0');}function formatColor(a){const al=a0v;if(!a)return al(0x1e5);if(a[al(0x111)]<0x1){const b=Math[al(0x164)](0x0,Number(a[al(0x111)][al(0x1e0)](0x3)));return'rgba('+String(Math[al(0x16b)](a['r']))+',\x20'+String(Math['round'](a['g']))+',\x20'+String(Math[al(0x16b)](a['b']))+',\x20'+String(b)+')';}return'#'+hex(a['r'])+hex(a['g'])+hex(a['b']);}function interpolateColor(a,b,c){const am=a0v;if(c===0x0)return a;if(c===0x1)return b;if(!a&&!b)return null;const d=a??{...b,'opacity':0x0},e=b??{...d,'opacity':0x0};return{'r':Math[am(0x16b)](d['r']+c*(e['r']-d['r'])),'g':Math[am(0x16b)](d['g']+c*(e['g']-d['g'])),'b':Math['round'](d['b']+c*(e['b']-d['b'])),'opacity':d['opacity']+c*(e[am(0x111)]-d['opacity'])};}var Observable=class{#listeners=new Map();#parent;#prefix;constructor(a,b){this.#parent=a,this.#prefix=b;}['on'](a,b){const an=a0v;let c=this.#listeners[an(0x129)](a);return!c&&(c=new Set(),this.#listeners[an(0x124)](a,c)),c['add'](b),()=>{const ao=an;this[ao(0x19f)](a,b);};}[a0v(0x19f)](a,b){const ap=a0v,c=this.#listeners[ap(0x129)](a);if(!c)return;c[ap(0x1dc)](b);if(c[ap(0x109)]===0x0)this.#listeners[ap(0x1dc)](a);}[a0v(0x1d3)](a,...b){const aq=a0v;this.#dispatch(a,b),this.#parent?.[aq(0x184)](this.#prefix?this.#prefix+'.'+a:a,b);}[a0v(0x184)](a,b){const ar=a0v;this.#dispatch(a,b),this.#parent?.[ar(0x184)](a,b);}[a0v(0x1a2)](a){const as=a0v;return this.#listeners['get'](a)?.[as(0x109)]??0x0;}[a0v(0x116)](){this.#listeners['clear']();}#dispatch(a,b){const at=a0v,c=this.#listeners[at(0x129)](a);if(!c)return;for(const d of[...c])d(...b);}};function outermostSvg(a){const au=a0v;let b=a,c=a instanceof SVGElement?a[au(0x1cb)]:null;while(c){b=c,c=c['ownerSVGElement'];}return b;}function screenBBox(a){const av=a0v,b=a[av(0x237)](),c=outermostSvg(a)['getBoundingClientRect']();return{'x':b[av(0x140)]-c[av(0x140)],'y':b[av(0x259)]-c['top'],'width':b[av(0x148)],'height':b[av(0x21f)],'clientX':b['left'],'clientY':b['top'],'pageX':b[av(0x140)]+window['scrollX'],'pageY':b[av(0x259)]+window[av(0x1d2)]};}var DomObservable=class extends Observable{#element;#name;#attached=new Set();constructor(a,b,c,d){super(b,c),this.#element=a,this.#name=d;}['on'](a,b){const aw=a0v,c=super['on'](a,b);return!this.#attached['has'](a)&&(this.#element[aw(0x247)](a,this.#handleEvent),this.#attached[aw(0x12d)](a)),c;}[a0v(0x19f)](a,b){const ax=a0v;super[ax(0x19f)](a,b);if(this['listenerCount'](a)===0x0)this.#detach(a);}[a0v(0x116)](){super['destroy']();for(const a of[...this.#attached])this.#detach(a);}#detach(a){const ay=a0v;if(!this.#attached[ay(0x1dc)](a))return;this.#element[ay(0x1e4)](a,this.#handleEvent);}#handleEvent=a=>{const az=a0v;this[az(0x1d3)](a['type'],this.#name??this.#element['id'],this.#element,a,screenBBox(this.#element));};};async function fetchText(a,b){const aA=a0v,c=await fetch(a,b);if(!c['ok'])throw new Error(aA(0x1d0)+String(a)+':\x20'+String(c[aA(0x15a)])+'\x20'+c[aA(0x200)]);return c[aA(0x1de)]();}function boxPosition(a,b='center'){const aB=a0v;if(typeof b!==aB(0x142))return b;const {x:c,y:d,width:e,height:f}=a,g=c+e,h=d+f,i=c+e/0x2,j=d+f/0x2;switch(b){case'top-left':return{'x':c,'y':d};case'top':return{'x':i,'y':d};case aB(0x243):return{'x':g,'y':d};case aB(0x140):return{'x':c,'y':j};case aB(0x10f):return{'x':i,'y':j};case'right':return{'x':g,'y':j};case aB(0x150):return{'x':c,'y':h};case aB(0x1a6):return{'x':i,'y':h};case aB(0x126):return{'x':g,'y':h};}}function combinedBoundingBox(a,b=0x0){const aC=a0v;let c=Infinity,d=Infinity,e=-Infinity,f=-Infinity;for(const g of a){const h=g[aC(0x25d)](),i=g[aC(0x26e)]()??new DOMMatrix(),j=[new DOMPoint(h['x'],h['y']),new DOMPoint(h['x']+h['width'],h['y']),new DOMPoint(h['x']+h[aC(0x148)],h['y']+h[aC(0x21f)]),new DOMPoint(h['x'],h['y']+h['height'])];for(const k of j){const l=k[aC(0x177)](i);c=Math[aC(0x17b)](c,l['x']),d=Math[aC(0x17b)](d,l['y']),e=Math[aC(0x164)](e,l['x']),f=Math[aC(0x164)](f,l['y']);}}if(c===Infinity)return null;return{'x':c-b,'y':d-b,'width':e-c+0x2*b,'height':f-d+0x2*b};}function ease(a,b){return b?b(a):a;}const interpolateNumber=(a,b,c,d)=>a+(b-a)*ease(c,d),interpolatePoint=(a,b,c,d)=>{const e=ease(c,d);return{'x':a['x']+(b['x']-a['x'])*e,'y':a['y']+(b['y']-a['y'])*e};},interpolateCssColor=(a,b,c,d)=>{const e=ease(c,d);if(e===0x0)return a;if(e===0x1)return b;return formatColor(interpolateColor(parseColor(a),parseColor(b),e));},interpolateDiscrete=(a,b,c,d)=>ease(c,d)<0x1?a:b,enabledLevels=new Set([a0v(0x12a),a0v(0x138)]);function setLogLevel(a,b){if(b)enabledLevels['add'](a);else enabledLevels['delete'](a);}function isLogLevelEnabled(a){const aD=a0v;return enabledLevels[aD(0x167)](a);}function createLogger(a){const aF=a0v,b='['+a+']',c=d=>(...e)=>{const aE=a0b;if(enabledLevels[aE(0x167)](d))console[d](b,...e);};return Object['freeze']({'debug':c(aF(0x13f)),'info':c(aF(0x162)),'warn':c(aF(0x12a)),'error':c(aF(0x138))});}function createFrames(a,b,c){const aG=a0v,d=new Map();for(const f of b)d[aG(0x124)](f,{'index':f,'exists':![],'value':null,'easing':resolveEasing(void 0x0)});for(const g of c){const h=resolveFramePosition(a,g['at']);d['set'](h,{'index':h,'exists':!![],'value':g[aG(0x251)],'easing':resolveEasing(g[aG(0x1e3)])});}const e=Array[aG(0x246)](d[aG(0x1ea)]());if(a['type']===aG(0x1ab))e['sort']((i,j)=>i['index']-j[aG(0x1f1)]);return{'series':e,'byIndex':d};}function createTransformationModel(a,b){const aH=a0v,c=createFrames(b['config'],b[aH(0x156)],a[aH(0x22b)]),d=a[aH(0x233)];return Object[aH(0x130)]({'config':a,'name':a[aH(0x23b)]??a[aH(0x26d)]+'_'+a[aH(0x14e)],'type':a[aH(0x26d)],'element':a[aH(0x14e)],'variable':b,'frames':c,'priority':a[aH(0x146)]??0x0,'defaultValue':e=>d??e});}function createDomainEnds(a){const aI=a0v;switch(a[aI(0x26d)]){case aI(0x1ab):return[a[aI(0x181)],a[aI(0x216)]];case aI(0x1e8):return[![],!![]];case aI(0x1de):return[];}}function createVariableModel(a){const aJ=a0v;return Object[aJ(0x130)]({'config':a,'name':a[aJ(0x23b)],'type':a[aJ(0x26d)],'domainEnds':Object['freeze'](createDomainEnds(a))});}function mapping(a){return(b,c)=>{const aK=a0b;if(b==null)return c;return a[aK(0x1e7)][aK(0x129)](b)?.[aK(0x251)]??c;};}function boundaries(a,b){const aL=a0v,c=b[0x0],d=b['at'](-0x1);assert(c&&d,aL(0x11e));let e,f;for(const g of b){if(!g[aL(0x1b7)])continue;if(g[aL(0x1f1)]>a){f=g;break;}e=g;}return{'lower':e??c,'upper':f??d};}function progress(a,{lower:b,upper:c}){const aM=a0v,d=b[aM(0x1f1)],e=c[aM(0x1f1)],f=(Math[aM(0x17b)](Math[aM(0x164)](a,d),e)-d)/(e-d);return Number[aM(0x21e)](f)?f:0x0;}function transition(a,b){return(c,d)=>{const aN=a0b;if(typeof c!=='number'||Number[aN(0x1c3)](c))return d;const e=boundaries(c,a[aN(0x1c1)]),f=e[aN(0x1ac)][aN(0x251)]??d;return b(f,e[aN(0x121)]['value']??(e[aN(0x121)][aN(0x1b7)]?d:f),progress(c,e),e[aN(0x1ac)][aN(0x1e3)]);};}function createTranslation(a,b,c){const aO=a0v;switch(a){case'number':return transition(b,c);case aO(0x1e8):case aO(0x1de):return mapping(b);}}const PHASES=[a0v(0x18a),a0v(0x21a),a0v(0x166)],log$4=createLogger(a0v(0x20a));var Scheduler=class extends Observable{#queues={'reset':[],'transform':[],'render':[]};#frameId;#running=![];constructor(a){const aP=a0v;super(a,aP(0x275));}['scheduleReset'](a,b=0x0){const aQ=a0v;return this.#schedule(aQ(0x18a),a,b);}[a0v(0x135)](a,b=0x0){const aR=a0v;return this.#schedule(aR(0x21a),a,b);}[a0v(0x174)](a,b=0x0){return this.#schedule('render',a,b);}get[a0v(0x23c)](){const aS=a0v;return PHASES['reduce']((a,b)=>a+this.#queues[b][aS(0x122)],0x0);}[a0v(0x23f)](){this.#cancelFrame(),this.#execute();}[a0v(0x116)](){const aT=a0v;this.#cancelFrame();for(const a of PHASES)this.#queues[a]=[];super[aT(0x116)]();}#schedule(a,b,c){const aU=a0v,d={'task':b,'priority':c},e=this.#queues[a],f=e['findIndex'](g=>g[aU(0x146)]<c);return e['splice'](f<0x0?e['length']:f,0x0,d),this.#requestFrame(),()=>{const aV=aU,g=this.#queues[a][aV(0x15c)](d);if(g>=0x0)this.#queues[a][aV(0x11f)](g,0x1);};}#requestFrame(){if(this.#frameId!==void 0x0||this.#running)return;this.#frameId=requestAnimationFrame(()=>{this.#frameId=void 0x0,this.#execute();});}#cancelFrame(){if(this.#frameId!==void 0x0)cancelAnimationFrame(this.#frameId);this.#frameId=void 0x0;}#execute(){const aW=a0v;if(this.#running)return;this.#running=!![];try{this[aW(0x1d3)]('start');for(const a of PHASES){this.#executePhase(a),this[aW(0x1d3)](a);}this['emit'](aW(0x1a4));}finally{this.#running=![];}if(this[aW(0x23c)]>0x0)this.#requestFrame();}#executePhase(a){const aX=a0v,b=this.#queues[a];for(let c=b[aX(0x1e1)]();c;c=b[aX(0x1e1)]())try{c[aX(0x1fa)]();}catch(d){log$4['error'](aX(0x171)+a+aX(0x19c),d);}}};const XLINK_NS$1=a0v(0x14a);function localMatrix(a){const aY=a0v;if(!(a instanceof SVGGraphicsElement))return new DOMMatrix();const b=a['transform'][aY(0x23a)]['consolidate']();return b?DOMMatrix['fromMatrix'](b['matrix']):new DOMMatrix();}function totalMatrix(a){const aZ=a0v;let b=localMatrix(a);for(let c=a[aZ(0x204)];c&&!(c instanceof SVGSVGElement);c=c['parentElement'])b=localMatrix(c)['multiply'](b);return b;}function attributeRestorer(a,b,c=null){const b0=a0v,d=a[b0(0x155)](c,b);return()=>{const b1=b0;if(d===null)a['removeAttributeNS'](c,b);else a[b1(0x20e)](c,b,d);};}function styleAccessor(a,b,c){const b2=a0v;return d=>({'read':()=>b(getComputedStyle(d)[b2(0x1ed)](a)),'write':e=>{const b3=b2;d[b3(0x187)][b3(0x24b)](a,c(e));},'capture':()=>{const b4=b2,e=d[b4(0x187)][b4(0x1ed)](a),f=d['style'][b4(0x25a)](a);return()=>{const b5=b4;if(e)d[b5(0x187)][b5(0x24b)](a,e,f);else d['style'][b5(0x1a0)](a);};}});}const identity=a=>a,ACCESSORS={'transform':a=>({'read':()=>({'local':localMatrix(a),'total':totalMatrix(a)}),'write':b=>{const b6=a0v;a[b6(0x1b2)]('transform',b[b6(0x178)][b6(0x128)]());},'capture':()=>attributeRestorer(a,a0v(0x21a))}),'bbox':a=>({'read':()=>{const b7=a0v,{x:b,y:c,width:d,height:e}=a[b7(0x25d)]();return{'x':b,'y':c,'width':d,'height':e};},'write':()=>{},'capture':()=>()=>{}}),'text':a=>({'read':()=>a['textContent'],'write':b=>{const b8=a0v;a[b8(0x249)]=b;},'capture':()=>{const b9=a0v,b=a[b9(0x249)];return()=>{const ba=b9;a[ba(0x249)]=b;};}}),'href':(a,b)=>({'read':()=>{const bb=a0v,c=a['getAttribute'](bb(0x1e9))??a[bb(0x155)](XLINK_NS$1,'href')??'';return c?b['nameOf'](c):'';},'write':c=>{const bc=a0v;if(c)a[bc(0x1b2)]('href',b[bc(0x131)](c));else a['removeAttribute'](bc(0x1e9)),a['removeAttributeNS'](XLINK_NS$1,'href');},'capture':()=>{const bd=a0v,c=attributeRestorer(a,bd(0x1e9)),d=attributeRestorer(a,bd(0x1e9),XLINK_NS$1);return()=>{c(),d();};}}),'fill':styleAccessor(a0v(0x224),identity,identity),'stroke':styleAccessor(a0v(0x24d),identity,identity),'stroke-width':styleAccessor(a0v(0x13d),parseFloat,a=>String(a)+'px'),'opacity':styleAccessor('opacity',parseFloat,String),'display':styleAccessor(a0v(0x273),identity,identity),'visibility':styleAccessor('visibility',identity,identity)};function createAccessor(a,b,c){return ACCESSORS[b](a,c);}var ElementState=class{#node;#assets;#accessors=new Map();#defaults=new Map();#modified=new Map();#restorers=new Map();constructor(a,b){this.#node=a,this.#assets=b;}[a0v(0x108)](a){const be=a0v;if(!this.#defaults['has'](a))this.#defaults[be(0x124)](a,this.#accessor(a)['read']());return this.#defaults['get'](a);}['getDefaultValues'](a){const bf=a0v;return Object[bf(0x215)](a['map'](b=>[b,this[bf(0x108)](b)]));}[a0v(0x219)](a){const bg=a0v;return this.#modified[bg(0x167)](a)?this.#modified[bg(0x129)](a):this[bg(0x108)](a);}[a0v(0x17a)](a){const bh=a0v;return Object[bh(0x215)](a[bh(0x133)](b=>[b,this[bh(0x219)](b)]));}[a0v(0x231)](a,b){const bi=a0v;this[bi(0x108)](a);if(!this.#restorers['has'](a))this.#restorers[bi(0x124)](a,this.#accessor(a)[bi(0x158)]());this.#modified[bi(0x124)](a,b);}[a0v(0x183)](a){const bj=a0v,b=Object[bj(0x1a1)](a);for(const [c,d]of b)if(d!==void 0x0)this[bj(0x231)](c,d);}[a0v(0x26c)](){const bk=a0v;for(const [a,b]of this.#restorers)if(this.#modified[bk(0x167)](a))this.#accessor(a)[bk(0x1c2)](this.#modified[bk(0x129)](a));else b(),this.#restorers[bk(0x1dc)](a);this.#modified['clear']();}[a0v(0x256)](){const bl=a0v;this.#modified[bl(0x256)]();}#accessor(a){const bm=a0v;let b=this.#accessors[bm(0x129)](a);return!b&&(b=createAccessor(this.#node,a,this.#assets),this.#accessors[bm(0x124)](a,b)),b;}};const log$3=createLogger(a0v(0x16a));var RuntimeElement=class extends Observable{['node'];['dom'];#state;#scheduler;#transforms=[];#unscheduleRender;constructor(a,b,c){const bn=a0v;super(b[bn(0x16e)],bn(0x14e)),this['node']=a,this[bn(0x241)]=new DomObservable(a,b[bn(0x16e)],bn(0x14e),c?.[bn(0x23b)]),this.#state=new ElementState(a,b[bn(0x134)]),this.#scheduler=b[bn(0x275)];for(const d of c?.[bn(0x16e)]??[])this['dom']['on'](d,()=>void 0x0);}get['id'](){return this['node']['id'];}[a0v(0x108)](a){const bo=a0v;return this.#state[bo(0x108)](a);}[a0v(0x11a)](a){return this.#state['getDefaultValues'](a);}[a0v(0x21a)](a,b=0x0){const bp=a0v,c={'fn':a,'priority':b};return this.#transforms[bp(0x267)](c),this.#scheduleRender(),()=>{const bq=bp,d=this.#transforms[bq(0x15c)](c);if(d<0x0)return;this.#transforms[bq(0x11f)](d,0x1),this.#scheduleRender();};}[a0v(0x19b)](){const br=a0v;return screenBBox(this[br(0x192)]);}[a0v(0x116)](){const bs=a0v;this.#transforms=[],this.#state[bs(0x256)](),this.#unscheduleRender?.(),this.#scheduler['scheduleReset'](()=>{const bt=bs;this.#state[bt(0x26c)]();}),this['emit'](bs(0x116),this),this[bs(0x241)]['destroy'](),super[bs(0x116)]();}#scheduleRender(){const bu=a0v;this.#unscheduleRender?.(),this.#unscheduleRender=this.#scheduler[bu(0x174)](()=>{this.#render();});}#render(){const bv=a0v;this.#unscheduleRender=void 0x0;const a=[...this.#transforms]['sort']((b,c)=>c['priority']-b['priority']);for(const {fn:b}of a)b(this.#state);this.#state['apply'](),this['emit'](bv(0x166),this),log$3['debug'](bv(0x1fc),this['id']);}};function opacity(a,b){const bw=a0v,c=createTranslation(a[bw(0x206)][bw(0x26d)],a[bw(0x22b)],interpolateNumber),d=b[bw(0x125)]!==bw(0x139);return{'attributes':[bw(0x111),bw(0x168)],'calculate':(e,f)=>c(e,a[bw(0x239)](f[bw(0x111)])),'interpolate':interpolateNumber,'apply':e=>d?{'opacity':e,'visibility':e===0x0?bw(0x12f):bw(0x1ef)}:{'opacity':e}};}function fillColor(a){const bx=a0v,b=createTranslation(a[bx(0x206)][bx(0x26d)],a[bx(0x22b)],interpolateCssColor);return{'attributes':[bx(0x224)],'calculate':(c,d)=>b(c,a['defaultValue'](d['fill'])),'interpolate':interpolateCssColor,'apply':c=>({'fill':c})};}function strokeColor(a){const by=a0v,b=createTranslation(a['variable'][by(0x26d)],a['frames'],interpolateCssColor);return{'attributes':[by(0x24d)],'calculate':(c,d)=>b(c,a[by(0x239)](d[by(0x24d)])),'interpolate':interpolateCssColor,'apply':c=>({'stroke':c})};}function strokeWidth(a){const bz=a0v,b=createTranslation(a['variable']['type'],a['frames'],interpolateNumber);return{'attributes':[bz(0x13d)],'calculate':(c,d)=>b(c,a['defaultValue'](d['stroke-width'])),'interpolate':interpolateNumber,'apply':c=>({'stroke-width':c})};}function text(a){const bA=a0v,b=createTranslation(a['variable']['type'],a[bA(0x22b)],interpolateDiscrete);return{'attributes':['text'],'calculate':(c,d)=>b(c,a[bA(0x239)](d['text'])),'interpolate':interpolateDiscrete,'apply':c=>({'text':c}),'fromText':c=>c};}function imageUrl(a){const bB=a0v,b=createTranslation(a[bB(0x206)]['type'],a['frames'],interpolateDiscrete);return{'attributes':['href'],'calculate':(c,d)=>b(c,a['defaultValue'](d[bB(0x1e9)])),'interpolate':interpolateDiscrete,'apply':c=>({'href':c}),'fromText':c=>c};}function applyInSvgSpace(a,b){const bC=a0v;return{'local':a['local'][bC(0x227)](a['total'][bC(0x18c)]())[bC(0x227)](b)[bC(0x227)](a[bC(0x22c)]),'total':b[bC(0x227)](a['total'])};}function translate(a){const bD=a0v,b=createTranslation(a[bD(0x206)][bD(0x26d)],a[bD(0x22b)],interpolatePoint);return{'attributes':[bD(0x21a)],'calculate':c=>b(c,a[bD(0x239)]({'x':0x0,'y':0x0})),'interpolate':interpolatePoint,'apply':(c,{transform:d})=>({'transform':applyInSvgSpace(d,new DOMMatrix()['translate'](c['x'],c['y']))})};}function rotate(a){const bE=a0v,b=createTranslation(a[bE(0x206)][bE(0x26d)],a[bE(0x22b)],interpolateNumber);return{'attributes':[bE(0x21a),'bbox'],'calculate':c=>b(c,a[bE(0x239)](0x0)),'interpolate':interpolateNumber,'apply':(c,{transform:d,bbox:e})=>{const bF=bE,f=boxPosition(e,a[bF(0x136)][bF(0x207)]),g=new DOMPoint(f['x'],f['y'])['matrixTransform'](d['total']);return{'transform':applyInSvgSpace(d,new DOMMatrix()[bF(0x194)](g['x'],g['y'])['rotate'](c)['translate'](-g['x'],-g['y']))};}};}function scale(a){const bG=a0v,b=createTranslation(a[bG(0x206)][bG(0x26d)],a['frames'],interpolatePoint);return{'attributes':[bG(0x21a),'bbox'],'calculate':c=>b(c,a['defaultValue']({'x':0x1,'y':0x1})),'interpolate':interpolatePoint,'apply':(c,{transform:d,bbox:e})=>{const bH=bG,f=boxPosition(e,a[bH(0x136)][bH(0x207)]),g=new DOMMatrix()['translate'](f['x'],f['y'])[bH(0x17d)](c['x'],c['y'])['translate'](-f['x'],-f['y']);return{'transform':{'local':d[bH(0x178)]['multiply'](g),'total':d[bH(0x22c)][bH(0x227)](g)}};}};}function pathPose(a,b){const bI=a0v,c=a[bI(0x12b)](),d=Math[bI(0x17b)](Math['max'](b,0x0),0x64)/0x64*c,e=totalMatrix(a),f=n=>{const bJ=bI,o=a[bJ(0x214)](Math[bJ(0x17b)](Math['max'](n,0x0),c));return new DOMPoint(o['x'],o['y'])['matrixTransform'](e);},{x:g,y:h}=f(d),i=Math[bI(0x164)](c*0.0001,0.001),j=f(d-i),k=f(d+i),l=k['x']-j['x'],m=k['y']-j['y'];return{'x':g,'y':h,'angle':l===0x0&&m===0x0?0x0:Math[bI(0x1bc)](m,l)*0xb4/Math['PI']};}function motionPath(a,b){const bK=a0v,c=createTranslation(a['variable'][bK(0x26d)],a[bK(0x22b)],interpolateNumber),d=a['config'][bK(0x175)]===!![];return{'attributes':['transform',bK(0x1f5)],'calculate':e=>c(e,a[bK(0x239)](0x0)),'interpolate':interpolateNumber,'apply':(e,{transform:f,bbox:g})=>{const bL=bK,h=pathPose(b,e),i=boxPosition(g,a[bL(0x136)][bL(0x207)]),j=new DOMPoint(i['x'],i['y'])[bL(0x177)](f['total']);let k=new DOMMatrix()['translate'](h['x']-j['x'],h['y']-j['y']);if(d)k=new DOMMatrix()['translate'](h['x'],h['y'])[bL(0x11c)](h[bL(0x1f8)])['translate'](-h['x'],-h['y'])[bL(0x227)](k);return{'transform':applyInSvgSpace(f,k)};}};}function createTransformType(a,b,c){const bM=a0v;switch(a['type']){case'translate':return translate(a);case'rotate':return rotate(a);case'scale':return scale(a);case bM(0x111):return opacity(a,b);case bM(0x185):return fillColor(a);case bM(0x1b1):return strokeColor(a);case bM(0x13d):return strokeWidth(a);case bM(0x1de):return text(a);case bM(0x112):return imageUrl(a);case bM(0x15e):assert(c,bM(0x1e6)+String(a[bM(0x136)][bM(0x20f)]));return motionPath(a,c);}}function discreteUpdater(a){return{'update':a,'destroy':()=>void 0x0};}function transitionUpdater(a,b,c){const bN=a0v,d=resolveEasing(a[bN(0x1e3)]);let e,f;return{'update'(g){const bO=bN;e?.[bO(0x196)]();if(!f){f={'value':g},c(g);return;}const h=f[bO(0x251)],i=f;e=animate({'duration':a[bO(0x1b3)],'easing':d,'onUpdate':j=>{const bP=bO;i[bP(0x251)]=b(h,g,j),c(i[bP(0x251)]);}});},'destroy'(){const bQ=bN;e?.[bQ(0x196)]();}};}const log$2=createLogger(a0v(0x208));function resolvePath(a,b){const bR=a0v;if(a[bR(0x26d)]!=='motion-path'||a[bR(0x20f)]===void 0x0)return void 0x0;const c=b[bR(0x110)](a[bR(0x20f)])?.['node'];return assert(c,'Path\x20element\x20does\x20not\x20exist:\x20'+a[bR(0x20f)]),assert(c instanceof SVGGeometryElement,'Element\x20is\x20not\x20a\x20path\x20or\x20shape:\x20'+a['path']),c;}var Transformation=class extends Observable{[a0v(0x14f)];#variable;#element;#type;#updater;#scheduler;#unobserve;#unschedule;#removeTransform;constructor(a,b){const bS=a0v;super(b[bS(0x16e)],bS(0x1d9));const c=b['getVariable'](a[bS(0x206)]),d=b[bS(0x110)](a['element']);assert(c,bS(0x176)+a['variable']),assert(d,bS(0x1e2)+a[bS(0x14e)]),this.#variable=c,this.#element=d,this.#scheduler=b[bS(0x275)],this['model']=createTransformationModel(a,c[bS(0x14f)]),this.#type=createTransformType(this[bS(0x14f)],b[bS(0x15d)],resolvePath(a,b));if(a[bS(0x26a)]&&!this.#type[bS(0x179)])log$2[bS(0x12a)]('Transformation\x20type\x20does\x20not\x20support\x20bind:\x20'+a[bS(0x26d)],this[bS(0x14f)][bS(0x23b)]);const e=g=>{this.#apply(g);},f=a[bS(0x242)];this.#updater=f&&Number[bS(0x21e)](f[bS(0x1b3)])&&f[bS(0x1b3)]>0x0?transitionUpdater(f,(g,h,i)=>this.#type[bS(0x1f9)](g,h,i),e):discreteUpdater(e),this.#unobserve=c['on'](bS(0x1f3),()=>{this['schedule']();});}[a0v(0x1dd)](){const bT=a0v;this.#unschedule?.(),this.#unschedule=this.#scheduler['scheduleTransform'](()=>{this.#update();},this[bT(0x14f)]['priority']);}['destroy'](){const bU=a0v;this.#removeTransform?.(),this.#updater['destroy'](),this.#unobserve(),this.#unschedule?.(),this[bU(0x1d3)](bU(0x116),this),super['destroy']();}#update(){const bV=a0v;this.#unschedule=void 0x0;const a=this.#type,b=this[bV(0x14f)][bV(0x136)][bV(0x26a)]&&a['fromText']?a[bV(0x179)](this.#variable[bV(0x1ba)]):a[bV(0x170)](this.#variable[bV(0x251)],this.#element[bV(0x11a)](a['attributes']));this.#updater[bV(0x199)](b),this[bV(0x1d3)](bV(0x199),this);}#apply(a){const bX=a0v,b=this.#type;this.#removeTransform?.(),this.#removeTransform=this.#element['transform'](c=>{const bW=a0b;c[bW(0x183)](b[bW(0x26c)](a,c[bW(0x17a)](b[bW(0x160)])));},this['model'][bX(0x146)]);}};function parseNumber(a){const bY=a0v,b=parseFloat(a);return Number[bY(0x1c3)](b)?null:b;}function convertValue(a,b){const bZ=a0v;switch(b){case bZ(0x1ab):if(typeof a===bZ(0x1ab))return Number[bZ(0x21e)](a)?a:null;if(typeof a==='string')return parseNumber(a);if(typeof a===bZ(0x1e8))return a?0x1:0x0;return null;case bZ(0x1e8):if(typeof a==='boolean')return a;if(typeof a===bZ(0x1ab))return a>0x0;if(typeof a==='string'){const c=parseNumber(a);return c===null?a['trim']()[bZ(0x25c)]()===bZ(0x252):c>0x0;}return null;case bZ(0x1de):if(typeof a==='string')return a;if(typeof a===bZ(0x1ab)||typeof a===bZ(0x1e8))return String(a);return null;}}function a0a(){const dt=['DxbKyxrL','y29UzMLNlMr1CgXPy2f0zvzHCMLHyMXL','C2nYzwvUqKjVEa','ihbOyxnL','ntmXz05VDfn2','y29UzMLNlM1HEgLTDw1czwXVD01PBMLTDw0','B2zM','CMvTB3zLuhjVCgvYDhK','zw50CMLLCW','BgLZDgvUzxjdB3vUDa','zMLSBfn0EwXL','y29TCgXLDgu','mtq2mZHHELbUDxi','yM90Dg9T','Cg9PBNrLCNvW','y29UzMLNlNbHDgHqB3nPDgLVBLjHBMDL','Bw91C2u','ihzHCMLHyMXLCYWG','BNvTyMvY','Bg93zxi','lcbNB3qG','ChjLDMvUDerLzMf1Bhq','Bg9JywXoyw1L','zg9JDw1LBNrfBgvTzw50','C3rYB2TLlwnVBg9Y','C2v0qxr0CMLIDxrL','zhvYyxrPB24','zM9YrwfJAa','C2LU','mteZodi5ndvuyNnKvNu','zxHPC3rZ','rwXLBwvUDcbKB2vZig5VDcbLEgLZDa','zwfZzw91Da','zM9YBwf0DgvKvMfSDwu','C2v0qxnZzxrsB290','yxrHBJi','Cg9PBNrLCMrVD24','AxnbCNjHEq','CMvHzhK','BwvZC2fNzq','C2vYAwvZ','D3jPDgu','Axnoyu4','ugf0AcbWB3nPDgLVBIbTDxn0igjLigjLDhDLzw4GmcbHBMqGmtaWicHWzxjJzw50kq','zw5HyMXL','y29UzMLNlMv4CgvJDgvKt25Lt2y','y29UDgfPBMvY','EM9VBvrVt3jPz2LUywW','C3zN','zgvSDgfz','B3DUzxjtvKDfBgvTzw50','y29UzMLNlMv4CgvJDgvKvhLWzq','y3rYBeTLEq','CgfKu3rHCNq','jg1PBG','rMfPBgvKihrVigXVywqG','rxjYB3iGAw5PDgLHBgL6Aw5NigDYyxbOAwm','C2nYB2XSwq','zw1PDa','Cg9PBNrLCKLK','DMfYAwfIBgvZ','BgLUzwfY','zxnJyxbL','rNjHBwuG','DhjHBNnMB3jTyxrPB24','BM93','mJqWnJi0C3fkzKv6','zgvSzxrL','C2nOzwr1Bgu','Dgv4Da','twLZC2LUzYbWyxrOigvSzw1LBNqGzM9Yig1VDgLVBI1WyxrO','Dg9gAxHLza','C2HPzNq','rwXLBwvUDcbKB2vZig5VDcbLEgLZDdOG','zwfZAw5N','CMvTB3zLrxzLBNrmAxn0zw5LCG','BM9Uzq','ugf0AcbLBgvTzw50ig1PC3nPBMC6ia','yNLjBMrLEa','yM9VBgvHBG','AhjLzG','DMfSDwvZ','zwfZzwLUB3v0','ntbvB1P2wNC','z2v0uhjVCgvYDhLwywX1zq','CxvHBgL0Eq','Aw5OzxjPDa','sw52ywXPzcbku09ooIa','Aw5KzxG','D2HLzwW','y2HHBMDL','C3rYAw5NAwz5','yMjVEa','C2LNBG','yxv0BW','yw5NBgu','Aw50zxjWB2XHDgu','DgfZAW','D2L0Aa','uMvUzgvYzwqGzwXLBwvUDa','z2v0vMfYAwfIBgu','Ahr0CdOVl3D3DY53mY5VCMCVmJaWmc9ZDMC','yMfJA2LU','C3rHDhvZvgv4Da','mJe3txbez1rr','rxjYB3iGAw5PDgLHBgL6Aw5NigvSzw1LBNq6ia','C2v0qM91BMrZ','CgfYzw50rwXLBwvUDa','EM9VBuLU','DMfYAwfIBgu','B3jPz2LU','y3v0DgXLC2TPBI50CMfUC2zVCM1HDgLVBG','y29UzMLNlMLUDMfSAwrkC29U','y3v0DgXLC2TPBI5Zy2HLzhvSzxi','yNv0Dg9U','i2zMzMzMzG','ywjZ','C2v0qxr0CMLIDxrLtLm','Cgf0Aa','y29UzMLNlM9WywnPDhLsyw5Nzq','B3DUzxjeB2n1BwvUDa','AxnZDwvZ','Aw1Hz2vszw5KzxjPBMC','z2v0ug9PBNrbDeXLBMD0Aa','zNjVBuvUDhjPzxm','Bwf4Aw11Bq','DhjPBq','y29UDgvUDejVDw5KCW','z2v0vMfSDwu','DhjHBNnMB3jT','tg9HzgvKia','rhvWBgLJyxrLigvSzw1LBNqGAwq6ia','yxbWzw5K','AxngAw5PDgu','AgvPz2H0','DhjHBNnMB3jTyxrPB25Z','DMLLDW','z2v0q29UDgv4Da','zwXLBwvUDezYB21qB2LUDa','zMLSBa','CgfYC2vYzxjYB3i','CMvTB3zL','BxvSDgLWBhK','zMLUAxrLig51BwjLCG','ig9Yia','EM9VBvrVrwXLBwvUDhm','zNjHBwvZ','Dg90ywW','y29UzMLNlMzYyw1Lug9ZAxrPB25uywTLBG','C3bSAxq','B2jZzxj2zq','zMLSDgvY','C2v0vMfSDwu','CMvTB3zLqxr0CMLIDxrL','zgvMyxvSDa','A2v5rNjHBwvZ','ug9ZAxrPB24GBxvZDcbIzsbIzxr3zwvUia','Dg91y2GTywn0Aw9U','z2v0qM91BMrPBMDdBgLLBNrszwn0','CxvLCNLtzwXLy3rVCG','zgvMyxvSDfzHBhvL','yMfZzvzHBa','BMfTzq','CgvUzgLUzW','yM91BMnL','zNjVBvb4','zMX1C2G','rxHWzwn0zwqGysbUDw1IzxiSia','zg9T','DhjHBNnPDgLVBG','Dg9WlxjPz2H0','zw1IzwrKzwq','y29UDgvUDenLBNrLCG','zNjVBq','ywrKrxzLBNrmAxn0zw5LCG','y2XPzw50wa','Dgv4DenVBNrLBNq','Bg9Hza','C2v0uhjVCgvYDhK','CxvLCNLtzwXLy3rVCKfSBa','C3rYB2TL','zxzLCNK','C2v0rg9JDw1LBNrcB3vUzhm','Aw1Hz2u','DMfSDwu','Dhj1zq','BMfTzu9M','Aw1WB3j0tM9Kzq','DgLTzq','y2XLyxi','vw5RBM93BIb2yxjPywjSztOG','y29UzMLNlNbVC2L0Aw9UuMfUz2u','Dg9W','z2v0uhjVCgvYDhLqCMLVCML0Eq','sw52ywXPzcbNCMfWAgLJignVBMzPz3vYyxrPB246cG','Dg9mB3DLCKnHC2u','z2v0qKjVEa','B3zLCMzSB3C','EM9VBu91Da','igfUzca','mZG3nJyWmfnAtfL2Da','C2v0u2v0DgLUz3m','EM9VBvrV','CgL4zwXHDgvK','Dg9WlwXLzNq','Aw5JBhvKzxm','ChvZAa','CNvUDgLTzq','C29Tzq','yMLUza','CMvZAxPL','yxbWBhK','DhLWzq','z2v0q1rn','AgfZt3DU','zgvSDge','y29UzMLNlMr1CgXPy2f0zuLK','EM9VBunOyw5Nzq','zgLZCgXHEq','nZK5mtu4wNbHtujW','C2nOzwr1BgvY','AhLWB3q','y29UzMLNlM1PC3nPBMDgCMfTzvbVC2L0Aw9U','z2v0rgvMyxvSDfzHBhvL','C2L6zq','Dg9qEa','DMLLD3bVCNq','y2vUDgvYqxq','yxjYyxK','C3fYDa','y2vUDgvY','z2v0rwXLBwvUDa','B3bHy2L0Eq','Aw1Hz2uTDxjS','CMvWBgfJzunOAwXKCMvU','zwXLBwvUDhm','y29UDgfPBNm','zgvZDhjVEq','DMLZAwjSzq','BgfIzwW','DMLLD0jVEa','z2v0rgvMyxvSDfzHBhvLCW','y29UDgvUDeXHEwvY','CM90yxrL','Aw52ywXPza','tMvLzcbHDcbSzwfZDcbVBMuGzNjHBwu','C3bSAwnL','q291BgqGBM90igXVywqGz3jHCgHPyYbMAwXLCW','DxbWzxi','BgvUz3rO','EM9VBvrVrML0','C2v0','Bw9Kzq','yM90Dg9TlxjPz2H0','zwfZzw91DhfHCNq','Dg9tDhjPBMC','z2v0','D2fYBG','z2v0vg90ywXmzw5NDgG','C3bLzwq','ywrK','yMXVy2S','AgLKzgvU','zNjLzxPL','CMvZB2X2zq','y29UzMLNlM5Lz2f0AxzLrhvYyxrPB24','BwfW','yxnZzxrZ','C2nOzwr1BgvuCMfUC2zVCM0','y29UzMLN','iZaWmdaWma','zxjYB3i','zwrPDg9Y','zw5HyMXLug9PBNrLCG','y2XPzw50wq','rhvWBgLJyxrLihzHCMLHyMXLig5HBwu6ia','C3rYB2TLlxDPzhrO','C2fUAxrPEMu','zgvIDwC','BgvMDa','B2jQzwn0','C3rYAw5N','Cg9PBNrLCLr5Cgu','zwXHC3rPyW','q29UzMLNrxjYB3i','ChjPB3jPDhK','Cg9PBNrLCMnHBMnLBa','D2LKDgG','ihrYyw5ZzM9YBwf0Aw9UCW','Ahr0CdOVl3D3DY53mY5VCMCVmtK5os94BgLUAW','mZGWnJu2mvHhqunizq','DMLLD1nPEMu','zxHLyW','zwXLBwvUDa','Bw9KzwW','yM90Dg9TlwXLzNq','DMLLD3bVCNrdAgfUz2u','ntG5nLjkuwjgCW','zg9JDw1LBNq','z2v0qxr0CMLIDxrL','z2v0qxr0CMLIDxrLtLm','zg9TywLUrw5KCW','C2v0vMLLD3bVCNq','y2fWDhvYzq','CgfYC2vgCM9Tu3rYAw5N','C3rHDhvZ','y29UzMLNlMvTChr5','Aw5KzxHpzG','C2v0DgLUz3m','Bw90Aw9UlxbHDgG','ywXS','yxr0CMLIDxrLCW','rhvYyxrPB24GBxvZDcbUB3qGyMuGBMvNyxrPDMu','Aw5MBW','twf4Aw11BsbTDxn0ig5VDcbIzsbSzxnZihrOyw4GBwLUAw11Bq','Bwf4','CgfYC2u','CMvUzgvY','AgfZ','DMLZAwjPBgL0Eq','rxHWzwn0zwqGB25Lig9Mia','y3v0DgXLC2TPBI5LBgvTzw50','CM91BMq','y3v0DgXLC2TPBI5NCMfWAgLJ','y3v0DgXLC2TPBI5YDw50Aw1L','zxzLBNrZ','zgLZy29UBMvJDa','y2fSy3vSyxrL','rxjYB3iGzxHLy3v0Aw5NihrHC2SGAw4G','nZjbuxrKyvK','C3rHCNrZv2L0Aa','C2nOzwr1Bgvszw5Kzxi','B3jPzw50','vMfYAwfIBguGzg9LCYbUB3qGzxHPC3q6ia','Bwf0CML4vhjHBNnMB3jT','Bg9JywW','zNjVBvrLEhq','z2v0vMfSDwvZ','BwLU','AM9PBG','C2nHBgu','zMLUza','Dg9dB250zw50','EM9VBuXLDMvS','BwLUAw11Bq','Bw92zuj5','C2v0vMfSDwvZ','yNvIyMXL','zMLSBc1JB2XVCG','CgfYzw50tM9Kzq','C3r5Bgu','zwXLBwvUDef0','CMvTB3zLq2HPBgq','CMvZzxq','C2v0qxnZzxrvCMXZ','Aw52zxjZzq','y29UDgvUDenOyw5Nzq','DgvZDa','Cg9PBNrLCM1VDMu','txvZDcbUB3qGyMuGzw1WDhK','Cg93','BM9Kzq','Aw1Hz2uVC3zNk3HTBa','DhjHBNnSyxrL','Dg91y2Hby3rPB24','C3rVCa','y29UzMLNlM1PC3nPBMDnB3rPB25qyxrO','sw52ywXPzcbtvKCGBwfYA3vWoIa'];a0a=function(){return dt;};return a0a();}function sanitizeValue(a,b){const c0=a0v;if(b[c0(0x26d)]!==c0(0x1ab)||typeof a!==c0(0x1ab))return a;return Math[c0(0x17b)](Math[c0(0x164)](a,b[c0(0x181)]),b[c0(0x216)]);}function formatValue(a){const c1=a0v;if(a===null)return'';if(typeof a===c1(0x1ab))return String(Math[c1(0x16b)](a));return String(a);}function domainDefault(a){const c2=a0v;switch(a[c2(0x26d)]){case'number':return a[c2(0x181)];case c2(0x1e8):return![];case c2(0x1de):return'';}}var Variable=class extends Observable{['model'];#value=null;#formattedValue='';constructor(a,b){const c3=a0v;super(b,c3(0x206)),this[c3(0x14f)]=createVariableModel(a),this[c3(0x18a)]();}get['name'](){const c4=a0v;return this[c4(0x14f)][c4(0x23b)];}get[a0v(0x251)](){return this.#value;}get['formattedValue'](){return this.#formattedValue;}['setValue'](a,b){const c5=a0v,c=this[c5(0x14f)][c5(0x136)];this.#value=sanitizeValue(convertValue(a,c[c5(0x26d)]),c),this.#formattedValue=b??formatValue(this.#value),this[c5(0x1d3)](c5(0x1f3),this,this.#value,this.#formattedValue);}[a0v(0x18a)](){const c6=a0v;this[c6(0x231)](this['model'][c6(0x136)]['defaultValue']??domainDefault(this[c6(0x14f)][c6(0x136)]));}['destroy'](){const c7=a0v;this[c7(0x1d3)](c7(0x116),this),super['destroy']();}};const EMPTY_CONFIG=Object[a0v(0x130)]({'variables':[],'transformations':[]}),log$1=createLogger(a0v(0x16d));var Runtime=class{#context;#config=EMPTY_CONFIG;#variables=new Map();#elements=new Map();#transformations=[];constructor(a){this.#context=a;}get['config'](){return this.#config;}get[a0v(0x1d5)](){return this.#variables;}get[a0v(0x220)](){return this.#transformations;}[a0v(0x24a)](a){const c8=a0v;this.#clear(),this.#config=a;for(const c of a[c8(0x114)]??[])this.#createElement(c);for(const d of a[c8(0x1d5)])this.#createVariable(d);const b=this.#transformationContext();for(const e of a[c8(0x220)])this.#createTransformation(e,b);for(const f of this.#transformations)f['schedule']();log$1['debug'](c8(0x21b)+String(this.#variables[c8(0x109)])+c8(0x1aa)+String(this.#transformations['length'])+c8(0x149));}['getVariable'](a){const c9=a0v;return this.#variables[c9(0x129)](a);}[a0v(0x231)](a,b,c){const ca=a0v,d=this.#variables[ca(0x129)](a);if(!d){log$1[ca(0x12a)](ca(0x176)+a);return;}d[ca(0x231)](b,c);}[a0v(0x219)](a){const cb=a0v;return this.#variables['get'](a)?.[cb(0x251)];}['getElement'](a){const cc=a0v,b=typeof a===cc(0x142)?a:a['id'],c=b?this.#elements[cc(0x129)](b):void 0x0;if(c)return c;const d=typeof a===cc(0x142)?this.#context['document'][cc(0x110)](a):a;if(!d)return void 0x0;const e=this.#newElement(d);if(b)this.#elements[cc(0x124)](b,e);return e;}[a0v(0x116)](){this.#clear(),this.#config=EMPTY_CONFIG;}#clear(){const cd=a0v;for(const a of this.#transformations)a[cd(0x116)]();for(const b of this.#variables['values']())b[cd(0x116)]();for(const c of this.#elements['values']())c[cd(0x116)]();this.#transformations=[],this.#variables=new Map(),this.#elements=new Map();}#newElement(a,b){const {scheduler:c,assets:d,events:e}=this.#context;return new RuntimeElement(a,e?{'scheduler':c,'assets':d,'events':e}:{'scheduler':c,'assets':d},b);}#createElement(a){const ce=a0v,b=this.#context[ce(0x153)][ce(0x110)](a['id']);if(!b){log$1['error'](ce(0x202)+a['id'],ce(0x1b8));return;}this.#elements[ce(0x124)](a['id'],this.#newElement(b,a));}#createVariable(a){const cf=a0v;this.#variables['set'](a[cf(0x23b)],new Variable(a,this.#context['events']));}#createTransformation(a,b){const cg=a0v;try{this.#transformations['push'](new Transformation(a,b));}catch(c){log$1[cg(0x138)]('Error\x20initializing\x20transformation:\x20'+(a[cg(0x23b)]??a[cg(0x26d)]+'_'+a[cg(0x14e)]),c);}}#transformationContext(){const ch=a0v,{scheduler:a,settings:b,events:c}=this.#context,d={'getVariable':e=>this['getVariable'](e),'getElement':e=>this[ch(0x110)](e)};return c?{'scheduler':a,'settings':b,'events':c,...d}:{'scheduler':a,'settings':b,...d};}};async function loadGraphicConfig(a,b){return parseGraphicConfigJson(await fetchText(a,b));}function a0b(a,b){a=a-0x106;const c=a0a();let d=c[a];if(a0b['XlojbX']===undefined){var e=function(h){const i='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let j='',l='';for(let m=0x0,n,o,p=0x0;o=h['charAt'](p++);~o&&(n=m%0x4?n*0x40+o:o,m++%0x4)?j+=String['fromCharCode'](0xff&n>>(-0x2*m&0x6)):0x0){o=i['indexOf'](o);}for(let q=0x0,r=j['length'];q<r;q++){l+='%'+('00'+j['charCodeAt'](q)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(l);};a0b['EfpBJD']=e,a0b['FVmSdB']={},a0b['XlojbX']=!![];}const f=c[0x0];a0b['VouWDq']!==f&&(a0b['FVmSdB']={},a0b['VouWDq']=f);const g=a0b['FVmSdB'][a];return g===undefined?(d=a0b['EfpBJD'](d),a0b['FVmSdB'][a]=d):d=g,d;}const SVG_NS=a0v(0x1fe),XLINK_NS=a0v(0x14a);function parseMarkup(a){const ci=a0v,b=new DOMParser(),c=b[ci(0x159)](a,ci(0x193));if(!c[ci(0x238)](ci(0x225)))return[c[ci(0x1b0)]];const d=b[ci(0x159)]('<svg\x20xmlns=\x22'+SVG_NS+'\x22\x20xmlns:xlink=\x22'+XLINK_NS+'\x22>'+a+'</svg>',ci(0x193)),e=d[ci(0x238)](ci(0x225));return assert(!e,ci(0x198)+(e?.[ci(0x249)]??'')),[...d[ci(0x1b0)]['childNodes']];}function findSvg(a){const cj=a0v;for(const b of a){if(b instanceof SVGSVGElement)return b;if(b instanceof Element||b instanceof Document||b instanceof DocumentFragment){const c=b[cj(0x238)](cj(0x1c9));if(c instanceof SVGSVGElement)return c;}}return null;}function pixelSize(a){const ck=a0v;return a&&/^\s*[\d.]+(px)?\s*$/[ck(0x18e)](a)?parseFloat(a):null;}function declaredBounds(a){const cl=a0v,b=a[cl(0x154)]('viewBox');if(b){const [e=0x0,f=0x0,g=0x0,h=0x0]=b[cl(0x217)]()['split'](/[\s,]+/)[cl(0x133)](Number);if([e,f,g,h][cl(0x24e)](Number[cl(0x21e)]))return{'x':e,'y':f,'width':g,'height':h};}const c=pixelSize(a[cl(0x154)](cl(0x148))),d=pixelSize(a[cl(0x154)]('height'));return c&&d?{'x':0x0,'y':0x0,'width':c,'height':d}:null;}var GraphicDocument=class extends Observable{[a0v(0x1c7)];[a0v(0x11b)];#assets=createAssetResolver();#assetRoot='';#assetUrls={};#bounds=null;constructor(a,b){const cm=a0v;super(b,cm(0x153)),this[cm(0x1c7)]=a,this[cm(0x11b)]=a['ownerDocument']['createElementNS'](SVG_NS,'svg'),this[cm(0x11b)]['setAttribute'](cm(0x25e),cm(0x12f)),this[cm(0x11b)][cm(0x187)][cm(0x273)]=cm(0x12e),a[cm(0x113)](this[cm(0x11b)]);}[a0v(0x24a)](a){const cn=a0v,b=findSvg(typeof a===cn(0x142)?parseMarkup(a):[a]);assert(b,'Content\x20must\x20be\x20or\x20contain\x20an\x20SVG\x20element'),this[cn(0x11b)][cn(0x113)](),this.#bounds=declaredBounds(b),this[cn(0x21d)](b);}[a0v(0x21d)](a,b=this[a0v(0x11b)]){const co=a0v,c=typeof a===co(0x142)?parseMarkup(a):[a];for(const d of c){const e=d['ownerDocument']===this[co(0x11b)][co(0x211)]?d:this[co(0x11b)][co(0x211)][co(0x254)](d,!![]);this.#prepare(e),b[co(0x21d)](e);}this[co(0x1d3)](co(0x18d));}[a0v(0x226)](a){const cp=a0v;a[cp(0x186)]?.[cp(0x189)](a),this[cp(0x1d3)]('contentChange');}[a0v(0x256)](){const cq=a0v;this[cq(0x11b)][cq(0x113)](),this.#bounds=null,this[cq(0x1d3)]('contentChange');}[a0v(0x17e)](a){const cr=a0v;return this['contentLayer'][cr(0x238)](a);}[a0v(0x110)](a){const cs=a0v,b=this[cs(0x17e)]('#'+CSS[cs(0x1d7)](a));return b instanceof SVGGraphicsElement?b:null;}[a0v(0x188)](a,b){const ct=a0v,c=this[ct(0x11b)][ct(0x211)][ct(0x223)](a,b);return c&&c!==this['contentLayer']&&this[ct(0x11b)][ct(0x115)](c)?c:null;}[a0v(0x1bb)](a){this.#assetRoot=a&&!a['endsWith']('/')?a+'/':a,this.#assets=createAssetResolver(this.#assetRoot,this.#assetUrls);}['setAssetUrls'](a){this.#assetUrls={...a},this.#assets=createAssetResolver(this.#assetRoot,this.#assetUrls);}[a0v(0x131)](a){return this.#assets['resolve'](a);}[a0v(0x253)](a){const cu=a0v;return this.#assets[cu(0x253)](a);}[a0v(0x24f)](a){this.#bounds=a;}[a0v(0x218)](){const cv=a0v;if(this.#bounds)return this.#bounds;const {x:a,y:b,width:c,height:d}=this[cv(0x11b)][cv(0x25d)]();return{'x':a,'y':b,'width':c,'height':d};}[a0v(0x14c)](){const cw=a0v,a=getComputedStyle(this[cw(0x1c7)]);return{'width':parseFloat(a[cw(0x148)])||0x0,'height':parseFloat(a[cw(0x21f)])||0x0};}[a0v(0x116)](){const cx=a0v;this['contentLayer'][cx(0x226)](),super[cx(0x116)]();}#prepare(a){const cy=a0v;if(!(a instanceof Element))return;const b=[...a['querySelectorAll'](cy(0x1c9)),...a[cy(0x1af)]===cy(0x1c9)?[a]:[]];for(const d of b){d[cy(0x1b2)](cy(0x25e),cy(0x117)),d[cy(0x232)](cy(0x119));}const c=[...a[cy(0x24c)](cy(0x250)),...a[cy(0x1af)]===cy(0x250)?[a]:[]];for(const e of c)for(const [f,g]of[[null,cy(0x1e9)],[XLINK_NS,cy(0x1e9)]]){const h=e[cy(0x155)](f,g);if(h)e[cy(0x20e)](f,f?'xlink:href':'href',this[cy(0x131)](h));}}};const MIN_ZOOM_LEVEL=0.01,MAX_ZOOM_LEVEL=99.99;function clampZoom(a){const cz=a0v;return Math[cz(0x17b)](Math[cz(0x164)](a,MIN_ZOOM_LEVEL),MAX_ZOOM_LEVEL);}const INITIAL_STATE={'x':0x0,'y':0x0,'width':0x0,'height':0x0,'zoomLevel':0x1,'viewSize':{'width':0x0,'height':0x0},'contentBounds':{'x':0x0,'y':0x0,'width':0x0,'height':0x0}};var Viewport=class Viewport{['x'];['y'];[a0v(0x148)];[a0v(0x21f)];[a0v(0x180)];[a0v(0x14c)];[a0v(0x218)];constructor(a=INITIAL_STATE){const cA=a0v;this['x']=a['x'],this['y']=a['y'],this['width']=a['width'],this[cA(0x21f)]=a[cA(0x21f)],this[cA(0x180)]=a[cA(0x180)],this[cA(0x14c)]=a[cA(0x14c)],this['contentBounds']=a['contentBounds'],Object['freeze'](this);}get[a0v(0x245)](){const {x:a,y:b,width:c,height:d}=this['contentBounds'];return{'x':a+c/0x2,'y':b+d/0x2};}get['center'](){const cB=a0v;return{'x':this['x']+this[cB(0x148)]/0x2,'y':this['y']+this[cB(0x21f)]/0x2};}get[a0v(0x119)](){const cC=a0v;return[this['x'],this['y'],this['width'],this[cC(0x21f)]]['join']('\x20');}[a0v(0x1fb)](a){const {x:b,y:c,width:d,height:e,zoomLevel:f,viewSize:g,contentBounds:h}=this;return new Viewport({'x':b,'y':c,'width':d,'height':e,'zoomLevel':f,'viewSize':g,'contentBounds':h,...a});}['resize'](){const cD=a0v;return this[cD(0x1fb)]({'width':this[cD(0x14c)][cD(0x148)]/this['zoomLevel'],'height':this[cD(0x14c)][cD(0x21f)]/this[cD(0x180)]});}['moveBy'](a,b){return this['with']({'x':this['x']+a,'y':this['y']+b});}[a0v(0x10c)](a,b){const cE=a0v;return this[cE(0x1fb)]({'x':a-this[cE(0x148)]/0x2,'y':b-this['height']/0x2});}[a0v(0x263)](a,b=this[a0v(0x10f)]){const cF=a0v,c=clampZoom(a),d=this['viewSize'][cF(0x148)]/c,e=this[cF(0x14c)][cF(0x21f)]/c,f=this[cF(0x148)]?(b['x']-this['x'])/this[cF(0x148)]:0.5,g=this['height']?(b['y']-this['y'])/this[cF(0x21f)]:0.5;return this[cF(0x1fb)]({'zoomLevel':c,'x':this['x']-(d-this[cF(0x148)])*f,'y':this['y']-(e-this['height'])*g,'width':d,'height':e});}[a0v(0x205)](a,b){const cG=a0v;return this[cG(0x263)](this[cG(0x180)]*a,b);}[a0v(0x25f)](a,b){const cH=a0v;return this['zoomTo'](this[cH(0x180)]/a,b);}['zoomToFit'](a=0x0){const cI=a0v,{width:b,height:c}=this[cI(0x218)],d=Math['min'](this[cI(0x14c)]['width']/(b+0x2*a),this['viewSize'][cI(0x21f)]/(c+0x2*a)),e=this[cI(0x245)];return this[cI(0x263)](d)[cI(0x10c)](e['x'],e['y']);}[a0v(0x1c8)](){const cJ=a0v,a=this[cJ(0x245)];return this['zoomTo'](0x1)['centerAt'](a['x'],a['y']);}[a0v(0x203)](a){const cK=a0v,b=clampZoom(Math['min'](this[cK(0x14c)][cK(0x148)]/a['width'],this[cK(0x14c)][cK(0x21f)]/a['height'])),c=this['viewSize'][cK(0x148)]/b,d=this[cK(0x14c)]['height']/b;return this[cK(0x1fb)]({'zoomLevel':b,'x':a['x']-(c-a[cK(0x148)])/0x2,'y':a['y']-(d-a['height'])/0x2,'width':c,'height':d});}[a0v(0x13e)](){const cL=a0v,{x:a,y:b,width:c,height:d}=this[cL(0x218)],e=this['width']/0x2,f=this['height']/0x2;return this['with']({'x':Math[cL(0x17b)](Math['max'](this['x'],a-e),a+c-e),'y':Math[cL(0x17b)](Math[cL(0x164)](this['y'],b-f),b+d-f)});}[a0v(0x10a)](a){const cM=a0v;return{'x':a['x']*this[cM(0x180)],'y':a['y']*this['zoomLevel']};}[a0v(0x23e)](a){const cN=a0v;return{'x':a['x']/this[cN(0x180)],'y':a['y']/this['zoomLevel']};}[a0v(0x17f)](a){const cO=a0v;return{'x':this['x']+a['x']/this['zoomLevel'],'y':this['y']+a['y']/this[cO(0x180)]};}};const WHEEL_ZOOM_FACTOR=0.001,WHEEL_ZOOM_MAX_STEP=1.25,WHEEL_ZOOM_MIN_STEP=0.8,TRACKPAD_PINCH_BOOST=0x5,FLING_THRESHOLD=0x64,FLING_FACTOR=0x5,FLING_DURATION=0x258;function distance(c,d){const cP=a0v;return Math[cP(0x106)](d['x']-c['x'],d['y']-c['y']);}var PointerControl=class{#view;#container;#pointers=new Map();#pan=![];#zoom=![];#pinch;#lastMove;constructor(a,b){this.#view=a,this.#container=b;}[a0v(0x1c5)](a,b){const cQ=a0v;this.#detach(),this.#pan=a,this.#zoom=b;if(!a&&!b)return;this.#container['addEventListener'](cQ(0x1bd),this.#onPointerDown);if(b)this.#container[cQ(0x247)](cQ(0x1f2),this.#onWheel,{'passive':![]});this.#container[cQ(0x187)][cQ(0x195)]=cQ(0x1e5);}#detach(){const cR=a0v;this.#container[cR(0x1e4)]('pointerdown',this.#onPointerDown),this.#container[cR(0x1e4)]('wheel',this.#onWheel),this.#stopTracking(),this.#container[cR(0x187)][cR(0x1a0)](cR(0x236));}#stopTracking(){const cS=a0v;window[cS(0x1e4)](cS(0x18f),this.#onPointerMove),window[cS(0x1e4)](cS(0x1a7),this.#onPointerUp),window['removeEventListener'](cS(0x147),this.#onPointerUp),this.#pointers[cS(0x256)](),this.#pinch=void 0x0,this.#lastMove=void 0x0;}#contentAt(a){const cT=a0v,b=this.#container[cT(0x237)]();return this.#view['viewport'][cT(0x17f)]({'x':a['x']-b['left'],'y':a['y']-b['top']});}#startPinch(){const cU=a0v,[c,d]=[...this.#pointers[cU(0x1ea)]()];if(!c||!d)return;this.#pinch={'startDistance':distance(c,d),'startZoom':this.#view['zoomLevel'],'target':this.#contentAt({'x':(c['x']+d['x'])/0x2,'y':(c['y']+d['y'])/0x2})};}#onPointerDown=a=>{const cV=a0v;if(a[cV(0x143)]===cV(0x1a9)&&a[cV(0x20b)]!==0x0)return;this.#pointers[cV(0x109)]===0x0&&(window[cV(0x247)](cV(0x18f),this.#onPointerMove),window[cV(0x247)](cV(0x1a7),this.#onPointerUp),window[cV(0x247)](cV(0x147),this.#onPointerUp));this.#pointers[cV(0x124)](a[cV(0x1d4)],{'x':a[cV(0x248)],'y':a[cV(0x13b)]}),this.#lastMove=void 0x0;if(this.#pointers[cV(0x109)]===0x2&&this.#zoom)this.#startPinch();};#onPointerMove=c=>{const cW=a0v,d=this.#pointers['get'](c[cW(0x1d4)]);if(!d)return;const e={'x':c[cW(0x248)],'y':c[cW(0x13b)]};this.#pointers[cW(0x124)](c['pointerId'],e);if(this.#pinch){const [f,g]=[...this.#pointers[cW(0x1ea)]()];if(!f||!g)return;const {startDistance:h,startZoom:i,target:j}=this.#pinch;this.#view['zoomTo'](i*distance(f,g)/h,j),c[cW(0x1ae)]();return;}if(this.#pan&&this.#pointers[cW(0x109)]===0x1){const k={'x':e['x']-d['x'],'y':e['y']-d['y']};this.#lastMove={'time':performance['now'](),'delta':k};const l=this.#view[cW(0x10b)][cW(0x23e)]({'x':-k['x'],'y':-k['y']});this.#view[cW(0x182)](l['x'],l['y']),c[cW(0x1ae)]();}};#onPointerUp=a=>{const cX=a0v;if(!this.#pointers[cX(0x1dc)](a['pointerId']))return;if(this.#pinch){this.#pinch=void 0x0,this.#lastMove=void 0x0;return;}this.#pointers[cX(0x109)]===0x0&&(this.#fling(),this.#stopTracking());};#fling(){const cY=a0v,a=this.#lastMove;if(!a||performance[cY(0x1da)]()-a[cY(0x255)]>=FLING_THRESHOLD)return;const b=this.#view[cY(0x10b)],c=b[cY(0x23e)]({'x':-a[cY(0x270)]['x']*FLING_FACTOR,'y':-a[cY(0x270)]['y']*FLING_FACTOR});this.#view[cY(0x157)](b[cY(0x182)](c['x'],c['y']),{'easing':EASINGS[cY(0x127)],'duration':FLING_DURATION});}#onWheel=a=>{const cZ=a0v;a[cZ(0x1ae)]();const b=a[cZ(0x1cd)]?a[cZ(0x1ca)]*TRACKPAD_PINCH_BOOST:a[cZ(0x1ca)],c=Math[cZ(0x17b)](Math['max'](0x1-b*WHEEL_ZOOM_FACTOR,WHEEL_ZOOM_MIN_STEP),WHEEL_ZOOM_MAX_STEP);this.#view[cZ(0x263)](this.#view[cZ(0x180)]*c,this.#contentAt({'x':a[cZ(0x248)],'y':a[cZ(0x13b)]}));};};const DEFAULT_DURATION=0x190;var View=class extends Observable{#document;#pointer;#resizeObserver;#unsubscribe;#viewport=new Viewport();#applied;#animation;#frameId;constructor(a,b){const d0=a0v;super(b,d0(0x221)),this.#document=a,this.#pointer=new PointerControl(this,a['container']),this.#unsubscribe=a['on'](d0(0x18d),()=>{const d1=d0;this[d1(0x26b)]();}),this.#resizeObserver=new ResizeObserver(()=>{const d2=d0,{width:c,height:d}=this.#document[d2(0x14c)](),e=this.#viewport[d2(0x14c)];if(c!==e[d2(0x148)]||d!==e['height'])this[d2(0x26b)]();}),this.#resizeObserver[d0(0x22f)](a['container']),this[d0(0x26b)]();}get[a0v(0x10b)](){return this.#viewport;}get[a0v(0x180)](){return this.#viewport['zoomLevel'];}[a0v(0x26b)](){const d3=a0v,a=this.#document[d3(0x14c)](),b=this.#document[d3(0x218)](),c=this.#viewport[d3(0x218)],d=c['x']!==b['x']||c['y']!==b['y']||c[d3(0x148)]!==b[d3(0x148)]||c['height']!==b['height'];this.#document[d3(0x11b)][d3(0x1b2)]('width',String(a[d3(0x148)])),this.#document['contentLayer'][d3(0x1b2)]('height',String(a['height'])),this[d3(0x157)](this.#viewport[d3(0x1fb)]({'viewSize':a,'contentBounds':b,...d?{'x':b['x'],'y':b['y']}:{}})[d3(0x26b)]());}[a0v(0x157)](a,b=![]){const d4=a0v;this.#animation?.[d4(0x196)](),this.#animation=void 0x0;const c=a[d4(0x13e)]();if(!b){this.#viewport=c,this.#scheduleApply();return;}const {duration:duration=DEFAULT_DURATION,easing:easing=EASINGS[d4(0x1eb)]}=b===!![]?{}:b,d=this.#viewport;this.#animation=animate({'duration':duration,'easing':easing,'onUpdate':e=>{const d5=d4;this.#viewport=c[d5(0x1fb)]({'x':d['x']+(c['x']-d['x'])*e,'y':d['y']+(c['y']-d['y'])*e,'width':d[d5(0x148)]+(c[d5(0x148)]-d[d5(0x148)])*e,'height':d['height']+(c[d5(0x21f)]-d['height'])*e}),this.#scheduleApply();}});}[a0v(0x263)](a,b,c){const d6=a0v;this[d6(0x157)](this.#viewport[d6(0x263)](a,b),c);}[a0v(0x205)](a,b,c){const d7=a0v;this[d7(0x157)](this.#viewport['zoomIn'](a,b),c);}[a0v(0x25f)](a,b,c){const d8=a0v;this['setViewport'](this.#viewport[d8(0x25f)](a,b),c);}['zoomToFit'](a,b){const d9=a0v;this['setViewport'](this.#viewport[d9(0x123)](a),b);}[a0v(0x1c8)](a){const da=a0v;this[da(0x157)](this.#viewport[da(0x1c8)](),a);}[a0v(0x22a)](a,b,c){const db=a0v,d=combinedBoundingBox(a,b);if(d)this['setViewport'](this.#viewport[db(0x203)](d),c);}[a0v(0x182)](a,b,c){const dc=a0v;this[dc(0x157)](this.#viewport[dc(0x182)](a,b),c);}[a0v(0x10c)](a,b,c){this['setViewport'](this.#viewport['centerAt'](a,b),c);}[a0v(0x13a)](a,b){const dd=a0v;this.#pointer[dd(0x1c5)](a,b);}['destroy'](){const de=a0v;this.#animation?.[de(0x196)]();if(this.#frameId!==void 0x0)cancelAnimationFrame(this.#frameId);this.#resizeObserver[de(0x16f)](),this.#unsubscribe(),this.#pointer[de(0x1c5)](![],![]),super[de(0x116)]();}#scheduleApply(){if(this.#frameId!==void 0x0)return;this.#frameId=requestAnimationFrame(()=>{this.#frameId=void 0x0,this.#apply();});}#apply(){const df=a0v,a=this.#viewport;this.#document[df(0x11b)][df(0x1b2)](df(0x119),a[df(0x119)]);if(this.#applied?.[df(0x180)]!==a[df(0x180)])this[df(0x1d3)](df(0x272),a['zoomLevel']);this.#applied=a,this['emit'](df(0x151),a);}};const log=createLogger(a0v(0x16c));var Graphic=class extends Observable{[a0v(0x153)];[a0v(0x275)];['view'];[a0v(0x268)];#settings;constructor(a,b={}){const dg=a0v;super(),this.#settings=resolveSettings(b),this[dg(0x153)]=new GraphicDocument(a,this),this[dg(0x275)]=new Scheduler(this),this[dg(0x221)]=new View(this['document'],this);const c=()=>this.#settings;this[dg(0x268)]=new Runtime({'scheduler':this[dg(0x275)],'document':this[dg(0x153)],'assets':this[dg(0x153)],get 'settings'(){return c();},'events':this}),this.#applySettings();}get[a0v(0x15d)](){return this.#settings;}get['config'](){const dh=a0v;return this[dh(0x268)]['config'];}[a0v(0x262)](a){this.#settings=resolveSettings({...this.#settings,...a}),this.#applySettings();}[a0v(0x1bb)](a){const di=a0v;this[di(0x153)][di(0x1bb)](a);}['setAssetUrls'](a){const dj=a0v;this[dj(0x153)][dj(0x18b)](a);}[a0v(0x24a)](a,b){const dk=a0v;try{const {config:c,issues:d}=typeof b===dk(0x142)?parseGraphicConfigJson(b):parseGraphicConfig(b);for(const e of d)log['warn']('Invalid\x20configuration\x20at\x20'+(e[dk(0x20f)]||'/')+':\x20'+e[dk(0x1c0)]);if(c['settings'])this[dk(0x262)](c['settings']);return this['document'][dk(0x24a)](a),this[dk(0x268)][dk(0x24a)](c),this[dk(0x1d3)](dk(0x1bf)),d;}catch(f){log[dk(0x138)](dk(0x1d1),f),this[dk(0x1d3)](dk(0x138),f);throw f;}}async['loadUrl'](a,b){const dl=a0v;let c,d;try{[c,d]=await Promise[dl(0x15f)]([fetchText(a),fetchText(b)]);}catch(e){log[dl(0x138)](dl(0x120),e),this[dl(0x1d3)]('error',e);throw e;}return this[dl(0x24a)](c,d);}[a0v(0x14e)](a){const dm=a0v;return this[dm(0x268)]['getElement'](a);}[a0v(0x206)](a){const dn=a0v;return this[dn(0x268)][dn(0x1fd)](a);}[a0v(0x219)](a){const dp=a0v;return this[dp(0x268)][dp(0x219)](a);}[a0v(0x231)](a,b,c){const dq=a0v;this[dq(0x268)][dq(0x231)](a,b,c);}['destroy'](){const dr=a0v;this[dr(0x221)][dr(0x116)](),this['runtime'][dr(0x116)](),this[dr(0x275)][dr(0x116)](),this['document'][dr(0x116)](),super['destroy']();}#applySettings(){const ds=a0v;this[ds(0x153)]['contentLayer'][ds(0x187)][ds(0x213)]=this.#settings[ds(0x213)]===ds(0x12c)?ds(0x264):ds(0x1f7);}};function create(a,b){return new Graphic(a,b);}export{ANCHOR_NAMES,ConfigError,DEFAULT_SETTINGS,DomObservable,EASINGS,EASING_NAMES,ElementState,Graphic,GraphicDocument,IMAGE_RENDERINGS,MAX_ZOOM_LEVEL,MIN_ZOOM_LEVEL,MODES,Observable,PointerControl,RANGE_ENDS,Runtime,RuntimeElement,Scheduler,TRANSFORMATION_TYPES,Transformation,VARIABLE_TYPES,Variable,View,Viewport,animate,assert,assetName,boxPosition,combinedBoundingBox,convertValue,create,createAccessor,createAssetResolver,createFrames,createLogger,createTransformType,createTransformationModel,createTranslation,createVariableModel,discreteUpdater,domainDefault,fetchText,formatColor,formatValue,interpolateColor,interpolateCssColor,interpolateDiscrete,interpolateNumber,interpolatePoint,isEasingName,isLogLevelEnabled,isRangeEnd,loadGraphicConfig,mapping,parseColor,parseGraphicConfig,parseGraphicConfigJson,parseGraphicConfigStrict,resolveEasing,resolveFramePosition,resolveSettings,sanitizeValue,screenBBox,setLogLevel,totalMatrix,transition,transitionUpdater,upgradeGraphicConfig};
+// config/settings.ts
+const MODES = ["embedded", "editor"];
+const IMAGE_RENDERINGS = ["quality", "speed"];
+const DEFAULT_SETTINGS = Object.freeze({
+	mode: "embedded",
+	imageRendering: "quality"
+});
+function resolveSettings(overrides = {}) {
+	return Object.freeze({
+		...DEFAULT_SETTINGS,
+		...overrides
+	});
+}
+// config/graphic-config.ts
+const EASING_NAMES = [
+	"step",
+	"linear",
+	"easein",
+	"easeout",
+	"easeinout",
+	"backin",
+	"backout",
+	"elastic",
+	"bounce",
+	"easeoutqart"
+];
+const VARIABLE_TYPES = [
+	"number",
+	"boolean",
+	"text"
+];
+/** Reserved frame names generated from the variable domain. */
+/** Positions at the ends of a number variable's range; frames there follow range changes. */
+const RANGE_ENDS = {
+	min: "$min",
+	max: "$max"
+};
+const TRANSFORMATION_TYPES = [
+	"translate",
+	"rotate",
+	"scale",
+	"text",
+	"image-url",
+	"opacity",
+	"fill-color",
+	"stroke-color",
+	"stroke-width",
+	"motion-path"
+];
+const ANCHOR_NAMES = [
+	"center",
+	"top-left",
+	"top",
+	"top-right",
+	"left",
+	"right",
+	"bottom-left",
+	"bottom",
+	"bottom-right"
+];
+// config/frame-position.ts
+/** Whether the position is one of the ends `$min`/`$max` of a number variable's range. */
+function isRangeEnd(at) {
+	return at === RANGE_ENDS.min || at === RANGE_ENDS.max;
+}
+/**
+* Variable value at which a frame is located: `$min`/`$max` resolve to the range of a number
+* variable, all other positions are values of the variable already.
+*/
+function resolveFramePosition(variable, at) {
+	if (variable.type === "number") {
+		if (at === RANGE_ENDS.min) return variable.minimum;
+		if (at === RANGE_ENDS.max) return variable.maximum;
+	}
+	return at;
+}
+// config/parse/issues.ts
+/** Thrown by strict parsing when the configuration contains issues. */
+var ConfigError = class extends Error {
+	issues;
+	constructor(issues) {
+		const summary = issues.map((issue) => `${issue.path}: ${issue.message}`).join("\n");
+		super(`Invalid graphic configuration:\n${summary}`);
+		this.name = "ConfigError";
+		this.issues = issues;
+	}
+};
+/** Marker for a value that failed validation; the issue has already been recorded. */
+const INVALID = Symbol("invalid");
+/** Collects issues and builds paths while walking the input. */
+var IssueCollector = class {
+	issues = [];
+	add(path, message, code, params) {
+		this.issues.push({
+			path,
+			message,
+			code,
+			...params ? { params } : {}
+		});
+		return INVALID;
+	}
+};
+function joinPath(base, key) {
+	if (typeof key === "number") return `${base}[${String(key)}]`;
+	return base ? `${base}.${key}` : key;
+}
+// config/parse/primitives.ts
+function isRecord(value) {
+	return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function describe(value) {
+	if (value === null) return "null";
+	if (Array.isArray(value)) return "array";
+	return typeof value;
+}
+function record(value, path, issues) {
+	return isRecord(value) ? value : expectedType(issues, path, "object", value);
+}
+/** Records a value of the wrong type; `expected` is a type name like `object` or `number`. */
+function expectedType(issues, path, expected, value) {
+	const actual = describe(value);
+	return issues.add(path, `Expected ${expected}, got ${actual}`, "config.expectedType", {
+		expected,
+		actual
+	});
+}
+function string(value, path, issues) {
+	return typeof value === "string" ? value : expectedType(issues, path, "string", value);
+}
+function nonEmptyString(value, path, issues) {
+	const result = string(value, path, issues);
+	if (result === INVALID) return INVALID;
+	return result.trim() ? result : issues.add(path, "Must not be empty", "config.empty");
+}
+function finiteNumber(value, path, issues) {
+	return typeof value === "number" && Number.isFinite(value) ? value : expectedType(issues, path, "finite number", value);
+}
+function boolean(value, path, issues) {
+	return typeof value === "boolean" ? value : expectedType(issues, path, "boolean", value);
+}
+function oneOf(allowed, value, path, issues) {
+	if (allowed.includes(value)) return value;
+	const actual = typeof value === "string" ? JSON.stringify(value) : describe(value);
+	const options = allowed.join(", ");
+	return issues.add(path, `Expected one of ${options}, got ${actual}`, "config.expectedOneOf", {
+		options,
+		actual
+	});
+}
+function point(value, path, issues) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const x = finiteNumber(input.x, joinPath(path, "x"), issues);
+	const y = finiteNumber(input.y, joinPath(path, "y"), issues);
+	return x === INVALID || y === INVALID ? INVALID : {
+		x,
+		y
+	};
+}
+/** Validates each item; invalid items are dropped (their issues are recorded). */
+function list(value, path, issues, item) {
+	if (value === void 0 || value === null) return [];
+	if (!Array.isArray(value)) {
+		expectedType(issues, path, "array", value);
+		return [];
+	}
+	const result = [];
+	value.forEach((entry, index) => {
+		const parsed = item(entry, joinPath(path, index));
+		if (parsed !== INVALID) result.push(parsed);
+	});
+	return result;
+}
+/** Runs `parse` for a present value; `undefined` and `null` count as absent. */
+function optional(value, parse) {
+	return value === void 0 || value === null ? void 0 : parse(value);
+}
+// config/parse/upgrade-graphic-config.ts
+/** Positions of the former reserved frame names. */
+const RESERVED_POSITIONS = {
+	$min: "$min",
+	$max: "$max",
+	$false: false,
+	$true: true
+};
+/** Copy of `record` without the property `key`. */
+function withoutKey(record, key) {
+	return Object.fromEntries(Object.entries(record).filter(([name]) => name !== key));
+}
+/**
+* Converts one frame of the former object format (`name -> { at?, value, transition? }`) into
+* an entry of the frame list. `keyFrames` are the named positions of the variable in the oldest
+* format. Names that only repeat the position are dropped, other names are kept as `label`.
+*/
+function upgradeFrame(name, frame, keyFrames) {
+	const at = Object.hasOwn(RESERVED_POSITIONS, name) ? RESERVED_POSITIONS[name] : "at" in frame ? frame.at : Object.hasOwn(keyFrames, name) ? keyFrames[name] : name.startsWith("$") ? name : void 0;
+	const label = name.startsWith("$") || name === String(at) ? void 0 : name;
+	const easing = frame.easing ?? frame.transition;
+	return {
+		...at === void 0 ? {} : { at },
+		value: frame.value,
+		...easing === void 0 || easing === null ? {} : { easing },
+		...label === void 0 ? {} : { label }
+	};
+}
+function upgradeTransformation(transformation, keyFramesByVariable) {
+	if (!isRecord(transformation) || !isRecord(transformation.frames)) return transformation;
+	const keyFrames = (typeof transformation.variable === "string" ? keyFramesByVariable.get(transformation.variable) : void 0) ?? {};
+	let fallback;
+	const frames = [];
+	for (const [name, frame] of Object.entries(transformation.frames)) if (!isRecord(frame)) frames.push({
+		at: name,
+		value: frame
+	});
+	else if (name === "$default") fallback = frame.value;
+	else frames.push(upgradeFrame(name, frame, keyFrames));
+	const rest = withoutKey(transformation, "frames");
+	const keepDefault = "default" in rest || fallback === void 0 || fallback === null;
+	return {
+		...rest,
+		frames,
+		...keepDefault ? {} : { default: fallback }
+	};
+}
+/**
+* Converts configurations of former formats into the current one, in which every transformation
+* lists its frames with their position (`frames: [{ at, value }]`):
+*
+* - Frames as object keyed by name: `$min`/`$max` and `$false`/`$true` become positions, other
+*   frames keep their `at`, `$default` becomes the transformation's `default`, the frame option
+*   `transition` becomes `easing`.
+* - Named key frames of variables (`variables[].keyFrames`): referenced frames get the position
+*   of their key frame; the `keyFrames` are removed.
+*
+* Returns the input unchanged if there is nothing to convert, otherwise a converted copy; the
+* input is never modified.
+*/
+function upgradeGraphicConfig(input) {
+	if (!isRecord(input)) return input;
+	const variables = Array.isArray(input.variables) ? input.variables : [];
+	const transformations = Array.isArray(input.transformations) ? input.transformations : [];
+	const keyFramesByVariable = /* @__PURE__ */ new Map();
+	for (const variable of variables) if (isRecord(variable) && "keyFrames" in variable && typeof variable.name === "string") keyFramesByVariable.set(variable.name, isRecord(variable.keyFrames) ? variable.keyFrames : {});
+	const formerFrames = transformations.some((transformation) => isRecord(transformation) && isRecord(transformation.frames));
+	if (keyFramesByVariable.size === 0 && !formerFrames) return input;
+	return {
+		...input,
+		...Array.isArray(input.variables) ? { variables: variables.map((variable) => {
+			if (!isRecord(variable) || !("keyFrames" in variable)) return variable;
+			return withoutKey(variable, "keyFrames");
+		}) } : {},
+		...Array.isArray(input.transformations) ? { transformations: transformations.map((transformation) => upgradeTransformation(transformation, keyFramesByVariable)) } : {}
+	};
+}
+// config/parse/parse-graphic-config.ts
+const VARIABLE_VALUE_PARSERS = {
+	number: finiteNumber,
+	boolean,
+	text: string
+};
+const FRAME_VALUE_PARSERS = {
+	translate: point,
+	scale: point,
+	rotate: finiteNumber,
+	"stroke-width": finiteNumber,
+	opacity: (value, path, issues) => {
+		const result = finiteNumber(value, path, issues);
+		if (result === INVALID) return INVALID;
+		return result >= 0 && result <= 1 ? result : issues.add(path, "Opacity must be between 0 and 1", "config.opacityRange");
+	},
+	"fill-color": nonEmptyString,
+	"stroke-color": nonEmptyString,
+	text: string,
+	"image-url": string,
+	"motion-path": (value, path, issues) => {
+		const result = finiteNumber(value, path, issues);
+		if (result === INVALID) return INVALID;
+		return result >= 0 && result <= 100 ? result : issues.add(path, "Path position must be between 0 and 100 (percent)", "config.pathPositionRange");
+	}
+};
+/**
+* Position (`at`) of a frame: a number within the range or `$min`/`$max` for number variables,
+* `false`/`true` for boolean variables, any text for text variables.
+*/
+function parseFramePosition(value, path, issues, variable) {
+	if (value === void 0 || value === null) return issues.add(path, "Missing frame position", "config.missingFramePosition");
+	if (variable.type === "number") {
+		if (value === RANGE_ENDS.min || value === RANGE_ENDS.max) return value;
+		if (typeof value !== "number") return issues.add(path, `Expected a number, ${RANGE_ENDS.min} or ${RANGE_ENDS.max}`, "config.expectedFramePosition", {
+			min: RANGE_ENDS.min,
+			max: RANGE_ENDS.max
+		});
+		const at = finiteNumber(value, path, issues);
+		if (at === INVALID) return INVALID;
+		if (at < variable.minimum || at > variable.maximum) return issues.add(path, `Position must be between ${String(variable.minimum)} and ${String(variable.maximum)}`, "config.positionRange", {
+			minimum: variable.minimum,
+			maximum: variable.maximum
+		});
+		return at;
+	}
+	return VARIABLE_VALUE_PARSERS[variable.type](value, path, issues);
+}
+function parseVariable(value, path, issues, names) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const name = nonEmptyString(input.name, joinPath(path, "name"), issues);
+	const type = oneOf(VARIABLE_TYPES, input.type, joinPath(path, "type"), issues);
+	if (name === INVALID || type === INVALID) return INVALID;
+	if (names.has(name)) return issues.add(joinPath(path, "name"), `Duplicate variable name: ${name}`, "config.duplicateVariable", { name });
+	const parseValue = VARIABLE_VALUE_PARSERS[type];
+	const defaultValue = optional(input.defaultValue, (v) => parseValue(v, joinPath(path, "defaultValue"), issues));
+	if (defaultValue === INVALID) return INVALID;
+	const common = {
+		name,
+		...defaultValue === void 0 ? {} : { defaultValue }
+	};
+	let result;
+	if (type === "number") {
+		const minimum = finiteNumber(input.minimum, joinPath(path, "minimum"), issues);
+		const maximum = finiteNumber(input.maximum, joinPath(path, "maximum"), issues);
+		if (minimum === INVALID || maximum === INVALID) return INVALID;
+		if (minimum > maximum) return issues.add(joinPath(path, "maximum"), "Maximum must not be less than minimum", "config.maximumBelowMinimum");
+		result = {
+			...common,
+			type,
+			minimum,
+			maximum
+		};
+	} else result = {
+		...common,
+		type
+	};
+	names.add(name);
+	return result;
+}
+function parseFrames(value, path, issues, type, variable) {
+	if (value === void 0 || value === null) return [];
+	if (!Array.isArray(value)) return expectedType(issues, path, "array", value);
+	const parseValue = FRAME_VALUE_PARSERS[type];
+	const result = [];
+	const taken = /* @__PURE__ */ new Map();
+	let valid = true;
+	for (const [index, entry] of value.entries()) {
+		const framePath = joinPath(path, String(index));
+		const frame = record(entry, framePath, issues);
+		if (frame === INVALID) {
+			valid = false;
+			continue;
+		}
+		const at = parseFramePosition(frame.at, joinPath(framePath, "at"), issues, variable);
+		const parsedValue = frame.value === null ? null : parseValue(frame.value, joinPath(framePath, "value"), issues);
+		const easing = optional(frame.easing, (v) => oneOf(EASING_NAMES, v, joinPath(framePath, "easing"), issues));
+		const label = optional(frame.label, (v) => string(v, joinPath(framePath, "label"), issues));
+		if (at === INVALID || parsedValue === INVALID || easing === INVALID || label === INVALID) {
+			valid = false;
+			continue;
+		}
+		const position = resolveFramePosition(variable, at);
+		const other = taken.get(position);
+		if (other !== void 0) {
+			issues.add(joinPath(framePath, "at"), `Frame ${String(other)} is already at this position`, "config.framePositionTaken", { frame: other });
+			valid = false;
+			continue;
+		}
+		taken.set(position, index);
+		result.push({
+			at,
+			value: parsedValue,
+			...easing === void 0 ? {} : { easing },
+			...label === void 0 || label === "" ? {} : { label }
+		});
+	}
+	return valid ? result : INVALID;
+}
+function parseTransition(value, path, issues) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const duration = finiteNumber(input.duration, joinPath(path, "duration"), issues);
+	const easing = oneOf(EASING_NAMES, input.easing ?? "linear", joinPath(path, "easing"), issues);
+	if (duration === INVALID || easing === INVALID) return INVALID;
+	if (duration < 0) return issues.add(joinPath(path, "duration"), "Duration must not be negative", "config.negativeDuration");
+	return {
+		duration,
+		easing
+	};
+}
+function parseAnchor(value, path, issues) {
+	return typeof value === "string" ? oneOf(ANCHOR_NAMES, value, path, issues) : point(value, path, issues);
+}
+/** Accepts `true` and the legacy editor export value `"value"`. */
+function parseBind(value, path, issues) {
+	if (value === "value") return true;
+	return boolean(value, path, issues);
+}
+/** `path` is required for `motion-path` and not used by other types. */
+function parsePathOption(type, value, path, issues) {
+	if (type !== "motion-path") return void 0;
+	if (value === void 0 || value === null) return issues.add(path, "Missing path element for motion-path", "config.missingMotionPath");
+	return nonEmptyString(value, path, issues);
+}
+function parseTransformation(value, path, issues, variables) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const type = oneOf(TRANSFORMATION_TYPES, input.type, joinPath(path, "type"), issues);
+	const element = nonEmptyString(input.element, joinPath(path, "element"), issues);
+	const variableName = nonEmptyString(input.variable, joinPath(path, "variable"), issues);
+	if (type === INVALID || element === INVALID || variableName === INVALID) return INVALID;
+	const variable = variables.get(variableName);
+	if (!variable) return issues.add(joinPath(path, "variable"), `Unknown variable: ${variableName}`, "config.unknownVariable", { name: variableName });
+	const at = (key) => joinPath(path, key);
+	const name = optional(input.name, (v) => nonEmptyString(v, at("name"), issues));
+	const frames = parseFrames(input.frames, at("frames"), issues, type, variable);
+	const fallback = optional(input.default, (v) => FRAME_VALUE_PARSERS[type](v, at("default"), issues));
+	const priority = optional(input.priority, (v) => finiteNumber(v, at("priority"), issues));
+	const transition = optional(input.transition, (v) => parseTransition(v, at("transition"), issues));
+	const bind = optional(input.bind, (v) => parseBind(v, at("bind"), issues));
+	const origin = optional(input.origin, (v) => parseAnchor(v, at("origin"), issues));
+	const pathId = parsePathOption(type, input.path, at("path"), issues);
+	const orient = type === "motion-path" ? optional(input.orient, (v) => boolean(v, at("orient"), issues)) : void 0;
+	if (name === INVALID || frames === INVALID || fallback === INVALID || priority === INVALID || transition === INVALID || bind === INVALID || origin === INVALID || pathId === INVALID || orient === INVALID) return INVALID;
+	return {
+		type,
+		element,
+		variable: variableName,
+		frames,
+		...fallback === void 0 ? {} : { default: fallback },
+		...name === void 0 ? {} : { name },
+		...priority === void 0 ? {} : { priority },
+		...transition === void 0 ? {} : { transition },
+		...bind === true ? { bind } : {},
+		...origin === void 0 ? {} : { origin },
+		...pathId === void 0 ? {} : { path: pathId },
+		...orient === true ? { orient } : {}
+	};
+}
+function parseElement(value, path, issues, ids) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const id = nonEmptyString(input.id, joinPath(path, "id"), issues);
+	if (id === INVALID) return INVALID;
+	if (ids.has(id)) return issues.add(joinPath(path, "id"), `Duplicate element id: ${id}`, "config.duplicateId", { id });
+	const name = optional(input.name, (v) => nonEmptyString(v, joinPath(path, "name"), issues));
+	if (name === INVALID) return INVALID;
+	const eventsPath = joinPath(path, "events");
+	const before = issues.issues.length;
+	const events = list(input.events, eventsPath, issues, (v, p) => nonEmptyString(v, p, issues));
+	if (issues.issues.length > before) return INVALID;
+	ids.add(id);
+	return {
+		id,
+		...name === void 0 ? {} : { name },
+		...events.length ? { events } : {}
+	};
+}
+function parseSettings(value, path, issues) {
+	const input = record(value, path, issues);
+	if (input === INVALID) return INVALID;
+	const mode = optional(input.mode, (v) => oneOf(MODES, v, joinPath(path, "mode"), issues));
+	const imageRendering = optional(input.imageRendering, (v) => oneOf(IMAGE_RENDERINGS, v, joinPath(path, "imageRendering"), issues));
+	if (mode === INVALID || imageRendering === INVALID) return INVALID;
+	return {
+		...mode === void 0 ? {} : { mode },
+		...imageRendering === void 0 ? {} : { imageRendering }
+	};
+}
+const EMPTY_CONFIG$1 = Object.freeze({
+	variables: [],
+	transformations: []
+});
+/**
+* Validates a graphic configuration (already parsed JSON) and normalizes legacy editor output.
+* Invalid variables, transformations and elements are dropped as a whole and reported in `issues`;
+* transformations referencing a dropped or unknown variable are dropped as well.
+*/
+function parseGraphicConfig(input) {
+	const issues = new IssueCollector();
+	const root = record(upgradeGraphicConfig(input), "", issues);
+	if (root === INVALID) return {
+		config: EMPTY_CONFIG$1,
+		issues: issues.issues
+	};
+	const variableNames = /* @__PURE__ */ new Set();
+	const variables = list(root.variables, "variables", issues, (v, p) => parseVariable(v, p, issues, variableNames));
+	const variablesByName = new Map(variables.map((variable) => [variable.name, variable]));
+	const transformations = list(root.transformations, "transformations", issues, (v, p) => parseTransformation(v, p, issues, variablesByName));
+	const elementIds = /* @__PURE__ */ new Set();
+	const elements = list(root.elements, "elements", issues, (v, p) => parseElement(v, p, issues, elementIds));
+	const settings = optional(root.settings, (v) => parseSettings(v, "settings", issues));
+	return {
+		config: {
+			variables,
+			transformations,
+			...elements.length ? { elements } : {},
+			...settings === void 0 || settings === INVALID ? {} : { settings }
+		},
+		issues: issues.issues
+	};
+}
+/** Parses JSON text; syntax errors are reported as an issue with an empty configuration. */
+function parseGraphicConfigJson(text) {
+	let input;
+	try {
+		input = JSON.parse(text);
+	} catch (error) {
+		const message = error instanceof Error ? error.message : String(error);
+		return {
+			config: EMPTY_CONFIG$1,
+			issues: [{
+				path: "",
+				message: `Invalid JSON: ${message}`,
+				code: "config.invalidJson",
+				params: { message }
+			}]
+		};
+	}
+	return parseGraphicConfig(input);
+}
+/** Like `parseGraphicConfig`, but throws a `ConfigError` if there is any issue. */
+function parseGraphicConfigStrict(input) {
+	const { config, issues } = parseGraphicConfig(input);
+	if (issues.length) throw new ConfigError(issues);
+	return config;
+}
+// config/safe-url.ts
+/** URL schemes allowed in links and image references of graphics; relative URLs have none. */
+const SAFE_SCHEMES = /* @__PURE__ */ new Set([
+	"http",
+	"https",
+	"blob"
+]);
+/** Images as data URLs; an SVG image runs no script when shown through `<image>`. */
+const SAFE_DATA_URL = /^data:image\/(?:png|jpe?g|gif|webp|avif|bmp|svg\+xml)[;,]/i;
+/**
+* Whether a URL may be used as `href` in a graphic: relative URLs and fragments, `http(s):`,
+* `blob:` and data URLs of images. Everything else, in particular `javascript:`, is refused.
+* Whitespace and control characters are ignored like browsers do (`java\tscript:`).
+*/
+function isSafeUrl(value) {
+	const url = value.replace(/[\u0000- \u007f]/g, "");
+	const scheme = /^([a-z][a-z\d+.-]*):/i.exec(url)?.[1]?.toLowerCase();
+	if (scheme === void 0) return true;
+	if (scheme === "data") return SAFE_DATA_URL.test(url);
+	return SAFE_SCHEMES.has(scheme);
+}
+// src/util/easing.ts
+const BACK_OVERSHOOT = 1.70158;
+function cubeRoot(value) {
+	return Math.sign(value) * Math.pow(Math.abs(value), 1 / 3);
+}
+/** Curves match the former Snap.svg `mina` easings so existing graphics animate identically. */
+const EASINGS = Object.freeze({
+	step: () => 0,
+	linear: (t) => t,
+	easein: (t) => Math.pow(t, 1.7),
+	easeout: (t) => Math.pow(t, .48),
+	easeinout: (t) => {
+		if (t === 0 || t === 1) return t;
+		const q = .48 - t / 1.04;
+		const root = Math.sqrt(.1734 + q * q);
+		const x = cubeRoot(root - q) + cubeRoot(-root - q) + .5;
+		return (1 - x) * 3 * x * x + x * x * x;
+	},
+	backin: (t) => {
+		if (t === 1) return 1;
+		return t * t * (2.70158 * t - BACK_OVERSHOOT);
+	},
+	backout: (t) => {
+		if (t === 0) return 0;
+		const u = t - 1;
+		return u * u * (2.70158 * u + BACK_OVERSHOOT) + 1;
+	},
+	elastic: (t) => {
+		if (t === 0 || t === 1) return t;
+		return Math.pow(2, -10 * t) * Math.sin((t - .075) * (2 * Math.PI) / .3) + 1;
+	},
+	bounce: (t) => {
+		const s = 7.5625;
+		const p = 2.75;
+		if (t < 1 / p) return s * t * t;
+		if (t < 2 / p) {
+			const u = t - 1.5 / p;
+			return s * u * u + .75;
+		}
+		if (t < 2.5 / p) {
+			const u = t - 2.25 / p;
+			return s * u * u + .9375;
+		}
+		const u = t - 2.625 / p;
+		return s * u * u + .984375;
+	},
+	easeoutqart: (t) => {
+		const u = t - 1;
+		return 1 - u * u * u * u;
+	}
+});
+function isEasingName(name) {
+	return EASING_NAMES.includes(name);
+}
+/** Resolves an easing by name; unknown or missing names fall back to `linear`. */
+function resolveEasing(name) {
+	return isEasingName(name) ? EASINGS[name] : EASINGS.linear;
+}
+// src/util/animate.ts
+function animate(options) {
+	const { duration, easing = EASINGS.linear, onUpdate, onComplete } = options;
+	let frameId;
+	let running = true;
+	const finish = () => {
+		running = false;
+		onUpdate(1);
+		onComplete?.();
+	};
+	if (!(duration > 0)) finish();
+	else {
+		const start = performance.now();
+		const tick = (now) => {
+			const t = Math.min(Math.max((now - start) / duration, 0), 1);
+			if (t >= 1) {
+				frameId = void 0;
+				finish();
+				return;
+			}
+			onUpdate(easing(t));
+			frameId = requestAnimationFrame(tick);
+		};
+		frameId = requestAnimationFrame(tick);
+	}
+	return {
+		stop() {
+			running = false;
+			if (frameId !== void 0) cancelAnimationFrame(frameId);
+			frameId = void 0;
+		},
+		get running() {
+			return running;
+		}
+	};
+}
+// src/util/assert.ts
+function assert(condition, message) {
+	if (!condition) throw new Error(message);
+}
+// src/util/assets.ts
+const SCHEME = /^[a-z][\w.+-]*:/i;
+function assetName(url) {
+	return url.split("/").at(-1) ?? url;
+}
+/**
+* Resolves asset names relative to `root` (e.g. `assets/`). Names listed in `urls` resolve to
+* their own URL instead, e.g. content-addressed URLs that do not end with the name.
+*/
+function createAssetResolver(root = "", urls = {}) {
+	const byName = new Map(Object.entries(urls));
+	const byUrl = new Map([...byName].map(([name, url]) => [url, name]));
+	return Object.freeze({
+		resolve(nameOrUrl) {
+			if (SCHEME.test(nameOrUrl)) return nameOrUrl;
+			const name = assetName(nameOrUrl);
+			return byName.get(name) ?? root + name;
+		},
+		nameOf: (url) => byUrl.get(url) ?? assetName(url)
+	});
+}
+// src/util/color.ts
+const cache = /* @__PURE__ */ new Map();
+let context;
+function getContext() {
+	context ??= new OffscreenCanvas(1, 1).getContext("2d");
+	return context;
+}
+const HEX = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i;
+const RGBA = /^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i;
+function parseSerialized(value) {
+	const hex = HEX.exec(value);
+	if (hex) {
+		const [, r = "", g = "", b = ""] = hex;
+		return {
+			r: parseInt(r, 16),
+			g: parseInt(g, 16),
+			b: parseInt(b, 16),
+			opacity: 1
+		};
+	}
+	const rgba = RGBA.exec(value);
+	if (rgba) {
+		const [, r = "", g = "", b = "", a] = rgba;
+		return {
+			r: Number(r),
+			g: Number(g),
+			b: Number(b),
+			opacity: a === void 0 ? 1 : Number(a)
+		};
+	}
+	return null;
+}
+/**
+* Parses any CSS color (hex, rgb(), hsl(), named colors, ...) using the browser's canvas color parser.
+* Returns `null` for `none` and invalid values.
+*/
+function parseColor(value) {
+	const key = value.trim().toLowerCase();
+	const cached = cache.get(key);
+	if (cached !== void 0) return cached;
+	let result = null;
+	const ctx = getContext();
+	if (ctx && key !== "" && key !== "none") {
+		ctx.fillStyle = "#000000";
+		ctx.fillStyle = key;
+		const first = ctx.fillStyle;
+		ctx.fillStyle = "#ffffff";
+		ctx.fillStyle = key;
+		if (first === ctx.fillStyle) result = parseSerialized(first);
+	}
+	cache.set(key, result);
+	return result;
+}
+function hex(channel) {
+	return Math.round(Math.min(255, Math.max(0, channel))).toString(16).padStart(2, "0");
+}
+/** Formats as `#rrggbb`, or `rgba(...)` when translucent; `null` becomes `none`. */
+function formatColor(color) {
+	if (!color) return "none";
+	if (color.opacity < 1) {
+		const opacity = Math.max(0, Number(color.opacity.toFixed(3)));
+		return `rgba(${String(Math.round(color.r))}, ${String(Math.round(color.g))}, ${String(Math.round(color.b))}, ${String(opacity)})`;
+	}
+	return `#${hex(color.r)}${hex(color.g)}${hex(color.b)}`;
+}
+/**
+* Linear RGB interpolation. A missing color fades in/out using the other color's channels with opacity 0.
+*/
+function interpolateColor(from, to, t) {
+	if (t === 0) return from;
+	if (t === 1) return to;
+	if (!from && !to) return null;
+	const start = from ?? {
+		...to,
+		opacity: 0
+	};
+	const end = to ?? {
+		...start,
+		opacity: 0
+	};
+	return {
+		r: Math.round(start.r + t * (end.r - start.r)),
+		g: Math.round(start.g + t * (end.g - start.g)),
+		b: Math.round(start.b + t * (end.b - start.b)),
+		opacity: start.opacity + t * (end.opacity - start.opacity)
+	};
+}
+// src/util/observable.ts
+/**
+* Event emitter with optional bubbling to a parent.
+* Events emitted here are re-dispatched on the parent as `<prefix>.<event>`,
+* so `graphic.on('element.click', ...)` captures clicks of all elements.
+*/
+var Observable = class {
+	#listeners = /* @__PURE__ */ new Map();
+	#parent;
+	#prefix;
+	constructor(parent, prefix) {
+		this.#parent = parent;
+		this.#prefix = prefix;
+	}
+	/** Registers a listener and returns a function that removes it again. */
+	on(event, listener) {
+		let listeners = this.#listeners.get(event);
+		if (!listeners) {
+			listeners = /* @__PURE__ */ new Set();
+			this.#listeners.set(event, listeners);
+		}
+		listeners.add(listener);
+		return () => {
+			this.off(event, listener);
+		};
+	}
+	off(event, listener) {
+		const listeners = this.#listeners.get(event);
+		if (!listeners) return;
+		listeners.delete(listener);
+		if (listeners.size === 0) this.#listeners.delete(event);
+	}
+	emit(event, ...args) {
+		this.#dispatch(event, args);
+		this.#parent?.bubble(this.#prefix ? `${this.#prefix}.${event}` : event, args);
+	}
+	bubble(event, args) {
+		this.#dispatch(event, args);
+		this.#parent?.bubble(event, args);
+	}
+	listenerCount(event) {
+		return this.#listeners.get(event)?.size ?? 0;
+	}
+	destroy() {
+		this.#listeners.clear();
+	}
+	#dispatch(event, args) {
+		const listeners = this.#listeners.get(event);
+		if (!listeners) return;
+		for (const listener of [...listeners]) listener(...args);
+	}
+};
+// src/util/screen-bbox.ts
+function outermostSvg(element) {
+	let result = element;
+	let owner = element instanceof SVGElement ? element.ownerSVGElement : null;
+	while (owner) {
+		result = owner;
+		owner = owner.ownerSVGElement;
+	}
+	return result;
+}
+function screenBBox(element) {
+	const bounds = element.getBoundingClientRect();
+	const containerBounds = outermostSvg(element).getBoundingClientRect();
+	return {
+		x: bounds.left - containerBounds.left,
+		y: bounds.top - containerBounds.top,
+		width: bounds.width,
+		height: bounds.height,
+		clientX: bounds.left,
+		clientY: bounds.top,
+		pageX: bounds.left + window.scrollX,
+		pageY: bounds.top + window.scrollY
+	};
+}
+// src/util/dom-observable.ts
+/**
+* Observable that forwards DOM events of an element.
+* Exactly one native listener is registered per event type, regardless of the number of subscribers,
+* and it is removed once the last subscriber is gone.
+*/
+var DomObservable = class extends Observable {
+	#element;
+	#name;
+	#attached = /* @__PURE__ */ new Set();
+	/** `name` is passed to the listeners; without it, the ID of the element. */
+	constructor(element, parent, prefix, name) {
+		super(parent, prefix);
+		this.#element = element;
+		this.#name = name;
+	}
+	on(event, listener) {
+		const unsubscribe = super.on(event, listener);
+		if (!this.#attached.has(event)) {
+			this.#element.addEventListener(event, this.#handleEvent);
+			this.#attached.add(event);
+		}
+		return unsubscribe;
+	}
+	off(event, listener) {
+		super.off(event, listener);
+		if (this.listenerCount(event) === 0) this.#detach(event);
+	}
+	destroy() {
+		super.destroy();
+		for (const event of [...this.#attached]) this.#detach(event);
+	}
+	#detach(event) {
+		if (!this.#attached.delete(event)) return;
+		this.#element.removeEventListener(event, this.#handleEvent);
+	}
+	#handleEvent = (event) => {
+		this.emit(event.type, this.#name ?? this.#element.id, this.#element, event, screenBBox(this.#element));
+	};
+};
+// src/util/fetch-text.ts
+/** Loads a text resource (markup, configuration). Rejects on network errors and non-2xx responses. */
+async function fetchText(url, init) {
+	const response = await fetch(url, init);
+	if (!response.ok) throw new Error(`Failed to load ${String(url)}: ${String(response.status)} ${response.statusText}`);
+	return response.text();
+}
+// src/util/geometry.ts
+/** Resolves a named anchor of `box`; an explicit point is returned unchanged. */
+function boxPosition(box, anchor = "center") {
+	if (typeof anchor !== "string") return anchor;
+	const { x, y, width, height } = box;
+	const right = x + width;
+	const bottom = y + height;
+	const cx = x + width / 2;
+	const cy = y + height / 2;
+	switch (anchor) {
+		case "top-left": return {
+			x,
+			y
+		};
+		case "top": return {
+			x: cx,
+			y
+		};
+		case "top-right": return {
+			x: right,
+			y
+		};
+		case "left": return {
+			x,
+			y: cy
+		};
+		case "center": return {
+			x: cx,
+			y: cy
+		};
+		case "right": return {
+			x: right,
+			y: cy
+		};
+		case "bottom-left": return {
+			x,
+			y: bottom
+		};
+		case "bottom": return {
+			x: cx,
+			y: bottom
+		};
+		case "bottom-right": return {
+			x: right,
+			y: bottom
+		};
+	}
+}
+/**
+* Bounding box of all elements after their transforms, in the coordinate system of the nearest viewport
+* (`getCTM`). Returns `null` for an empty list.
+*/
+function combinedBoundingBox(elements, padding = 0) {
+	let minX = Infinity;
+	let minY = Infinity;
+	let maxX = -Infinity;
+	let maxY = -Infinity;
+	for (const element of elements) {
+		const bbox = element.getBBox();
+		const matrix = element.getCTM() ?? new DOMMatrix();
+		const corners = [
+			new DOMPoint(bbox.x, bbox.y),
+			new DOMPoint(bbox.x + bbox.width, bbox.y),
+			new DOMPoint(bbox.x + bbox.width, bbox.y + bbox.height),
+			new DOMPoint(bbox.x, bbox.y + bbox.height)
+		];
+		for (const corner of corners) {
+			const p = corner.matrixTransform(matrix);
+			minX = Math.min(minX, p.x);
+			minY = Math.min(minY, p.y);
+			maxX = Math.max(maxX, p.x);
+			maxY = Math.max(maxY, p.y);
+		}
+	}
+	if (minX === Infinity) return null;
+	return {
+		x: minX - padding,
+		y: minY - padding,
+		width: maxX - minX + 2 * padding,
+		height: maxY - minY + 2 * padding
+	};
+}
+// src/util/interpolate.ts
+function ease(t, easing) {
+	return easing ? easing(t) : t;
+}
+const interpolateNumber = (from, to, t, easing) => from + (to - from) * ease(t, easing);
+const interpolatePoint = (from, to, t, easing) => {
+	const f = ease(t, easing);
+	return {
+		x: from.x + (to.x - from.x) * f,
+		y: from.y + (to.y - from.y) * f
+	};
+};
+/**
+* Interpolates CSS color strings; intermediate results are hex/rgba strings or `none`.
+* The bounds are returned unchanged, so non-color paints such as `url(#gradient)` survive.
+*/
+const interpolateCssColor = (from, to, t, easing) => {
+	const f = ease(t, easing);
+	if (f === 0) return from;
+	if (f === 1) return to;
+	return formatColor(interpolateColor(parseColor(from), parseColor(to), f));
+};
+/** Discrete values (text, urls) keep the start value until the end is reached. */
+const interpolateDiscrete = (from, to, t, easing) => ease(t, easing) < 1 ? from : to;
+// src/util/logger.ts
+const enabledLevels = /* @__PURE__ */ new Set(["warn", "error"]);
+function setLogLevel(level, enabled) {
+	if (enabled) enabledLevels.add(level);
+	else enabledLevels.delete(level);
+}
+function isLogLevelEnabled(level) {
+	return enabledLevels.has(level);
+}
+function createLogger(name) {
+	const prefix = `[${name}]`;
+	const log = (level) => (...args) => {
+		if (enabledLevels.has(level)) console[level](prefix, ...args);
+	};
+	return Object.freeze({
+		debug: log("debug"),
+		info: log("info"),
+		warn: log("warn"),
+		error: log("error")
+	});
+}
+// src/model/frames.ts
+/**
+* Frames of a transformation: its configured frames plus the ends of the domain (minimum and
+* maximum, false and true) without a value where the transformation configures none. The ends
+* keep interpolation and lookup defined over the whole domain.
+*/
+function createFrames(variable, domainEnds, configs) {
+	const byIndex = /* @__PURE__ */ new Map();
+	for (const index of domainEnds) byIndex.set(index, {
+		index,
+		exists: false,
+		value: null,
+		easing: resolveEasing(void 0)
+	});
+	for (const config of configs) {
+		const index = resolveFramePosition(variable, config.at);
+		byIndex.set(index, {
+			index,
+			exists: true,
+			value: config.value,
+			easing: resolveEasing(config.easing)
+		});
+	}
+	const series = Array.from(byIndex.values());
+	if (variable.type === "number") series.sort((left, right) => left.index - right.index);
+	return {
+		series,
+		byIndex
+	};
+}
+// src/model/transformation.ts
+function createTransformationModel(config, variable) {
+	const frames = createFrames(variable.config, variable.domainEnds, config.frames);
+	const configured = config.default;
+	return Object.freeze({
+		config,
+		name: config.name ?? `${config.type}_${config.element}`,
+		type: config.type,
+		element: config.element,
+		variable,
+		frames,
+		priority: config.priority ?? 0,
+		defaultValue: (fallback) => configured ?? fallback
+	});
+}
+// src/model/variable.ts
+function createDomainEnds(config) {
+	switch (config.type) {
+		case "number": return [config.minimum, config.maximum];
+		case "boolean": return [false, true];
+		case "text": return [];
+	}
+}
+function createVariableModel(config) {
+	return Object.freeze({
+		config,
+		name: config.name,
+		type: config.type,
+		domainEnds: Object.freeze(createDomainEnds(config))
+	});
+}
+// src/translation/mapping.ts
+/** Discrete lookup of the frame located exactly at the variable value (boolean and text variables). */
+function mapping(frames) {
+	return (index, fallback) => {
+		if (index == null) return fallback;
+		return frames.byIndex.get(index)?.value ?? fallback;
+	};
+}
+// src/translation/transition.ts
+/** Configured frames enclosing `index`; falls back to the first/last frame of the series. */
+function boundaries(index, series) {
+	const first = series[0];
+	const last = series.at(-1);
+	assert(first && last, "Need at least one frame");
+	let lower;
+	let upper;
+	for (const frame of series) {
+		if (!frame.exists) continue;
+		if (frame.index > index) {
+			upper = frame;
+			break;
+		}
+		lower = frame;
+	}
+	return {
+		lower: lower ?? first,
+		upper: upper ?? last
+	};
+}
+function progress(index, { lower, upper }) {
+	const min = lower.index;
+	const max = upper.index;
+	const t = (Math.min(Math.max(index, min), max) - min) / (max - min);
+	return Number.isFinite(t) ? t : 0;
+}
+/** Continuous interpolation between the frames enclosing the value (number variables). */
+function transition(frames, interpolate) {
+	return (index, fallback) => {
+		if (typeof index !== "number" || Number.isNaN(index)) return fallback;
+		const bounds = boundaries(index, frames.series);
+		const lowerValue = bounds.lower.value ?? fallback;
+		return interpolate(lowerValue, bounds.upper.value ?? (bounds.upper.exists ? fallback : lowerValue), progress(index, bounds), bounds.lower.easing);
+	};
+}
+// src/translation/factory.ts
+function createTranslation(indexType, frames, interpolate) {
+	switch (indexType) {
+		case "number": return transition(frames, interpolate);
+		case "boolean":
+		case "text": return mapping(frames);
+	}
+}
+// src/runtime/scheduler.ts
+const PHASES = [
+	"reset",
+	"transform",
+	"render"
+];
+const log$4 = createLogger("cuttleskin.scheduler");
+/**
+* Executes scheduled tasks once per animation frame in the phases reset, transform and render.
+* - Higher priorities run first; equal priorities keep their scheduling order
+* - Tasks scheduled while a frame runs are executed in the same frame if their phase has not passed yet,
+*   otherwise in the next frame
+* - A failing task is logged and does not affect other tasks
+*/
+var Scheduler = class extends Observable {
+	#queues = {
+		reset: [],
+		transform: [],
+		render: []
+	};
+	#frameId;
+	#running = false;
+	constructor(parent) {
+		super(parent, "scheduler");
+	}
+	scheduleReset(task, priority = 0) {
+		return this.#schedule("reset", task, priority);
+	}
+	scheduleTransform(task, priority = 0) {
+		return this.#schedule("transform", task, priority);
+	}
+	scheduleRender(task, priority = 0) {
+		return this.#schedule("render", task, priority);
+	}
+	/** Number of tasks waiting for execution. */
+	get pending() {
+		return PHASES.reduce((sum, phase) => sum + this.#queues[phase].length, 0);
+	}
+	/** Executes all pending tasks synchronously instead of waiting for the next animation frame. */
+	flush() {
+		this.#cancelFrame();
+		this.#execute();
+	}
+	destroy() {
+		this.#cancelFrame();
+		for (const phase of PHASES) this.#queues[phase] = [];
+		super.destroy();
+	}
+	#schedule(phase, task, priority) {
+		const entry = {
+			task,
+			priority
+		};
+		const queue = this.#queues[phase];
+		const index = queue.findIndex((other) => other.priority < priority);
+		queue.splice(index < 0 ? queue.length : index, 0, entry);
+		this.#requestFrame();
+		return () => {
+			const position = this.#queues[phase].indexOf(entry);
+			if (position >= 0) this.#queues[phase].splice(position, 1);
+		};
+	}
+	#requestFrame() {
+		if (this.#frameId !== void 0 || this.#running) return;
+		this.#frameId = requestAnimationFrame(() => {
+			this.#frameId = void 0;
+			this.#execute();
+		});
+	}
+	#cancelFrame() {
+		if (this.#frameId !== void 0) cancelAnimationFrame(this.#frameId);
+		this.#frameId = void 0;
+	}
+	#execute() {
+		if (this.#running) return;
+		this.#running = true;
+		try {
+			this.emit("start");
+			for (const phase of PHASES) {
+				this.#executePhase(phase);
+				this.emit(phase);
+			}
+			this.emit("complete");
+		} finally {
+			this.#running = false;
+		}
+		if (this.pending > 0) this.#requestFrame();
+	}
+	#executePhase(phase) {
+		const queue = this.#queues[phase];
+		for (let entry = queue.shift(); entry; entry = queue.shift()) try {
+			entry.task();
+		} catch (error) {
+			log$4.error(`Error executing task in ${phase} phase`, error);
+		}
+	}
+};
+// src/runtime/element/attributes.ts
+const XLINK_NS$1 = "http://www.w3.org/1999/xlink";
+function localMatrix(node) {
+	if (!(node instanceof SVGGraphicsElement)) return new DOMMatrix();
+	const consolidated = node.transform.baseVal.consolidate();
+	return consolidated ? DOMMatrix.fromMatrix(consolidated.matrix) : new DOMMatrix();
+}
+/** Transforms of the node and its ancestors up to the nearest `<svg>`. */
+function totalMatrix(node) {
+	let matrix = localMatrix(node);
+	for (let parent = node.parentElement; parent && !(parent instanceof SVGSVGElement); parent = parent.parentElement) matrix = localMatrix(parent).multiply(matrix);
+	return matrix;
+}
+function attributeRestorer(node, name, namespace = null) {
+	const value = node.getAttributeNS(namespace, name);
+	return () => {
+		if (value === null) node.removeAttributeNS(namespace, name);
+		else node.setAttributeNS(namespace, name, value);
+	};
+}
+/** Accessor for a CSS property; writes inline styles so they override attributes and stylesheet rules. */
+function styleAccessor(property, parse, serialize) {
+	return (node) => ({
+		read: () => parse(getComputedStyle(node).getPropertyValue(property)),
+		write: (value) => {
+			node.style.setProperty(property, serialize(value));
+		},
+		capture: () => {
+			const value = node.style.getPropertyValue(property);
+			const priority = node.style.getPropertyPriority(property);
+			return () => {
+				if (value) node.style.setProperty(property, value, priority);
+				else node.style.removeProperty(property);
+			};
+		}
+	});
+}
+const identity = (value) => value;
+const ACCESSORS = {
+	transform: (node) => ({
+		read: () => ({
+			local: localMatrix(node),
+			total: totalMatrix(node)
+		}),
+		write: (value) => {
+			node.setAttribute("transform", value.local.toString());
+		},
+		capture: () => attributeRestorer(node, "transform")
+	}),
+	bbox: (node) => ({
+		read: () => {
+			const { x, y, width, height } = node.getBBox();
+			return {
+				x,
+				y,
+				width,
+				height
+			};
+		},
+		write: () => {},
+		capture: () => () => {}
+	}),
+	text: (node) => ({
+		read: () => node.textContent,
+		write: (value) => {
+			node.textContent = value;
+		},
+		capture: () => {
+			const text = node.textContent;
+			return () => {
+				node.textContent = text;
+			};
+		}
+	}),
+	href: (node, assets) => ({
+		read: () => {
+			const url = node.getAttribute("href") ?? node.getAttributeNS(XLINK_NS$1, "href") ?? "";
+			return url ? assets.nameOf(url) : "";
+		},
+		write: (value) => {
+			const url = value ? assets.resolve(value) : "";
+			if (url && isSafeUrl(url)) node.setAttribute("href", url);
+			else {
+				node.removeAttribute("href");
+				node.removeAttributeNS(XLINK_NS$1, "href");
+			}
+		},
+		capture: () => {
+			const restoreHref = attributeRestorer(node, "href");
+			const restoreXlink = attributeRestorer(node, "href", XLINK_NS$1);
+			return () => {
+				restoreHref();
+				restoreXlink();
+			};
+		}
+	}),
+	fill: styleAccessor("fill", identity, identity),
+	stroke: styleAccessor("stroke", identity, identity),
+	"stroke-width": styleAccessor("stroke-width", parseFloat, (value) => `${String(value)}px`),
+	opacity: styleAccessor("opacity", parseFloat, String),
+	display: styleAccessor("display", identity, identity),
+	visibility: styleAccessor("visibility", identity, identity)
+};
+function createAccessor(node, attribute, assets) {
+	return ACCESSORS[attribute](node, assets);
+}
+// src/runtime/element/element-state.ts
+/**
+* Buffered attribute access for one element.
+* - Default values: effective values before any modification, read once and cached
+* - Modifications are collected and written to the DOM in `apply()`
+* - Attributes modified earlier but not in the current frame are restored to their original markup state
+*/
+var ElementState = class {
+	#node;
+	#assets;
+	#accessors = /* @__PURE__ */ new Map();
+	#defaults = /* @__PURE__ */ new Map();
+	#modified = /* @__PURE__ */ new Map();
+	/** Attributes currently differing from markup, with their restore functions. */
+	#restorers = /* @__PURE__ */ new Map();
+	constructor(node, assets) {
+		this.#node = node;
+		this.#assets = assets;
+	}
+	getDefaultValue(attribute) {
+		if (!this.#defaults.has(attribute)) this.#defaults.set(attribute, this.#accessor(attribute).read());
+		return this.#defaults.get(attribute);
+	}
+	getDefaultValues(attributes) {
+		return Object.fromEntries(attributes.map((attribute) => [attribute, this.getDefaultValue(attribute)]));
+	}
+	/** Value modified in the current frame, otherwise the default value. */
+	getValue(attribute) {
+		return this.#modified.has(attribute) ? this.#modified.get(attribute) : this.getDefaultValue(attribute);
+	}
+	getValues(attributes) {
+		return Object.fromEntries(attributes.map((attribute) => [attribute, this.getValue(attribute)]));
+	}
+	setValue(attribute, value) {
+		this.getDefaultValue(attribute);
+		if (!this.#restorers.has(attribute)) this.#restorers.set(attribute, this.#accessor(attribute).capture());
+		this.#modified.set(attribute, value);
+	}
+	setValues(values) {
+		const entries = Object.entries(values);
+		for (const [attribute, value] of entries) if (value !== void 0) this.setValue(attribute, value);
+	}
+	/** Writes modifications to the DOM, restores attributes that are no longer modified and starts a new frame. */
+	apply() {
+		for (const [attribute, restore] of this.#restorers) if (this.#modified.has(attribute)) this.#accessor(attribute).write(this.#modified.get(attribute));
+		else {
+			restore();
+			this.#restorers.delete(attribute);
+		}
+		this.#modified.clear();
+	}
+	/** Discards modifications of the current frame. */
+	clear() {
+		this.#modified.clear();
+	}
+	#accessor(attribute) {
+		let accessor = this.#accessors.get(attribute);
+		if (!accessor) {
+			accessor = createAccessor(this.#node, attribute, this.#assets);
+			this.#accessors.set(attribute, accessor);
+		}
+		return accessor;
+	}
+};
+// src/runtime/element/element.ts
+const log$3 = createLogger("cuttleskin.element");
+/**
+* Runtime wrapper of an SVG element.
+* - Collects transform functions and renders them in priority order in the render phase
+* - Restores the original markup state when transforms are removed or the element is destroyed
+* - Forwards DOM events via `dom` (e.g. `element.dom.on('click', ...)`, bubbled as `element.click`)
+*/
+var RuntimeElement = class extends Observable {
+	node;
+	/** DOM events of the node. */
+	dom;
+	#state;
+	#scheduler;
+	#transforms = [];
+	#unscheduleRender;
+	constructor(node, context, config) {
+		super(context.events, "element");
+		this.node = node;
+		this.dom = new DomObservable(node, context.events, "element", config?.name);
+		this.#state = new ElementState(node, context.assets);
+		this.#scheduler = context.scheduler;
+		for (const event of config?.events ?? []) this.dom.on(event, () => void 0);
+	}
+	get id() {
+		return this.node.id;
+	}
+	getDefaultValue(attribute) {
+		return this.#state.getDefaultValue(attribute);
+	}
+	getDefaultValues(attributes) {
+		return this.#state.getDefaultValues(attributes);
+	}
+	/**
+	* Adds a transform function executed on every render; higher priorities run first.
+	* Returns a function that removes it again and re-renders the element.
+	*/
+	transform(fn, priority = 0) {
+		const entry = {
+			fn,
+			priority
+		};
+		this.#transforms.push(entry);
+		this.#scheduleRender();
+		return () => {
+			const index = this.#transforms.indexOf(entry);
+			if (index < 0) return;
+			this.#transforms.splice(index, 1);
+			this.#scheduleRender();
+		};
+	}
+	/** Current position and size on screen. */
+	screenBBox() {
+		return screenBBox(this.node);
+	}
+	/** Removes all transforms, restores the original markup state in the next reset phase and removes listeners. */
+	destroy() {
+		this.#transforms = [];
+		this.#state.clear();
+		this.#unscheduleRender?.();
+		this.#scheduler.scheduleReset(() => {
+			this.#state.apply();
+		});
+		this.emit("destroy", this);
+		this.dom.destroy();
+		super.destroy();
+	}
+	#scheduleRender() {
+		this.#unscheduleRender?.();
+		this.#unscheduleRender = this.#scheduler.scheduleRender(() => {
+			this.#render();
+		});
+	}
+	#render() {
+		this.#unscheduleRender = void 0;
+		const ordered = [...this.#transforms].sort((left, right) => right.priority - left.priority);
+		for (const { fn } of ordered) fn(this.#state);
+		this.#state.apply();
+		this.emit("render", this);
+		log$3.debug("Rendered element", this.id);
+	}
+};
+// src/runtime/transformation/types/appearance.ts
+/**
+* Sets the opacity. At opacity 0 the element is also hidden (`visibility: hidden`) so it no longer receives
+* pointer events; this is skipped in the editor to keep the visibility defined in the markup.
+*/
+function opacity(model, settings) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateNumber);
+	const toggleVisibility = settings.mode !== "editor";
+	return {
+		attributes: ["opacity", "visibility"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults.opacity)),
+		interpolate: interpolateNumber,
+		apply: (value) => toggleVisibility ? {
+			opacity: value,
+			visibility: value === 0 ? "hidden" : "inherit"
+		} : { opacity: value }
+	};
+}
+/** Sets the fill paint. */
+function fillColor(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateCssColor);
+	return {
+		attributes: ["fill"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults.fill)),
+		interpolate: interpolateCssColor,
+		apply: (fill) => ({ fill })
+	};
+}
+/** Sets the stroke paint. */
+function strokeColor(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateCssColor);
+	return {
+		attributes: ["stroke"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults.stroke)),
+		interpolate: interpolateCssColor,
+		apply: (stroke) => ({ stroke })
+	};
+}
+/** Sets the stroke width in user units. */
+function strokeWidth(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateNumber);
+	return {
+		attributes: ["stroke-width"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults["stroke-width"])),
+		interpolate: interpolateNumber,
+		apply: (width) => ({ "stroke-width": width })
+	};
+}
+/** Replaces the text content; supports `bind` to show the formatted variable value. */
+function text(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateDiscrete);
+	return {
+		attributes: ["text"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults.text)),
+		interpolate: interpolateDiscrete,
+		apply: (content) => ({ text: content }),
+		fromText: (content) => content
+	};
+}
+/** Replaces the image of an `<image>` element by asset name; supports `bind`. */
+function imageUrl(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateDiscrete);
+	return {
+		attributes: ["href"],
+		calculate: (value, defaults) => translation(value, model.defaultValue(defaults.href)),
+		interpolate: interpolateDiscrete,
+		apply: (href) => ({ href }),
+		fromText: (name) => name
+	};
+}
+// src/runtime/transformation/types/geometric.ts
+/**
+* Applies `matrix`, given in the coordinate system of the nearest `<svg>`, on top of the current transform.
+* The element's local transform becomes `local * total^-1 * matrix * total`.
+*/
+function applyInSvgSpace(transform, matrix) {
+	return {
+		local: transform.local.multiply(transform.total.inverse()).multiply(matrix).multiply(transform.total),
+		total: matrix.multiply(transform.total)
+	};
+}
+/** Moves the element by a point value in `<svg>` coordinates. */
+function translate(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolatePoint);
+	return {
+		attributes: ["transform"],
+		calculate: (value) => translation(value, model.defaultValue({
+			x: 0,
+			y: 0
+		})),
+		interpolate: interpolatePoint,
+		apply: (offset, { transform }) => ({ transform: applyInSvgSpace(transform, new DOMMatrix().translate(offset.x, offset.y)) })
+	};
+}
+/** Rotates the element by an angle in degrees around `origin` (anchor of its bounding box). */
+function rotate(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateNumber);
+	return {
+		attributes: ["transform", "bbox"],
+		calculate: (value) => translation(value, model.defaultValue(0)),
+		interpolate: interpolateNumber,
+		apply: (angle, { transform, bbox }) => {
+			const origin = boxPosition(bbox, model.config.origin);
+			const pivot = new DOMPoint(origin.x, origin.y).matrixTransform(transform.total);
+			return { transform: applyInSvgSpace(transform, new DOMMatrix().translate(pivot.x, pivot.y).rotate(angle).translate(-pivot.x, -pivot.y)) };
+		}
+	};
+}
+/** Scales the element by a point factor around `origin` in its own user space. */
+function scale(model) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolatePoint);
+	return {
+		attributes: ["transform", "bbox"],
+		calculate: (value) => translation(value, model.defaultValue({
+			x: 1,
+			y: 1
+		})),
+		interpolate: interpolatePoint,
+		apply: (factor, { transform, bbox }) => {
+			const pivot = boxPosition(bbox, model.config.origin);
+			const scaling = new DOMMatrix().translate(pivot.x, pivot.y).scale(factor.x, factor.y).translate(-pivot.x, -pivot.y);
+			return { transform: {
+				local: transform.local.multiply(scaling),
+				total: transform.total.multiply(scaling)
+			} };
+		}
+	};
+}
+/**
+* Position and direction on a path, given as percentage of its length, in `<svg>` coordinates.
+* The direction is the chord between two points just before and after the position, so it is the
+* mean direction exactly at a corner; at the ends only the inner side is used.
+*/
+function pathPose(path, percent) {
+	const length = path.getTotalLength();
+	const at = Math.min(Math.max(percent, 0), 100) / 100 * length;
+	const matrix = totalMatrix(path);
+	const point = (distance) => {
+		const local = path.getPointAtLength(Math.min(Math.max(distance, 0), length));
+		return new DOMPoint(local.x, local.y).matrixTransform(matrix);
+	};
+	const { x, y } = point(at);
+	const delta = Math.max(length * 1e-4, .001);
+	const before = point(at - delta);
+	const after = point(at + delta);
+	const dx = after.x - before.x;
+	const dy = after.y - before.y;
+	return {
+		x,
+		y,
+		angle: dx === 0 && dy === 0 ? 0 : Math.atan2(dy, dx) * 180 / Math.PI
+	};
+}
+/**
+* Moves the element along `path` so that its `origin` anchor lies on the path; the value is the position
+* in percent of the path length (0–100). Overrides the position reached by higher-priority transforms.
+* With `orient`, the element is also rotated around the anchor by the direction of the path; it is
+* drawn facing right (positive x axis), and a rotation it already has is kept on top.
+*/
+function motionPath(model, path) {
+	const translation = createTranslation(model.variable.type, model.frames, interpolateNumber);
+	const orient = model.config.orient === true;
+	return {
+		attributes: ["transform", "bbox"],
+		calculate: (value) => translation(value, model.defaultValue(0)),
+		interpolate: interpolateNumber,
+		apply: (percent, { transform, bbox }) => {
+			const target = pathPose(path, percent);
+			const anchor = boxPosition(bbox, model.config.origin);
+			const current = new DOMPoint(anchor.x, anchor.y).matrixTransform(transform.total);
+			let matrix = new DOMMatrix().translate(target.x - current.x, target.y - current.y);
+			if (orient) matrix = new DOMMatrix().translate(target.x, target.y).rotate(target.angle).translate(-target.x, -target.y).multiply(matrix);
+			return { transform: applyInSvgSpace(transform, matrix) };
+		}
+	};
+}
+// src/runtime/transformation/factory.ts
+/**
+* Creates the behaviour for the model's transformation type.
+* Frame values are trusted to match the type; validating them is the job of the config parser.
+*/
+function createTransformType(model, settings, path) {
+	switch (model.type) {
+		case "translate": return translate(model);
+		case "rotate": return rotate(model);
+		case "scale": return scale(model);
+		case "opacity": return opacity(model, settings);
+		case "fill-color": return fillColor(model);
+		case "stroke-color": return strokeColor(model);
+		case "stroke-width": return strokeWidth(model);
+		case "text": return text(model);
+		case "image-url": return imageUrl(model);
+		case "motion-path":
+			assert(path, `Path element missing: ${String(model.config.path)}`);
+			return motionPath(model, path);
+	}
+}
+// src/runtime/transformation/updater.ts
+/** Applies every value immediately. */
+function discreteUpdater(apply) {
+	return {
+		update: apply,
+		destroy: () => void 0
+	};
+}
+/**
+* Animates from the currently displayed value to the next one. The first value is applied immediately;
+* a new value during a running animation starts from the intermediate value reached so far.
+*/
+function transitionUpdater(transition, interpolate, apply) {
+	const easing = resolveEasing(transition.easing);
+	let animation;
+	let current;
+	return {
+		update(next) {
+			animation?.stop();
+			if (!current) {
+				current = { value: next };
+				apply(next);
+				return;
+			}
+			const from = current.value;
+			const state = current;
+			animation = animate({
+				duration: transition.duration,
+				easing,
+				onUpdate: (progress) => {
+					state.value = interpolate(from, next, progress);
+					apply(state.value);
+				}
+			});
+		},
+		destroy() {
+			animation?.stop();
+		}
+	};
+}
+// src/runtime/transformation/transformation.ts
+const log$2 = createLogger("cuttleskin.transformation");
+/** Shape followed by a `motion-path` transformation; throws if it does not exist or has no geometry. */
+function resolvePath(config, context) {
+	if (config.type !== "motion-path" || config.path === void 0) return void 0;
+	const node = context.getElement(config.path)?.node;
+	assert(node, `Path element does not exist: ${config.path}`);
+	assert(node instanceof SVGGeometryElement, `Element is not a path or shape: ${config.path}`);
+	return node;
+}
+/**
+* Connects a variable with an element:
+* - On variable changes, computes the new value in the transform phase
+* - Applies the value (optionally animated) as transform function on the element
+*/
+var Transformation = class extends Observable {
+	model;
+	#variable;
+	#element;
+	#type;
+	#updater;
+	#scheduler;
+	#unobserve;
+	#unschedule;
+	#removeTransform;
+	/** Throws if variable or element do not exist. */
+	constructor(config, context) {
+		super(context.events, "transformation");
+		const variable = context.getVariable(config.variable);
+		const element = context.getElement(config.element);
+		assert(variable, `Variable does not exist: ${config.variable}`);
+		assert(element, `Element does not exist: ${config.element}`);
+		this.#variable = variable;
+		this.#element = element;
+		this.#scheduler = context.scheduler;
+		this.model = createTransformationModel(config, variable.model);
+		this.#type = createTransformType(this.model, context.settings, resolvePath(config, context));
+		if (config.bind && !this.#type.fromText) log$2.warn(`Transformation type does not support bind: ${config.type}`, this.model.name);
+		const apply = (value) => {
+			this.#apply(value);
+		};
+		const transition = config.transition;
+		this.#updater = transition && Number.isFinite(transition.duration) && transition.duration > 0 ? transitionUpdater(transition, (from, to, t) => this.#type.interpolate(from, to, t), apply) : discreteUpdater(apply);
+		this.#unobserve = variable.on("change", () => {
+			this.schedule();
+		});
+	}
+	/** Schedules a recalculation in the next transform phase. */
+	schedule() {
+		this.#unschedule?.();
+		this.#unschedule = this.#scheduler.scheduleTransform(() => {
+			this.#update();
+		}, this.model.priority);
+	}
+	destroy() {
+		this.#removeTransform?.();
+		this.#updater.destroy();
+		this.#unobserve();
+		this.#unschedule?.();
+		this.emit("destroy", this);
+		super.destroy();
+	}
+	#update() {
+		this.#unschedule = void 0;
+		const type = this.#type;
+		const value = this.model.config.bind && type.fromText ? type.fromText(this.#variable.formattedValue) : type.calculate(this.#variable.value, this.#element.getDefaultValues(type.attributes));
+		this.#updater.update(value);
+		this.emit("update", this);
+	}
+	#apply(value) {
+		const type = this.#type;
+		this.#removeTransform?.();
+		this.#removeTransform = this.#element.transform((state) => {
+			state.setValues(type.apply(value, state.getValues(type.attributes)));
+		}, this.model.priority);
+	}
+};
+// src/runtime/variable/value.ts
+function parseNumber(value) {
+	const parsed = parseFloat(value);
+	return Number.isNaN(parsed) ? null : parsed;
+}
+/** Converts external input into the variable's type; `null` if it cannot be represented. */
+function convertValue(value, type) {
+	switch (type) {
+		case "number":
+			if (typeof value === "number") return Number.isFinite(value) ? value : null;
+			if (typeof value === "string") return parseNumber(value);
+			if (typeof value === "boolean") return value ? 1 : 0;
+			return null;
+		case "boolean":
+			if (typeof value === "boolean") return value;
+			if (typeof value === "number") return value > 0;
+			if (typeof value === "string") {
+				const number = parseNumber(value);
+				return number === null ? value.trim().toLowerCase() === "true" : number > 0;
+			}
+			return null;
+		case "text":
+			if (typeof value === "string") return value;
+			if (typeof value === "number" || typeof value === "boolean") return String(value);
+			return null;
+	}
+}
+/** Clamps number values into the configured domain. */
+function sanitizeValue(value, config) {
+	if (config.type !== "number" || typeof value !== "number") return value;
+	return Math.min(Math.max(value, config.minimum), config.maximum);
+}
+/** Display text of a value; numbers are rounded to integers. */
+function formatValue(value) {
+	if (value === null) return "";
+	if (typeof value === "number") return String(Math.round(value));
+	return String(value);
+}
+/** Value used when no `defaultValue` is configured. */
+function domainDefault(config) {
+	switch (config.type) {
+		case "number": return config.minimum;
+		case "boolean": return false;
+		case "text": return "";
+	}
+}
+// src/runtime/variable/variable.ts
+/** Runtime state of a configured variable: converts, clamps and formats values and notifies on change. */
+var Variable = class extends Observable {
+	model;
+	#value = null;
+	#formattedValue = "";
+	constructor(config, parent) {
+		super(parent, "variable");
+		this.model = createVariableModel(config);
+		this.reset();
+	}
+	get name() {
+		return this.model.name;
+	}
+	/** Current value; `null` if the last input could not be converted. */
+	get value() {
+		return this.#value;
+	}
+	/** Display text of the current value. */
+	get formattedValue() {
+		return this.#formattedValue;
+	}
+	/**
+	* Sets a new value. The input is converted to the variable type and clamped to the domain.
+	* `formattedValue` overrides the generated display text.
+	*/
+	setValue(value, formattedValue) {
+		const config = this.model.config;
+		this.#value = sanitizeValue(convertValue(value, config.type), config);
+		this.#formattedValue = formattedValue ?? formatValue(this.#value);
+		this.emit("change", this, this.#value, this.#formattedValue);
+	}
+	/** Restores the configured default value. */
+	reset() {
+		this.setValue(this.model.config.defaultValue ?? domainDefault(this.model.config));
+	}
+	destroy() {
+		this.emit("destroy", this);
+		super.destroy();
+	}
+};
+// src/runtime/runtime.ts
+const EMPTY_CONFIG = Object.freeze({
+	variables: [],
+	transformations: []
+});
+const log$1 = createLogger("cuttleskin.runtime");
+/**
+* Builds variables, elements and transformations from a graphic configuration and manages their lifecycle.
+* Entries that fail to initialize (e.g. missing SVG element) are logged and skipped.
+*/
+var Runtime = class {
+	#context;
+	#config = EMPTY_CONFIG;
+	#variables = /* @__PURE__ */ new Map();
+	#elements = /* @__PURE__ */ new Map();
+	#transformations = [];
+	constructor(context) {
+		this.#context = context;
+	}
+	/** The currently loaded configuration. */
+	get config() {
+		return this.#config;
+	}
+	get variables() {
+		return this.#variables;
+	}
+	get transformations() {
+		return this.#transformations;
+	}
+	/** Replaces the current configuration; the previous one is destroyed and its DOM changes restored. */
+	load(config) {
+		this.#clear();
+		this.#config = config;
+		for (const element of config.elements ?? []) this.#createElement(element);
+		for (const variable of config.variables) this.#createVariable(variable);
+		const context = this.#transformationContext();
+		for (const transformation of config.transformations) this.#createTransformation(transformation, context);
+		for (const transformation of this.#transformations) transformation.schedule();
+		log$1.debug(`Loaded ${String(this.#variables.size)} variables, ${String(this.#transformations.length)} transformations`);
+	}
+	getVariable(name) {
+		return this.#variables.get(name);
+	}
+	/** Sets a variable value; logs a warning if the variable does not exist. */
+	setValue(name, value, formattedValue) {
+		const variable = this.#variables.get(name);
+		if (!variable) {
+			log$1.warn(`Variable does not exist: ${name}`);
+			return;
+		}
+		variable.setValue(value, formattedValue);
+	}
+	getValue(name) {
+		return this.#variables.get(name)?.value;
+	}
+	/**
+	* Runtime wrapper for an element of the document, created on first access.
+	* Elements with an ID are cached; `undefined` if no such element exists.
+	*/
+	getElement(elementOrId) {
+		const id = typeof elementOrId === "string" ? elementOrId : elementOrId.id;
+		const cached = id ? this.#elements.get(id) : void 0;
+		if (cached) return cached;
+		const node = typeof elementOrId === "string" ? this.#context.document.getElement(elementOrId) : elementOrId;
+		if (!node) return void 0;
+		const element = this.#newElement(node);
+		if (id) this.#elements.set(id, element);
+		return element;
+	}
+	destroy() {
+		this.#clear();
+		this.#config = EMPTY_CONFIG;
+	}
+	#clear() {
+		for (const transformation of this.#transformations) transformation.destroy();
+		for (const variable of this.#variables.values()) variable.destroy();
+		for (const element of this.#elements.values()) element.destroy();
+		this.#transformations = [];
+		this.#variables = /* @__PURE__ */ new Map();
+		this.#elements = /* @__PURE__ */ new Map();
+	}
+	#newElement(node, config) {
+		const { scheduler, assets, events } = this.#context;
+		return new RuntimeElement(node, events ? {
+			scheduler,
+			assets,
+			events
+		} : {
+			scheduler,
+			assets
+		}, config);
+	}
+	#createElement(config) {
+		const node = this.#context.document.getElement(config.id);
+		if (!node) {
+			log$1.error(`Error initializing element: ${config.id}`, "Element does not exist");
+			return;
+		}
+		this.#elements.set(config.id, this.#newElement(node, config));
+	}
+	#createVariable(config) {
+		this.#variables.set(config.name, new Variable(config, this.#context.events));
+	}
+	#createTransformation(config, context) {
+		try {
+			this.#transformations.push(new Transformation(config, context));
+		} catch (error) {
+			log$1.error(`Error initializing transformation: ${config.name ?? `${config.type}_${config.element}`}`, error);
+		}
+	}
+	#transformationContext() {
+		const { scheduler, settings, events } = this.#context;
+		const lookups = {
+			getVariable: (name) => this.getVariable(name),
+			getElement: (id) => this.getElement(id)
+		};
+		return events ? {
+			scheduler,
+			settings,
+			events,
+			...lookups
+		} : {
+			scheduler,
+			settings,
+			...lookups
+		};
+	}
+};
+// src/runtime/load-config.ts
+/**
+* Loads and validates a graphic configuration.
+* Rejects on network errors; JSON and schema problems are returned as `issues`.
+*/
+async function loadGraphicConfig(url, init) {
+	return parseGraphicConfigJson(await fetchText(url, init));
+}
+// src/document/sanitize.ts
+const SVG_NS$1 = "http://www.w3.org/2000/svg";
+/** SVG elements that can run script or embed HTML; removed with their content. */
+const BLOCKED_ELEMENTS = /* @__PURE__ */ new Set([
+	"script",
+	"foreignobject",
+	"handler",
+	"listener"
+]);
+/** SMIL elements that could set an event handler or a link at runtime. */
+const ANIMATION_ELEMENTS = /* @__PURE__ */ new Set([
+	"animate",
+	"set",
+	"animatetransform",
+	"animatemotion"
+]);
+/** Whether an attribute name is an event handler (`onload`, `onclick`, …). */
+function isEventHandler(name) {
+	return name.toLowerCase().startsWith("on");
+}
+/** Whether a SMIL animation targets an event handler or a link. */
+function animatesUnsafeAttribute(element) {
+	const target = (element.getAttribute("attributeName") ?? "").trim().toLowerCase();
+	const name = target.includes(":") ? target.slice(target.indexOf(":") + 1) : target;
+	return isEventHandler(name) || name === "href";
+}
+/** Whether the element must be removed with its content. */
+function isBlocked(element) {
+	if (element.namespaceURI !== SVG_NS$1) return true;
+	const name = element.localName.toLowerCase();
+	if (BLOCKED_ELEMENTS.has(name)) return true;
+	return ANIMATION_ELEMENTS.has(name) && animatesUnsafeAttribute(element);
+}
+/** Removes event handlers and unsafe links from the attributes of one element. */
+function cleanAttributes(element) {
+	for (const attribute of [...element.attributes]) {
+		const name = attribute.localName;
+		if (isEventHandler(name) || name.toLowerCase() === "href" && !isSafeUrl(attribute.value)) element.removeAttributeNode(attribute);
+	}
+}
+/**
+* Removes everything from SVG content that could run script in the page that shows it:
+* - elements outside the SVG namespace (HTML, MathML, editor metadata), `<script>` and
+*   `<foreignObject>`
+* - event handler attributes (`onload`, `onclick`, …)
+* - links and image references with other schemes than `http(s):`, `blob:`, relative URLs and
+*   image data URLs, e.g. `javascript:`
+* - SMIL animations that would set an event handler or a link
+*
+* Works in place on `root` and its descendants; call it before the content is inserted into a
+* live document. Returns `false` if `root` itself must not be inserted at all.
+*/
+function sanitizeSvg(root) {
+	const visit = (node) => {
+		for (const child of [...node.childNodes]) if (child.nodeType === Node.PROCESSING_INSTRUCTION_NODE) child.remove();
+		else if (child instanceof Element) {
+			if (isBlocked(child)) child.remove();
+			else {
+				cleanAttributes(child);
+				visit(child);
+			}
+		}
+	};
+	if (root instanceof Element) {
+		if (isBlocked(root)) return false;
+		cleanAttributes(root);
+	} else if (root.nodeType === Node.PROCESSING_INSTRUCTION_NODE) return false;
+	visit(root);
+	return true;
+}
+// src/document/document.ts
+const SVG_NS = "http://www.w3.org/2000/svg";
+const XLINK_NS = "http://www.w3.org/1999/xlink";
+/** Parses SVG markup; markup with several root elements is parsed as children of a wrapper. */
+function parseMarkup(markup) {
+	const parser = new DOMParser();
+	const document = parser.parseFromString(markup, "image/svg+xml");
+	if (!document.querySelector("parsererror")) return [document.documentElement];
+	const wrapped = parser.parseFromString(`<svg xmlns="${SVG_NS}" xmlns:xlink="${XLINK_NS}">${markup}</svg>`, "image/svg+xml");
+	const error = wrapped.querySelector("parsererror");
+	assert(!error, `Invalid SVG markup: ${error?.textContent ?? ""}`);
+	return [...wrapped.documentElement.childNodes];
+}
+/** First `<svg>` element among or inside the nodes. */
+function findSvg(nodes) {
+	for (const node of nodes) {
+		if (node instanceof SVGSVGElement) return node;
+		if (node instanceof Element || node instanceof Document || node instanceof DocumentFragment) {
+			const found = node.querySelector("svg");
+			if (found instanceof SVGSVGElement) return found;
+		}
+	}
+	return null;
+}
+/** Length in pixels for unitless or `px` values, otherwise `null`. */
+function pixelSize(value) {
+	return value && /^\s*[\d.]+(px)?\s*$/.test(value) ? parseFloat(value) : null;
+}
+/** Bounds declared by an SVG root via `viewBox` or pixel `width`/`height`. */
+function declaredBounds(svg) {
+	const viewBox = svg.getAttribute("viewBox");
+	if (viewBox) {
+		const [x = 0, y = 0, width = 0, height = 0] = viewBox.trim().split(/[\s,]+/).map(Number);
+		if ([
+			x,
+			y,
+			width,
+			height
+		].every(Number.isFinite)) return {
+			x,
+			y,
+			width,
+			height
+		};
+	}
+	const width = pixelSize(svg.getAttribute("width"));
+	const height = pixelSize(svg.getAttribute("height"));
+	return width && height ? {
+		x: 0,
+		y: 0,
+		width,
+		height
+	} : null;
+}
+/**
+* The SVG content of a graphic inside its container.
+* - Owns the content layer (`<svg>`) that view and runtime work on
+* - Loads markup, adapts nested SVGs and resolves image URLs against the asset root
+* - Provides content bounds (declared by the SVG or measured) and the container size
+*/
+var GraphicDocument = class extends Observable {
+	container;
+	contentLayer;
+	#assets = createAssetResolver();
+	#assetRoot = "";
+	#assetUrls = {};
+	#bounds = null;
+	/** Removes all existing children of `container`. */
+	constructor(container, parent) {
+		super(parent, "document");
+		this.container = container;
+		this.contentLayer = container.ownerDocument.createElementNS(SVG_NS, "svg");
+		this.contentLayer.setAttribute("overflow", "hidden");
+		this.contentLayer.style.display = "block";
+		container.replaceChildren(this.contentLayer);
+	}
+	/**
+	* Replaces the content with an SVG document. Its `viewBox` or pixel size becomes the document bounds.
+	* Throws if the content is not and does not contain an `<svg>` element.
+	*/
+	load(content) {
+		const svg = findSvg(typeof content === "string" ? parseMarkup(content) : [content]);
+		assert(svg, "Content must be or contain an SVG element");
+		this.contentLayer.replaceChildren();
+		this.#bounds = declaredBounds(svg);
+		this.append(svg);
+	}
+	/**
+	* Adds content to the content layer or to `parent`. The content is sanitized first: scripts,
+	* event handlers, HTML and unsafe links are removed (see `sanitizeSvg`).
+	*/
+	append(content, parent = this.contentLayer) {
+		const nodes = typeof content === "string" ? parseMarkup(content) : [content];
+		for (const node of nodes) {
+			const imported = node.ownerDocument === this.contentLayer.ownerDocument ? node : this.contentLayer.ownerDocument.importNode(node, true);
+			if (!sanitizeSvg(imported)) continue;
+			this.#prepare(imported);
+			parent.append(imported);
+		}
+		this.emit("contentChange");
+	}
+	remove(node) {
+		node.parentNode?.removeChild(node);
+		this.emit("contentChange");
+	}
+	clear() {
+		this.contentLayer.replaceChildren();
+		this.#bounds = null;
+		this.emit("contentChange");
+	}
+	/** First element in the content matching a CSS selector. */
+	find(selector) {
+		return this.contentLayer.querySelector(selector);
+	}
+	/** Graphics element with the given ID inside the content. */
+	getElement(id) {
+		const element = this.find(`#${CSS.escape(id)}`);
+		return element instanceof SVGGraphicsElement ? element : null;
+	}
+	/** Topmost content element at a viewport position. */
+	elementAt(clientX, clientY) {
+		const element = this.contentLayer.ownerDocument.elementFromPoint(clientX, clientY);
+		return element && element !== this.contentLayer && this.contentLayer.contains(element) ? element : null;
+	}
+	/** Root for relative image URLs, e.g. `assets/`; a trailing slash is added if missing. */
+	setAssetRoot(root) {
+		this.#assetRoot = root && !root.endsWith("/") ? `${root}/` : root;
+		this.#assets = createAssetResolver(this.#assetRoot, this.#assetUrls);
+	}
+	/**
+	* URLs of individual images by file name; they take precedence over the asset root. Takes
+	* effect for markup loaded afterwards and for all values set by transformations.
+	*/
+	setAssetUrls(urls) {
+		this.#assetUrls = { ...urls };
+		this.#assets = createAssetResolver(this.#assetRoot, this.#assetUrls);
+	}
+	resolve(nameOrUrl) {
+		return this.#assets.resolve(nameOrUrl);
+	}
+	nameOf(url) {
+		return this.#assets.nameOf(url);
+	}
+	/** Overrides the bounds declared by the loaded SVG; `null` uses the measured content bounds. */
+	setDocumentBounds(bounds) {
+		this.#bounds = bounds;
+	}
+	/** Declared or explicitly set bounds, otherwise the bounding box of the content. */
+	contentBounds() {
+		if (this.#bounds) return this.#bounds;
+		const { x, y, width, height } = this.contentLayer.getBBox();
+		return {
+			x,
+			y,
+			width,
+			height
+		};
+	}
+	/** Inner size of the container. */
+	viewSize() {
+		const style = getComputedStyle(this.container);
+		return {
+			width: parseFloat(style.width) || 0,
+			height: parseFloat(style.height) || 0
+		};
+	}
+	destroy() {
+		this.contentLayer.remove();
+		super.destroy();
+	}
+	/**
+	* Adapts content for display:
+	* - Nested SVGs lose their `viewBox` (conflicts with zooming) and get `overflow: visible` (no clipping)
+	* - Relative image URLs are resolved against the asset root
+	*/
+	#prepare(node) {
+		if (!(node instanceof Element)) return;
+		const svgs = [...node.querySelectorAll("svg"), ...node.localName === "svg" ? [node] : []];
+		for (const svg of svgs) {
+			svg.setAttribute("overflow", "visible");
+			svg.removeAttribute("viewBox");
+		}
+		const images = [...node.querySelectorAll("image"), ...node.localName === "image" ? [node] : []];
+		for (const image of images) for (const [namespace, name] of [[null, "href"], [XLINK_NS, "href"]]) {
+			const url = image.getAttributeNS(namespace, name);
+			if (url) image.setAttributeNS(namespace, namespace ? "xlink:href" : "href", this.resolve(url));
+		}
+	}
+};
+// src/view/viewport.ts
+const MIN_ZOOM_LEVEL = .01;
+const MAX_ZOOM_LEVEL = 99.99;
+function clampZoom(level) {
+	return Math.min(Math.max(level, MIN_ZOOM_LEVEL), MAX_ZOOM_LEVEL);
+}
+const INITIAL_STATE = {
+	x: 0,
+	y: 0,
+	width: 0,
+	height: 0,
+	zoomLevel: 1,
+	viewSize: {
+		width: 0,
+		height: 0
+	},
+	contentBounds: {
+		x: 0,
+		y: 0,
+		width: 0,
+		height: 0
+	}
+};
+/** Immutable visible area of the content; all operations return a new viewport. */
+var Viewport = class Viewport {
+	x;
+	y;
+	width;
+	height;
+	zoomLevel;
+	viewSize;
+	contentBounds;
+	constructor(state = INITIAL_STATE) {
+		this.x = state.x;
+		this.y = state.y;
+		this.width = state.width;
+		this.height = state.height;
+		this.zoomLevel = state.zoomLevel;
+		this.viewSize = state.viewSize;
+		this.contentBounds = state.contentBounds;
+		Object.freeze(this);
+	}
+	/** Center of the content bounds. */
+	get contentCenter() {
+		const { x, y, width, height } = this.contentBounds;
+		return {
+			x: x + width / 2,
+			y: y + height / 2
+		};
+	}
+	/** Center of the visible area. */
+	get center() {
+		return {
+			x: this.x + this.width / 2,
+			y: this.y + this.height / 2
+		};
+	}
+	/** `viewBox` attribute value. */
+	get viewBox() {
+		return [
+			this.x,
+			this.y,
+			this.width,
+			this.height
+		].join(" ");
+	}
+	with(changes) {
+		const { x, y, width, height, zoomLevel, viewSize, contentBounds } = this;
+		return new Viewport({
+			x,
+			y,
+			width,
+			height,
+			zoomLevel,
+			viewSize,
+			contentBounds,
+			...changes
+		});
+	}
+	/** Adapts the visible area to the view size, keeping the zoom level and the top-left corner. */
+	resize() {
+		return this.with({
+			width: this.viewSize.width / this.zoomLevel,
+			height: this.viewSize.height / this.zoomLevel
+		});
+	}
+	moveBy(dx, dy) {
+		return this.with({
+			x: this.x + dx,
+			y: this.y + dy
+		});
+	}
+	centerAt(x, y) {
+		return this.with({
+			x: x - this.width / 2,
+			y: y - this.height / 2
+		});
+	}
+	/** Zooms so that `target` (content coordinates, default: center) stays at the same screen position. */
+	zoomTo(zoomLevel, target = this.center) {
+		const level = clampZoom(zoomLevel);
+		const width = this.viewSize.width / level;
+		const height = this.viewSize.height / level;
+		const ratioX = this.width ? (target.x - this.x) / this.width : .5;
+		const ratioY = this.height ? (target.y - this.y) / this.height : .5;
+		return this.with({
+			zoomLevel: level,
+			x: this.x - (width - this.width) * ratioX,
+			y: this.y - (height - this.height) * ratioY,
+			width,
+			height
+		});
+	}
+	zoomIn(factor, target) {
+		return this.zoomTo(this.zoomLevel * factor, target);
+	}
+	zoomOut(factor, target) {
+		return this.zoomTo(this.zoomLevel / factor, target);
+	}
+	/** Shows the whole content, centered, with `padding` content units on each side. */
+	zoomToFit(padding = 0) {
+		const { width, height } = this.contentBounds;
+		const level = Math.min(this.viewSize.width / (width + 2 * padding), this.viewSize.height / (height + 2 * padding));
+		const center = this.contentCenter;
+		return this.zoomTo(level).centerAt(center.x, center.y);
+	}
+	/** Zoom level 1, centered on the content. */
+	zoomToOriginal() {
+		const center = this.contentCenter;
+		return this.zoomTo(1).centerAt(center.x, center.y);
+	}
+	/** Shows `bounds` completely and centered, keeping the aspect ratio of the view. */
+	setBounds(bounds) {
+		const level = clampZoom(Math.min(this.viewSize.width / bounds.width, this.viewSize.height / bounds.height));
+		const width = this.viewSize.width / level;
+		const height = this.viewSize.height / level;
+		return this.with({
+			zoomLevel: level,
+			x: bounds.x - (width - bounds.width) / 2,
+			y: bounds.y - (height - bounds.height) / 2,
+			width,
+			height
+		});
+	}
+	/** Keeps the center of the visible area within the content bounds. */
+	sanitize() {
+		const { x, y, width, height } = this.contentBounds;
+		const halfWidth = this.width / 2;
+		const halfHeight = this.height / 2;
+		return this.with({
+			x: Math.min(Math.max(this.x, x - halfWidth), x + width - halfWidth),
+			y: Math.min(Math.max(this.y, y - halfHeight), y + height - halfHeight)
+		});
+	}
+	/** Converts a distance in content units to pixels. */
+	toPx(point) {
+		return {
+			x: point.x * this.zoomLevel,
+			y: point.y * this.zoomLevel
+		};
+	}
+	/** Converts a distance in pixels to content units. */
+	fromPx(point) {
+		return {
+			x: point.x / this.zoomLevel,
+			y: point.y / this.zoomLevel
+		};
+	}
+	/** Content coordinate at a position relative to the container's top-left corner (pixels). */
+	toContent(offset) {
+		return {
+			x: this.x + offset.x / this.zoomLevel,
+			y: this.y + offset.y / this.zoomLevel
+		};
+	}
+};
+// src/view/pointer-control.ts
+const WHEEL_ZOOM_FACTOR = .001;
+const WHEEL_ZOOM_MAX_STEP = 1.25;
+const WHEEL_ZOOM_MIN_STEP = .8;
+/** Trackpad pinch gestures arrive as wheel events with `ctrlKey` and small deltas. */
+const TRACKPAD_PINCH_BOOST = 5;
+/** A drag released within this time (ms) after the last move keeps gliding. */
+const FLING_THRESHOLD = 100;
+const FLING_FACTOR = 5;
+const FLING_DURATION = 600;
+function distance(a, b) {
+	return Math.hypot(b.x - a.x, b.y - a.y);
+}
+/**
+* Pan and zoom interaction for a view, based on Pointer Events (mouse, touch and pen):
+* - Drag with one pointer pans, with a short glide after a fast release
+* - Two pointers pinch-zoom around their center
+* - Mouse wheel and trackpad pinch zoom around the pointer position
+*/
+var PointerControl = class {
+	#view;
+	#container;
+	#pointers = /* @__PURE__ */ new Map();
+	#pan = false;
+	#zoom = false;
+	#pinch;
+	#lastMove;
+	constructor(view, container) {
+		this.#view = view;
+		this.#container = container;
+	}
+	enable(pan, zoom) {
+		this.#detach();
+		this.#pan = pan;
+		this.#zoom = zoom;
+		if (!pan && !zoom) return;
+		this.#container.addEventListener("pointerdown", this.#onPointerDown);
+		if (zoom) this.#container.addEventListener("wheel", this.#onWheel, { passive: false });
+		this.#container.style.touchAction = "none";
+	}
+	#detach() {
+		this.#container.removeEventListener("pointerdown", this.#onPointerDown);
+		this.#container.removeEventListener("wheel", this.#onWheel);
+		this.#stopTracking();
+		this.#container.style.removeProperty("touch-action");
+	}
+	#stopTracking() {
+		window.removeEventListener("pointermove", this.#onPointerMove);
+		window.removeEventListener("pointerup", this.#onPointerUp);
+		window.removeEventListener("pointercancel", this.#onPointerUp);
+		this.#pointers.clear();
+		this.#pinch = void 0;
+		this.#lastMove = void 0;
+	}
+	/** Content coordinate under a viewport (client) position. */
+	#contentAt(client) {
+		const rect = this.#container.getBoundingClientRect();
+		return this.#view.viewport.toContent({
+			x: client.x - rect.left,
+			y: client.y - rect.top
+		});
+	}
+	#startPinch() {
+		const [a, b] = [...this.#pointers.values()];
+		if (!a || !b) return;
+		this.#pinch = {
+			startDistance: distance(a, b),
+			startZoom: this.#view.zoomLevel,
+			target: this.#contentAt({
+				x: (a.x + b.x) / 2,
+				y: (a.y + b.y) / 2
+			})
+		};
+	}
+	#onPointerDown = (event) => {
+		if (event.pointerType === "mouse" && event.button !== 0) return;
+		if (this.#pointers.size === 0) {
+			window.addEventListener("pointermove", this.#onPointerMove);
+			window.addEventListener("pointerup", this.#onPointerUp);
+			window.addEventListener("pointercancel", this.#onPointerUp);
+		}
+		this.#pointers.set(event.pointerId, {
+			x: event.clientX,
+			y: event.clientY
+		});
+		this.#lastMove = void 0;
+		if (this.#pointers.size === 2 && this.#zoom) this.#startPinch();
+	};
+	#onPointerMove = (event) => {
+		const previous = this.#pointers.get(event.pointerId);
+		if (!previous) return;
+		const current = {
+			x: event.clientX,
+			y: event.clientY
+		};
+		this.#pointers.set(event.pointerId, current);
+		if (this.#pinch) {
+			const [a, b] = [...this.#pointers.values()];
+			if (!a || !b) return;
+			const { startDistance, startZoom, target } = this.#pinch;
+			this.#view.zoomTo(startZoom * distance(a, b) / startDistance, target);
+			event.preventDefault();
+			return;
+		}
+		if (this.#pan && this.#pointers.size === 1) {
+			const delta = {
+				x: current.x - previous.x,
+				y: current.y - previous.y
+			};
+			this.#lastMove = {
+				time: performance.now(),
+				delta
+			};
+			const move = this.#view.viewport.fromPx({
+				x: -delta.x,
+				y: -delta.y
+			});
+			this.#view.moveBy(move.x, move.y);
+			event.preventDefault();
+		}
+	};
+	#onPointerUp = (event) => {
+		if (!this.#pointers.delete(event.pointerId)) return;
+		if (this.#pinch) {
+			this.#pinch = void 0;
+			this.#lastMove = void 0;
+			return;
+		}
+		if (this.#pointers.size === 0) {
+			this.#fling();
+			this.#stopTracking();
+		}
+	};
+	#fling() {
+		const last = this.#lastMove;
+		if (!last || performance.now() - last.time >= FLING_THRESHOLD) return;
+		const viewport = this.#view.viewport;
+		const move = viewport.fromPx({
+			x: -last.delta.x * FLING_FACTOR,
+			y: -last.delta.y * FLING_FACTOR
+		});
+		this.#view.setViewport(viewport.moveBy(move.x, move.y), {
+			easing: EASINGS.easeoutqart,
+			duration: FLING_DURATION
+		});
+	}
+	#onWheel = (event) => {
+		event.preventDefault();
+		const delta = event.ctrlKey ? event.deltaY * TRACKPAD_PINCH_BOOST : event.deltaY;
+		const step = Math.min(Math.max(1 - delta * WHEEL_ZOOM_FACTOR, WHEEL_ZOOM_MIN_STEP), WHEEL_ZOOM_MAX_STEP);
+		this.#view.zoomTo(this.#view.zoomLevel * step, this.#contentAt({
+			x: event.clientX,
+			y: event.clientY
+		}));
+	};
+};
+// src/view/view.ts
+const DEFAULT_DURATION = 400;
+/**
+* Visible area of the graphic: zooming, panning and fitting the content into the container.
+* Viewport changes are written to the content layer's `viewBox` once per animation frame.
+*/
+var View = class extends Observable {
+	#document;
+	#pointer;
+	#resizeObserver;
+	#unsubscribe;
+	#viewport = new Viewport();
+	#applied;
+	#animation;
+	#frameId;
+	constructor(document, parent) {
+		super(parent, "view");
+		this.#document = document;
+		this.#pointer = new PointerControl(this, document.container);
+		this.#unsubscribe = document.on("contentChange", () => {
+			this.resize();
+		});
+		this.#resizeObserver = new ResizeObserver(() => {
+			const { width, height } = this.#document.viewSize();
+			const current = this.#viewport.viewSize;
+			if (width !== current.width || height !== current.height) this.resize();
+		});
+		this.#resizeObserver.observe(document.container);
+		this.resize();
+	}
+	get viewport() {
+		return this.#viewport;
+	}
+	get zoomLevel() {
+		return this.#viewport.zoomLevel;
+	}
+	/**
+	* Re-reads container size and content bounds. Called automatically on content and size changes.
+	* When the content bounds change, the visible area starts at the content's top-left corner.
+	*/
+	resize() {
+		const viewSize = this.#document.viewSize();
+		const contentBounds = this.#document.contentBounds();
+		const previous = this.#viewport.contentBounds;
+		const contentMoved = previous.x !== contentBounds.x || previous.y !== contentBounds.y || previous.width !== contentBounds.width || previous.height !== contentBounds.height;
+		this.#document.contentLayer.setAttribute("width", String(viewSize.width));
+		this.#document.contentLayer.setAttribute("height", String(viewSize.height));
+		this.setViewport(this.#viewport.with({
+			viewSize,
+			contentBounds,
+			...contentMoved ? {
+				x: contentBounds.x,
+				y: contentBounds.y
+			} : {}
+		}).resize());
+	}
+	/** Shows `viewport`, restricted to the content bounds, optionally animated. */
+	setViewport(viewport, animation = false) {
+		this.#animation?.stop();
+		this.#animation = void 0;
+		const target = viewport.sanitize();
+		if (!animation) {
+			this.#viewport = target;
+			this.#scheduleApply();
+			return;
+		}
+		const { duration = DEFAULT_DURATION, easing = EASINGS.easeinout } = animation === true ? {} : animation;
+		const from = this.#viewport;
+		this.#animation = animate({
+			duration,
+			easing,
+			onUpdate: (t) => {
+				this.#viewport = target.with({
+					x: from.x + (target.x - from.x) * t,
+					y: from.y + (target.y - from.y) * t,
+					width: from.width + (target.width - from.width) * t,
+					height: from.height + (target.height - from.height) * t
+				});
+				this.#scheduleApply();
+			}
+		});
+	}
+	zoomTo(zoomLevel, target, animation) {
+		this.setViewport(this.#viewport.zoomTo(zoomLevel, target), animation);
+	}
+	zoomIn(factor, target, animation) {
+		this.setViewport(this.#viewport.zoomIn(factor, target), animation);
+	}
+	zoomOut(factor, target, animation) {
+		this.setViewport(this.#viewport.zoomOut(factor, target), animation);
+	}
+	zoomToFit(padding, animation) {
+		this.setViewport(this.#viewport.zoomToFit(padding), animation);
+	}
+	zoomToOriginal(animation) {
+		this.setViewport(this.#viewport.zoomToOriginal(), animation);
+	}
+	/** Shows the given elements completely; does nothing for an empty list. */
+	zoomToElements(elements, padding, animation) {
+		const bounds = combinedBoundingBox(elements, padding);
+		if (bounds) this.setViewport(this.#viewport.setBounds(bounds), animation);
+	}
+	moveBy(dx, dy, animation) {
+		this.setViewport(this.#viewport.moveBy(dx, dy), animation);
+	}
+	centerAt(x, y, animation) {
+		this.setViewport(this.#viewport.centerAt(x, y), animation);
+	}
+	/** Enables panning (drag) and zooming (wheel, pinch) with mouse, touch and pen. */
+	enablePointer(pan, zoom) {
+		this.#pointer.enable(pan, zoom);
+	}
+	destroy() {
+		this.#animation?.stop();
+		if (this.#frameId !== void 0) cancelAnimationFrame(this.#frameId);
+		this.#resizeObserver.disconnect();
+		this.#unsubscribe();
+		this.#pointer.enable(false, false);
+		super.destroy();
+	}
+	#scheduleApply() {
+		if (this.#frameId !== void 0) return;
+		this.#frameId = requestAnimationFrame(() => {
+			this.#frameId = void 0;
+			this.#apply();
+		});
+	}
+	#apply() {
+		const viewport = this.#viewport;
+		this.#document.contentLayer.setAttribute("viewBox", viewport.viewBox);
+		if (this.#applied?.zoomLevel !== viewport.zoomLevel) this.emit("zoomChange", viewport.zoomLevel);
+		this.#applied = viewport;
+		this.emit("viewportChange", viewport);
+	}
+};
+// src/graphic.ts
+const log = createLogger("cuttleskin.graphic");
+/**
+* An interactive SVG graphic in a container element: loads markup and configuration,
+* connects variables with the SVG and manages the visible area.
+*/
+var Graphic = class extends Observable {
+	document;
+	scheduler;
+	view;
+	runtime;
+	#settings;
+	/** Replaces the content of `container`. */
+	constructor(container, settings = {}) {
+		super();
+		this.#settings = resolveSettings(settings);
+		this.document = new GraphicDocument(container, this);
+		this.scheduler = new Scheduler(this);
+		this.view = new View(this.document, this);
+		const currentSettings = () => this.#settings;
+		this.runtime = new Runtime({
+			scheduler: this.scheduler,
+			document: this.document,
+			assets: this.document,
+			get settings() {
+				return currentSettings();
+			},
+			events: this
+		});
+		this.#applySettings();
+	}
+	get settings() {
+		return this.#settings;
+	}
+	/** The loaded configuration. */
+	get config() {
+		return this.runtime.config;
+	}
+	/** Changes settings; `mode` takes effect with the next `load`. */
+	setSettings(settings) {
+		this.#settings = resolveSettings({
+			...this.#settings,
+			...settings
+		});
+		this.#applySettings();
+	}
+	/** Root for relative image URLs in markup and configuration, e.g. `assets/`. */
+	setAssetRoot(root) {
+		this.document.setAssetRoot(root);
+	}
+	/**
+	* URLs of individual images by file name, e.g. `{ "car.png": "/images/3f2a…" }`; they take
+	* precedence over the asset root. Set before `load`, so that the markup uses them.
+	*/
+	setAssetUrls(urls) {
+		this.document.setAssetUrls(urls);
+	}
+	/**
+	* Loads SVG markup and configuration (JSON text or parsed JSON). Invalid configuration entries are
+	* skipped and returned as issues. Emits `ready` on success; on failure emits `error` and throws.
+	*/
+	load(markup, config) {
+		try {
+			const { config: parsed, issues } = typeof config === "string" ? parseGraphicConfigJson(config) : parseGraphicConfig(config);
+			for (const issue of issues) log.warn(`Invalid configuration at ${issue.path || "/"}: ${issue.message}`);
+			if (parsed.settings) this.setSettings(parsed.settings);
+			this.document.load(markup);
+			this.runtime.load(parsed);
+			this.emit("ready");
+			return issues;
+		} catch (error) {
+			log.error("Error initializing graphic", error);
+			this.emit("error", error);
+			throw error;
+		}
+	}
+	/** Fetches markup and configuration in parallel and loads them; see `load`. */
+	async loadUrl(markupUrl, configUrl) {
+		let markup;
+		let config;
+		try {
+			[markup, config] = await Promise.all([fetchText(markupUrl), fetchText(configUrl)]);
+		} catch (error) {
+			log.error("Could not load graphic files", error);
+			this.emit("error", error);
+			throw error;
+		}
+		return this.load(markup, config);
+	}
+	/** Runtime element for an SVG element ID or node. */
+	element(elementOrId) {
+		return this.runtime.getElement(elementOrId);
+	}
+	variable(name) {
+		return this.runtime.getVariable(name);
+	}
+	getValue(name) {
+		return this.runtime.getValue(name);
+	}
+	setValue(name, value, formattedValue) {
+		this.runtime.setValue(name, value, formattedValue);
+	}
+	/** Removes the graphic from its container and releases all listeners. */
+	destroy() {
+		this.view.destroy();
+		this.runtime.destroy();
+		this.scheduler.destroy();
+		this.document.destroy();
+		super.destroy();
+	}
+	#applySettings() {
+		this.document.contentLayer.style.imageRendering = this.#settings.imageRendering === "speed" ? "pixelated" : "auto";
+	}
+};
+/** Creates a graphic in `container`. */
+function create(container, settings) {
+	return new Graphic(container, settings);
+}
+export { ANCHOR_NAMES, ConfigError, DEFAULT_SETTINGS, DomObservable, EASINGS, EASING_NAMES, ElementState, Graphic, GraphicDocument, IMAGE_RENDERINGS, MAX_ZOOM_LEVEL, MIN_ZOOM_LEVEL, MODES, Observable, PointerControl, RANGE_ENDS, Runtime, RuntimeElement, Scheduler, TRANSFORMATION_TYPES, Transformation, VARIABLE_TYPES, Variable, View, Viewport, animate, assert, assetName, boxPosition, combinedBoundingBox, convertValue, create, createAccessor, createAssetResolver, createFrames, createLogger, createTransformType, createTransformationModel, createTranslation, createVariableModel, discreteUpdater, domainDefault, fetchText, formatColor, formatValue, interpolateColor, interpolateCssColor, interpolateDiscrete, interpolateNumber, interpolatePoint, isEasingName, isLogLevelEnabled, isRangeEnd, isSafeUrl, loadGraphicConfig, mapping, parseColor, parseGraphicConfig, parseGraphicConfigJson, parseGraphicConfigStrict, resolveEasing, resolveFramePosition, resolveSettings, sanitizeSvg, sanitizeValue, screenBBox, setLogLevel, totalMatrix, transition, transitionUpdater, upgradeGraphicConfig };
